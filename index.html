@@ -13,9 +13,10 @@
 </head>
 
 <body class="has-background-light">
-
+    <!-- comienzo del header  -->
     <header>
-        <nav class="navbar is-spaced is-primary " role="navigation" aria-label="main navigation">
+    
+        <nav class="navbar is-spaced is-primary mb-5" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 
                 <a class="navbar-item">
@@ -70,12 +71,14 @@
       
     </header>
 
-    
+     <!-- section principal balance-filtro-operaciones -->
    <section class="section">
         <div class="columns ">
+            <!-- column izquierda BALANCE y FILTROS -->
             <div class="column is-offset-1 is-3">
+                <!-- article BALANCE -->
                 <article class="box">
-                    <h2 class=" title is-3is-size-3 m-2 mb-6">Balance</h2>
+                    <h2 class=" title is-3 is-size-3 m-2 mb-6">Balance</h2>
                  <div class="columns">   
                      <div class="column is-size-5">Ganancia</div>
                      <div  class="column has-text-right has-text-success">+$0</div>
@@ -94,21 +97,81 @@
                 </div>
 
                 </article>
+                <!-- article FILTROS  -->
                 <article class="box">
                     <div class="columns">
                         <div class="column">
-                            <h3 class="title is-3 is-size-4  mb-6">Filtros</h3>
+                            <h3 class="title is-3 is-size-4 ">Filtros</h3>
                         </div>
                         <div class="column has-text-right">
                             <button class="button is-ghost ">Ocultar filtros</button>
                         </div>
                     </div>
-               
+
+                      <!-- columns formulario filtros  -->
                     <div class="columns">
-                        <form>
+                        <div class="column"> 
+                         <form>
+                             <!-- select tipo-gastos-ganancias -->
+                            <div class="field">
+                                <label class="label is-fullwidth" for="tipo de gastos-opciones">Tipo</label>
+                                <div class="control">
+                                  <div class="select is-fullwidth">
+                                    <select>
+                                      <option>Todos</option>
+                                      <option>Gastos</option>
+                                      <option>Ganancia</option>
+                                    </select>
+                                  </div>
+                                </div>
+                            </div>
+                              <!-- select categorias-(comida-servicios-salidas-educacion-ext.) -->
+                             <div class="field">
+                                <label class="label" for="categoría-opciones">Categoría</label>
+                                <div class="control">
+                                  <div class="select is-fullwidth">
+                                    <select>
+                                      <option>Todas</option>
+                                      <option>Comida</option>
+                                      <option>Servicios</option>
+                                      <option>Salidas</option>
+                                      <option>Educación</option>
+                                      <option>Transporte</option>
+                                      <option>Trabajo</option>
+                                    </select>
+                                  </div>
+                                </div>
 
-                        </form>
+                            </div>
 
+                            <!-- imput date-tiempo-fecha -->
+                            <div class="field">
+                                <label class="label" for="datos-fecha">Desde</label>
+                              <div class="control">
+                                <input class="input" type="date">
+                              </div>
+
+                            </div>
+                              
+                            <!-- select ordenar por (mas reciente, menos reciente, mayor-menor monto, ext.) -->
+                             <div class="field">
+                                <label class="label" for="ordenar por-opciones">Ordenar por</label>
+                                <div class="control">
+                                  <div class="select is-fullwidth">
+                                    <select>
+                                      <option>Más recientes</option>
+                                      <option>Menos recientes</option>
+                                      <option>Mayor monto</option>
+                                      <option>Menos monto</option>
+                                      <option>A/Z</option>
+                                      <option>Z/A</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+
+                         </form>
+                        </div>
                     </div>
 
                 </article>
@@ -116,8 +179,9 @@
 
 
 
-
+                <!-- column derecha OPERACIONES  -->
             <div class="column is-7 ">
+                <!-- article OPERACIONES -->
                 <article class="box">
                     <div class="columns">
                         <div class="column">
@@ -126,26 +190,272 @@
                         <div class="column has-text-right">
                             <button class="button is-primary">+Nueva Operación</button>
                         </div>
+                    </div>
+                    <!-- columns imagen -->
+                    <div class="columns pt-6 pb-6">
+                        <div class="column is-offset-3 is-6">
+                            <figure class="image" >
+                                <img src="imagenes/billetera.svg" alt="tres personas con una billetera grande">
+                            </figure>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="columns pb-4">
+                        <div class="column">
+                            <h4 class=" title is-4 has-text-centered  pb-4"> Sin resultado</h4>
+                            <p class="has-text-centered pb-6"> Cambia los filtros o agrega operaciones</p>
+    
+                        </div>
 
                     </div>
-                    <div class="columna">
-                        <figure class="image p-4">
-                            <img src="imagenes/billetera.svg">
-                          </figure>
-
-                    </div>
-                    <div class="columna">
-                        <h4 class="is-size-4 has-text-centered pt-6 pb-4"> Sin resultado</h4>
-                        <p class="has-text-centered pb-6"> Cambia los filtros o agrega operaciones</p>
-
-
-
-                    </div>
+                 
 
                 </article>
             </div>
         </div>
-    </section> 
+   </section> 
+    <!-- section nueva operacion  -->
+    <section class="section">
+        <div class="column is-offset-2 is-8 ">
+            <article class="box">
+                <div class="column mb-5">
+                    <h2 class="title 2 is-size-2">Nueva operación</h2>
+                </div>
+
+                <!-- formulario nueva operacion -->
+               <div class="column">
+
+                <form>
+                    <!-- input descripcion -->
+                    <div class="field">
+                        <label class="label" for="Descripcion">Descripción</label>
+                        <div class="control">
+                          <input class="input" type="text">
+                        </div>
+                    </div>
+                        <!-- input monto -->
+                    <div class="field">
+                        <label class="label" for="Monto">Monto</label>
+                        <div class="control">
+                          <input class="input" type="number">
+                        </div>
+                    </div>
+                    <!-- select tipo-gastos-ganancias -->
+                   <div class="field">
+                       <label class="label is-fullwidth" for="tipo de gastos-opciones">Tipo</label>
+                       <div class="control">
+                         <div class="select is-fullwidth">
+                           <select>
+                             <option>Todos</option>
+                             <option>Gastos</option>
+                             <option>Ganancia</option>
+                           </select>
+                         </div>
+                       </div>
+                   </div>
+                     <!-- select categorias-(comida-servicios-salidas-educacion-ext.) -->
+                    <div class="field">
+                       <label class="label" for="categoría-opciones">Categoría</label>
+                       <div class="control">
+                         <div class="select is-fullwidth">
+                           <select>
+                             <option>Todas</option>
+                             <option>Comida</option>
+                             <option>Servicios</option>
+                             <option>Salidas</option>
+                             <option>Educación</option>
+                             <option>Transporte</option>
+                             <option>Trabajo</option>
+                           </select>
+                         </div>
+                       </div>
+
+                   </div>
+
+                   <!-- imput date fecha -->
+                   <div class="field">
+                       <label class="label" for="fecha">Fecha</label>
+                     <div class="control">
+                       <input class="input" type="date">
+                     </div>
+
+                   </div>
+
+                   <!-- botones de nueva operacion -->
+                    <div class="buttons mt-6 is-right">
+                        <p class="control">
+                          <button class="button is-light">
+                            Cancelar
+                          </button>
+                        </p>
+                        <p class="control">
+                          <button class="button is-success">
+                           Agregar
+                          </button>
+                        </p>
+                    </div>
+
+                   
+
+                   
+                     
+
+                </form>
+              </div>
+
+
+            </article>
+
+        </div>
+    </section>
+
+      <!-- section categorias -->
+    <section class="section">
+      <div class="column is-offset-2 is-8 ">
+          <article class="box">
+              <div class="column mb-5">
+                <h2 class="title 2 is-size-2">Categoría</h2>
+              </div>
+              <div class="column">
+                <div class="field">
+                   <label class="label " for="nombre categoria">Nombre</label>
+                   <div class="field is-grouped">
+                      <p class="control is-expanded">
+                       <input class="input" type="text">
+                     </p>
+                     <p class="control">
+                      <a class="button is-success">
+                        Agregar
+                      </a>
+                    </p>
+                    </div>
+                </div>
+              </div>
+               
+              <div class="columns">
+                  <div class="column ml-3 mt-5 mb-3">
+                    <div class="columns">
+                        <div class="column">
+                            <span class="tag has-text-primary-dark has-background-link-light "> Comida </span>
+                        </div>
+                        <div class="column has-text-right">
+                              <button class="button tag is-ghost">Editar</button>
+                              <button class="button tag is-ghost">Borrar</button>
+                        </div>
+      
+                    </div>
+      
+                    <div class="columns">
+                          <div class="column">
+                              <span class=" tag has-text-primary-dark has-background-link-light "> Servicios </span>
+                          </div>
+                          <div class="column has-text-right">
+                                <button class="button tag is-ghost">Editar</button>
+                                <button class="button tag is-ghost">Borrar</button>
+                          </div>
+        
+                     </div>
+      
+                        <div class="columns">
+                          <div class="column ">
+                              <span class="tag has-text-primary-dark has-background-link-light "> Salidas </span>
+                          </div>
+                          <div class="column has-text-right">
+                                <button class="button tag is-ghost">Editar</button>
+                                <button class="button tag is-ghost">Borrar</button>
+                          </div>
+        
+                        </div>
+      
+                        <div class="columns ">
+                          <div class="column">
+                              <span class="tag has-text-primary-dark has-background-link-light "> Educación</span>
+                          </div>
+                          <div class="column has-text-right">
+                                <button class="button tag is-ghost">Editar</button>
+                                <button class="button tag is-ghost">Borrar</button>
+                          </div>
+        
+                        </div>
+                       
+      
+                        <div class="columns ">
+                          <div class="column">
+                              <span class="tag has-text-primary-dark has-background-link-light "> Transporte </span>
+                          </div>
+                          <div class="column has-text-right">
+                                <button class="button tag is-ghost">Editar</button>
+                                <button class="button tag is-ghost">Borrar</button>
+                          </div>
+        
+                        </div>
+      
+                        <div class="columns ">
+                          <div class="column ">
+                              <span class="tag has-text-primary-dark has-background-link-light "> Trabajo </span>
+                          </div>
+                          <div class="column has-text-right">
+                                <button class="button tag is-ghost">Editar</button>
+                                <button class="button tag is-ghost">Borrar</button>
+                          </div>
+        
+                        </div>
+      
+                        <div class="columns">
+                          <div class="column">
+                              <span class="tag has-text-primary-dark has-background-link-light "> Servicios </span>
+                          </div>
+                          <div class="column has-text-right">
+                                <button class="button tag is-ghost">Editar</button>
+                                <button class="button tag is-ghost">Borrar</button>
+                          </div>
+        
+                        </div>
+
+
+                  </div>
+
+              </div>
+
+            </article>
+          
+
+        </div>
+
+    </section>
+
+    <!-- section reportes -->
+    <section class="section">
+        <div class="column is-offset-2 is-8">
+            <article class="box">
+                <div class="column mb-6">
+                     <h2 class="title 2 is-size-2">Reportes</h2>
+                   
+                </div>
+                <div class="columns">
+                    <div class="column is-offset-3 is-6">
+                        <figure class="image">
+                            <img src="imagenes/operaciones-insuficientes.svg" alt="una persona mirando un gráfico">
+                        </figure>
+    
+                    </div>
+
+                </div>
+                
+                <div class="column mb-6">
+                    <h4 class="title 4 is-size-4 has-text-centered mt-3">Operaciones insuficientes</h4>
+                    <p class="has-text-centered"> Prueba agregando más operaciones</p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+        
+
+    </section>
 
 
 
