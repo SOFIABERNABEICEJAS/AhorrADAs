@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AhorrADAs</title>
+    <link rel="shortcut icon" type="imagen/x-icon" href="">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
@@ -72,13 +73,13 @@
     </header>
 
      <!-- section principal balance-filtro-operaciones -->
-   <section class="section    " id="seccion-principal">
+   <section class="section" id="seccion-principal">
         <div class="columns ">
             <!-- column izquierda BALANCE y FILTROS -->
             <div class="column is-offset-1 is-3">
                 <!-- article BALANCE -->
                 <article class="box">
-                    <h2 class=" title is-3 is-size-3 m-2 mb-6">Balance</h2>
+                    <h2 class=" title is-3 is-size-3 m-2 mb-6 has-text-weight-bold">Balance</h2>
                  <div class="columns">   
                      <div class="column is-size-5">Ganancia</div>
                      <div  class="column has-text-right has-text-success">+$0</div>
@@ -101,15 +102,15 @@
                 <article class="box">
                     <div class="columns">
                         <div class="column">
-                            <h3 class="title is-3 is-size-4 ">Filtros</h3>
+                            <h3 class="title is-3 is-size-4 has-text-weight-bold ">Filtros</h3>
                         </div>
                         <div class="column has-text-right">
-                            <button class="button is-ghost ">Ocultar filtros</button>
+                            <button id="boton-ocultar-filtros" class="button is-ghost ">Ocultar filtros</button>
                         </div>
                     </div>
 
                       <!-- columns formulario filtros  -->
-                    <div class="columns">
+                    <div class="columns" id="div-formulario-filtros">
                         <div class="column"> 
                          <form>
                              <!-- select tipo-gastos-ganancias -->
@@ -185,7 +186,7 @@
                 <article class="box">
                     <div class="columns">
                         <div class="column">
-                            <h2 class="title is-4">Operaciones</h2>
+                            <h2 class="title is-4 has-text-weight-bold">Operaciones</h2>
                         </div>
                         <div class="column has-text-right">
                             <button class="button is-primary" id="boton-nueva-operacion">+Nueva Operación</button>
@@ -220,7 +221,7 @@
         <div class="column is-offset-2 is-8 ">
             <article class="box">
                 <div class="column mb-5">
-                    <h2 class="title 2 is-size-2">Nueva operación</h2>
+                    <h2 class="title 2 is-size-2 has-text-weight-bold">Nueva operación</h2>
                 </div>
 
                 <!-- formulario nueva operacion -->
@@ -295,11 +296,7 @@
                           </button>
                         </p>
                     </div>
-
-                   
-
-                   
-                     
+ 
 
                 </form>
               </div>
@@ -315,7 +312,7 @@
       <div class="column is-offset-2 is-8 ">
           <article class="box">
               <div class="column mb-5">
-                <h2 class="title 2 is-size-2">Categoría</h2>
+                <h2 class="title 2 is-size-2 has-text-weight-bold">Categoría</h2>
               </div>
               <div class="column">
                 <div class="field">
@@ -430,7 +427,7 @@
         <div class="column is-offset-2 is-8">
             <article class="box">
                 <div class="column mb-6">
-                     <h2 class="title 2 is-size-2">Reportes</h2>
+                     <h2 class="title 2 is-size-2 has-text-weight-bold">Reportes</h2>
                    
                 </div>
                 <div class="columns">

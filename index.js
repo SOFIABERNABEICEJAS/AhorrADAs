@@ -6,22 +6,12 @@ const seccionReporte = document.getElementById("seccion-reporte")
 const botonReporte = document.getElementById("boton-reporte")
 const botonBalance = document.getElementById("boton-balance")
 const botonCategorias = document.getElementById("boton-categorias")
-
-console.log("hola")
-
-
+const botonOcultarFiltros = document.getElementById("boton-ocultar-filtros")
+const divFormularioFiltros = document.getElementById("div-formulario-filtros")
 
 
-// boton nueva operacion 
 
-
-botonNuevaOperacion.onclick = () => {
-    seccionNuevaOperacion.classList.remove("is-hidden")
-    seccionPrincipal.classList.add("is-hidden")
-
-}  
-
-// boton balance 
+// boton balance  
 
 botonBalance.onclick = () => {
     seccionPrincipal.classList.remove("is-hidden")
@@ -46,4 +36,20 @@ botonReporte.onclick = () => {
     seccionPrincipal.classList.add("is-hidden")
     seccionCategoria.classList.add("is-hidden")
     seccionNuevaOperacion.classList.add("is-hidden")
+}
+
+// boton nueva operacion SECCION OPERACIONES 
+
+
+botonNuevaOperacion.onclick = () => {
+    seccionNuevaOperacion.classList.remove("is-hidden")
+    seccionPrincipal.classList.add("is-hidden")
+
+}  
+
+
+//boton ocultar filtros SECCION FILTRO
+
+botonOcultarFiltros.onclick = () => {
+    divFormularioFiltros.classList.toggle("is-hidden")
 }
