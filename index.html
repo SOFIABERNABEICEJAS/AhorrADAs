@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AhorrADAs</title>
-    <link rel="shortcut icon" type="imagen/x-icon" href="">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
@@ -183,7 +182,8 @@
                 <!-- column derecha OPERACIONES  -->
             <div class="column is-7 ">
                 <!-- article OPERACIONES -->
-                <article class="box">
+                <article class="box" >
+                      <!-- titulo y boton nueva operacion  -->
                     <div class="columns">
                         <div class="column">
                             <h2 class="title is-4 has-text-weight-bold">Operaciones</h2>
@@ -192,23 +192,74 @@
                             <button class="button is-primary" id="boton-nueva-operacion">+Nueva Operación</button>
                         </div>
                     </div>
-                    <!-- columns imagen -->
-                    <div class="columns pt-6 pb-6">
-                        <div class="column is-offset-3 is-6">
-                            <figure class="image" >
-                                <img src="imagenes/billetera.svg" alt="tres personas con una billetera grande">
-                            </figure>
+
+                    <!-- contenedor de datos en operaciones TITULO -->
+                    <div class="columns is-hidden" id="div-datos-operaciones-titulo">
+
+                        <div class="column is-3">
+                          <h3 class="has-text-weight-semibold">Descripción</h3>
+                        </div>
+                     
+                        <div class="column is-3">
+                          <h3 class="has-text-weight-semibold">Categoría</h3>
+                        </div>
+
+                        <div class="column is-2 has-text-right">
+                          <h3 class="has-text-weight-semibold">Fecha</h3>
+                        </div>
+
+                        <div class="column is-2 has-text-right">
+                          <h3 class="has-text-weight-semibold	">Monto</h3>
+                        </div>
+
+                        <div class="column is-2 has-text-right">
+                          <h3 class="has-text-weight-semibold">Acciones</h3>
                         </div>
                         
                     </div>
-                    
-                    <div class="columns pb-4">
-                        <div class="column">
-                            <h4 class=" title is-4 has-text-centered  pb-4"> Sin resultado</h4>
-                            <p class="has-text-centered pb-6"> Cambia los filtros o agrega operaciones</p>
-    
-                        </div>
 
+                    
+                    <!-- columnas para rellenar con js!! -->
+
+                    <div class="columns" id="div-datos-operacion-jS">
+                      <div class="column is-3">
+                        <p>HOLA</p>
+                      </div>
+                      <div class="column is-3">
+                        <p class="tag has-background-primary-light has-text-primary-dark"> hola </p>
+                      </div>
+                      <div class="column is-2 has-text-right">fecha</div>
+                      <div class="column is-2 has-text-right">$$$$$</div>
+                      
+                      <div class="column is-2 has-text-right">
+                        <button class=" tag button is-ghost">Ghost</button>
+                        <button class=" tag button is-ghost">Ghost</button>
+                      </div>
+
+
+                    </div>
+
+
+                      <!-- contenedor de imagen y texto -->
+                    <div id="div-operaciones-imagen-texto">
+                        <!-- columns imagen -->
+                        <div class="columns pt-6 pb-6">
+                            <div class="column is-offset-3 is-6">
+                              <figure class="image" >
+                                  <img src="imagenes/billetera.svg" alt="tres personas con una billetera grande">
+                              </figure>
+                            </div>
+                        
+                        </div>
+                    
+                        <div class="columns pb-4">
+                            <div class="column">
+                               <h4 class=" title is-4 has-text-centered"> Sin resultado</h4>
+                               <p class="has-text-centered pb-6"> Cambia los filtros o agrega operaciones</p>
+    
+                            </div>
+
+                        </div>
                     </div>
                  
 
@@ -290,8 +341,8 @@
                             Cancelar
                           </button>
                         </p>
-                        <p class="control">
-                          <button class="button is-success">
+                        <p class="control" id="boton-agregar-formulario-nueva-operacion">
+                          <button class="button is-success" type="button">
                            Agregar
                           </button>
                         </p>
