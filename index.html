@@ -173,12 +173,8 @@
                          </form>
                         </div>
                     </div>
-
                 </article>
             </div>
-
-
-
                 <!-- column derecha OPERACIONES  -->
             <div class="column is-7 ">
                 <!-- article OPERACIONES -->
@@ -195,32 +191,23 @@
 
                     <!-- contenedor de datos en operaciones TITULO -->
                     <div class="columns is-hidden" id="div-datos-operaciones-titulo">
-
                         <div class="column is-3">
                           <h3 class="has-text-weight-semibold">Descripción</h3>
                         </div>
-                     
                         <div class="column is-3">
                           <h3 class="has-text-weight-semibold">Categoría</h3>
                         </div>
-
                         <div class="column is-2 has-text-right">
                           <h3 class="has-text-weight-semibold">Fecha</h3>
                         </div>
-
                         <div class="column is-2 has-text-right">
                           <h3 class="has-text-weight-semibold	">Monto</h3>
                         </div>
-
                         <div class="column is-2 has-text-right">
                           <h3 class="has-text-weight-semibold">Acciones</h3>
                         </div>
-                        
                     </div>
-
-                    
                     <!-- columnas para rellenar con js!! -->
-
                     <div class="columns" id="div-datos-operacion-jS">
                       <div class="column is-3">
                         <p>HOLA</p>
@@ -230,16 +217,11 @@
                       </div>
                       <div class="column is-2 has-text-right">fecha</div>
                       <div class="column is-2 has-text-right">$$$$$</div>
-                      
                       <div class="column is-2 has-text-right">
                         <button class=" tag button is-ghost">Ghost</button>
                         <button class=" tag button is-ghost">Ghost</button>
                       </div>
-
-
                     </div>
-
-
                       <!-- contenedor de imagen y texto -->
                     <div id="div-operaciones-imagen-texto">
                         <!-- columns imagen -->
@@ -249,24 +231,18 @@
                                   <img src="imagenes/billetera.svg" alt="tres personas con una billetera grande">
                               </figure>
                             </div>
-                        
                         </div>
-                    
                         <div class="columns pb-4">
                             <div class="column">
-                               <h4 class=" title is-4 has-text-centered"> Sin resultado</h4>
-                               <p class="has-text-centered pb-6"> Cambia los filtros o agrega operaciones</p>
-    
+                              <h4 class=" title is-4 has-text-centered"> Sin resultado</h4>
+                              <p class="has-text-centered pb-6"> Cambia los filtros o agrega operaciones</p>
                             </div>
-
                         </div>
                     </div>
-                 
-
                 </article>
             </div>
         </div>
-   </section> 
+</section> 
     <!-- section nueva operacion  -->
     <section class="section is-hidden" id="section-nueva-operacion">
         <div class="column is-offset-2 is-8 ">
@@ -370,10 +346,10 @@
                    <label class="label " for="nombre categoria">Nombre</label>
                    <div class="field is-grouped">
                       <p class="control is-expanded">
-                       <input class="input" type="text">
+                       <input class="input" type="text" id="input-agregar-categorias">
                      </p>
                      <p class="control">
-                      <a class="button is-success">
+                      <a class="button is-success" id="boton-agregar-categorias">
                         Agregar
                       </a>
                     </p>
@@ -383,15 +359,15 @@
                
               <div class="columns">
                   <div class="column ml-3 mt-5 mb-3">
+                    <!-- aca comienza el div de la caja categorias -->
                     <div class="columns">
                         <div class="column">
-                            <span class="tag has-text-primary-dark has-background-link-light "> Comida </span>
+                            <span class="tag has-text-primary-dark has-background-link-light">Comida</span>
                         </div>
                         <div class="column has-text-right">
                               <button class="button tag is-ghost">Editar</button>
                               <button class="button tag is-ghost">Borrar</button>
                         </div>
-      
                     </div>
       
                     <div class="columns">
