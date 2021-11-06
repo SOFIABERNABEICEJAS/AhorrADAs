@@ -1,5 +1,5 @@
 const seccionNuevaOperacion = document.getElementById(
-	"section-nueva-operacion"
+	"seccion-nueva-operacion"
 );
 const botonNuevaOperacion = document.getElementById("boton-nueva-operacion");
 const seccionPrincipal = document.getElementById("seccion-principal");
@@ -66,9 +66,9 @@ botonAgregarCategorias.onclick = () => {
 			id: 0,
 			nombre: agregarNuevasCategorias,
 		};
-		const funcionAuxiliar = guardarEnLocalStorage();
-		funcionAuxiliar.categorias.push(nuevasCategorias);
-		localStorage.setItem("tp-ahorradas", JSON.stringify(funcionAuxiliar));
+		const verificaLocalStorage = guardarEnLocalStorage();
+		verificaLocalStorage.categorias.push(nuevasCategorias);
+		localStorage.setItem("tp-ahorradas", JSON.stringify(verificaLocalStorage));
 	};
 	agregarCategorias();
 };
