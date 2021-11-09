@@ -130,14 +130,7 @@
                                 <label class="label" for="categoría-opciones">Categoría</label>
                                 <div class="control">
                                   <div class="select is-fullwidth">
-                                    <select>
-                                      <option>Todas</option>
-                                      <option>Comida</option>
-                                      <option>Servicios</option>
-                                      <option>Salidas</option>
-                                      <option>Educación</option>
-                                      <option>Transporte</option>
-                                      <option>Trabajo</option>
+                                    <select id="select-filtro-categorias">
                                     </select>
                                   </div>
                                 </div>
@@ -358,86 +351,7 @@
               </div>
                
               <div class="columns">
-                  <div class="column ml-3 mt-5 mb-3">
-                    <!-- aca comienza el div de la caja categorias -->
-                    <div class="columns">
-                        <div class="column">
-                            <span class="tag has-text-primary-dark has-background-link-light">Comida</span>
-                        </div>
-                        <div class="column has-text-right">
-                              <button class="button tag is-ghost">Editar</button>
-                              <button class="button tag is-ghost">Borrar</button>
-                        </div>
-                    </div>
-      
-                    <div class="columns">
-                          <div class="column">
-                              <span class=" tag has-text-primary-dark has-background-link-light "> Servicios </span>
-                          </div>
-                          <div class="column has-text-right">
-                                <button class="button tag is-ghost">Editar</button>
-                                <button class="button tag is-ghost">Borrar</button>
-                          </div>
-        
-                     </div>
-      
-                        <div class="columns">
-                          <div class="column ">
-                              <span class="tag has-text-primary-dark has-background-link-light "> Salidas </span>
-                          </div>
-                          <div class="column has-text-right">
-                                <button class="button tag is-ghost">Editar</button>
-                                <button class="button tag is-ghost">Borrar</button>
-                          </div>
-        
-                        </div>
-      
-                        <div class="columns ">
-                          <div class="column">
-                              <span class="tag has-text-primary-dark has-background-link-light "> Educación</span>
-                          </div>
-                          <div class="column has-text-right">
-                                <button class="button tag is-ghost">Editar</button>
-                                <button class="button tag is-ghost">Borrar</button>
-                          </div>
-        
-                        </div>
-                       
-      
-                        <div class="columns ">
-                          <div class="column">
-                              <span class="tag has-text-primary-dark has-background-link-light "> Transporte </span>
-                          </div>
-                          <div class="column has-text-right">
-                                <button class="button tag is-ghost">Editar</button>
-                                <button class="button tag is-ghost">Borrar</button>
-                          </div>
-        
-                        </div>
-      
-                        <div class="columns ">
-                          <div class="column ">
-                              <span class="tag has-text-primary-dark has-background-link-light "> Trabajo </span>
-                          </div>
-                          <div class="column has-text-right">
-                                <button class="button tag is-ghost">Editar</button>
-                                <button class="button tag is-ghost">Borrar</button>
-                          </div>
-        
-                        </div>
-      
-                        <div class="columns">
-                          <div class="column">
-                              <span class="tag has-text-primary-dark has-background-link-light "> Servicios </span>
-                          </div>
-                          <div class="column has-text-right">
-                                <button class="button tag is-ghost">Editar</button>
-                                <button class="button tag is-ghost">Borrar</button>
-                          </div>
-        
-                        </div>
-
-
+                  <div class="column ml-3 mt-5 mb-3" id="div-mostrar-categorias-html">
                   </div>
 
               </div>
