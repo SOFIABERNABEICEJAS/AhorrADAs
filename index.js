@@ -170,7 +170,7 @@ const mostrarCategorias = () => {
 				`
 		<div class="columns">
 	<div class="column">
-		<span class="tag has-text-primary-dark has-background-link-light" id="${elemento}">
+		<span class="tag has-text-primary-dark has-background-link-light" id="${elemento.id}">
 			${elemento.nombre}
 		</span>
 	</div>
