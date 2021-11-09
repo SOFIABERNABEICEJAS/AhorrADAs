@@ -25,6 +25,12 @@ const inputAgregarCategorias = document.getElementById(
 const botonAgregarCategorias = document.getElementById(
 	"boton-agregar-categorias"
 );
+const selectFiltroCategorias = document.getElementById(
+	"select-filtro-categorias"
+);
+const divMostrarCategoriasHtml = document.getElementById(
+	"div-mostrar-categorias-html"
+);
 // div datos js para modificar
 const divDatosOperacionJS = document.getElementById("div-datos-operacion-jS");
 
@@ -62,15 +68,18 @@ botonCategorias.onclick = () => {
 botonAgregarCategorias.onclick = () => {
 	const agregarCategorias = () => {
 		let agregarNuevasCategorias = inputAgregarCategorias.value;
+
+		const verificaLocalStorage = guardarEnLocalStorage();
 		const nuevasCategorias = {
-			id: 0,
+			id: verificaLocalStorage.categorias.length,
 			nombre: agregarNuevasCategorias,
 		};
-		const verificaLocalStorage = guardarEnLocalStorage();
 		verificaLocalStorage.categorias.push(nuevasCategorias);
 		localStorage.setItem("tp-ahorradas", JSON.stringify(verificaLocalStorage));
 	};
 	agregarCategorias();
+	mostrarCategorias();
+	mostrarCategoriasSelect();
 };
 
 // boton reporte
@@ -131,3 +140,49 @@ const guardarEnLocalStorage = () => {
 	}
 	return infoTraidaDeStorage;
 };
+
+//funcion mostrar categorias
+const mostrarCategorias = () => {
+	let mostrarDelLocalStorage = guardarEnLocalStorage();
+	const mostrarCategoriaHtml = mostrarDelLocalStorage.categorias.reduce(
+		(acc, elemento) => {
+			return (
+				acc +
+				`
+		<div class="columns">
+	<div class="column">
+		<span class="tag has-text-primary-dark has-background-link-light">
+			${elemento.nombre}
+		</span>
+	</div>
+	<div class="column has-text-right">
+		<button class="button tag is-ghost">Editar</button>
+		<button class="button tag is-ghost">Borrar</button>
+	</div>
+</div>
+		`
+			);
+		},
+		""
+	);
+	divMostrarCategoriasHtml.innerHTML = mostrarCategoriaHtml;
+};
+mostrarCategorias();
+
+const mostrarCategoriasSelect = () => {
+	let mostrarDelLocalStorage = guardarEnLocalStorage();
+	const mostrarCategoriaEnSelect = mostrarDelLocalStorage.categorias.reduce(
+		(acc, elemento) => {
+			return (
+				acc +
+				`
+	<option>${elemento.nombre}</option>
+		`
+			);
+		},
+		""
+	);
+	selectFiltroCategorias.innerHTML = mostrarCategoriaEnSelect;
+};
+
+mostrarCategoriasSelect();
