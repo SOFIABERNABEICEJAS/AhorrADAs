@@ -63,8 +63,6 @@ botonCategorias.onclick = () => {
 	seccionNuevaOperacion.classList.add("is-hidden");
 };
 
-
-
 //funcion agregar categorias
 
 botonAgregarCategorias.onclick = () => {
@@ -77,7 +75,10 @@ botonAgregarCategorias.onclick = () => {
 			nombre: agregarNuevasCategorias,
 		};
 		verificaLocalStorage.categorias.push(nuevasCategorias);
-		localStorage.setItem("tp-ahorradas", JSON.stringify(verificaLocalStorage));
+		localStorage.setItem(
+			"tp-ahorradas",
+			JSON.stringify(verificaLocalStorage)
+		);
 	};
 	agregarCategorias();
 	mostrarCategorias();
@@ -143,21 +144,18 @@ const guardarEnLocalStorage = () => {
 	return infoTraidaDeStorage;
 };
 
-
-
-// agregar id a categorias- 
+// agregar id a categorias-
 const setearID = () => {
 	const storageLocal = guardarEnLocalStorage();
 
 	if (storageLocal.categorias.length > 0) {
-		// se fija cual es el ultimo 
-		const obtenerItemUltimo = storageLocal.categorias[storageLocal.categorias.length - 1];
+		// se fija cual es el ultimo
+		const obtenerItemUltimo =
+			storageLocal.categorias[storageLocal.categorias.length - 1];
 
-		// retorna el ultimo + 1 
+		// retorna el ultimo + 1
 		return obtenerItemUltimo.id + 1;
 	}
-
-	return 1;
 };
 
 //funcion mostrar categorias
