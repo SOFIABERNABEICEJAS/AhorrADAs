@@ -71,11 +71,14 @@ botonAgregarCategorias.onclick = () => {
 
 		const verificaLocalStorage = guardarEnLocalStorage();
 		const nuevasCategorias = {
-			id: verificaLocalStorage.categorias.length,
+			id: setearID(),
 			nombre: agregarNuevasCategorias,
 		};
 		verificaLocalStorage.categorias.push(nuevasCategorias);
-		localStorage.setItem("tp-ahorradas", JSON.stringify(verificaLocalStorage));
+		localStorage.setItem(
+			"tp-ahorradas",
+			JSON.stringify(verificaLocalStorage)
+		);
 	};
 	agregarCategorias();
 	mostrarCategorias();
@@ -141,17 +144,31 @@ const guardarEnLocalStorage = () => {
 	return infoTraidaDeStorage;
 };
 
+// agregar id a categorias-
+const setearID = () => {
+	const storageLocal = guardarEnLocalStorage();
+
+	if (storageLocal.categorias.length > 0) {
+		// se fija cual es el ultimo
+		const obtenerItemUltimo =
+			storageLocal.categorias[storageLocal.categorias.length - 1];
+
+		// retorna el ultimo + 1
+		return obtenerItemUltimo.id + 1;
+	}
+};
+
 //funcion mostrar categorias
 const mostrarCategorias = () => {
 	let mostrarDelLocalStorage = guardarEnLocalStorage();
 	const mostrarCategoriaHtml = mostrarDelLocalStorage.categorias.reduce(
-		(acc, elemento) => {
+		(acc, elemento, index) => {
 			return (
 				acc +
 				`
 		<div class="columns">
 	<div class="column">
-		<span class="tag has-text-primary-dark has-background-link-light">
+		<span class="tag has-text-primary-dark has-background-link-light" id="${elemento.id}">
 			${elemento.nombre}
 		</span>
 	</div>
