@@ -229,8 +229,6 @@ const formularioNuevaOperacion = document.getElementById(
 );
 
 formularioNuevaOperacion.onsubmit = () => {
-	// e.preventDefault();
-	// const formulario = e.target;
 	const descripcionNuevaOperacion = inputTextoNuevaOperacion.value;
 	const montoNuevaOperacion = inputMontoNuevaOperacion.value;
 	const tipoNuevaOperacion = selectTipoNuevaOperacion.value;
