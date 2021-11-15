@@ -205,18 +205,18 @@ const mostrarCategoriasSelect = () => {
 mostrarCategoriasSelect();
 
 const inputTextoNuevaOperacion = document.getElementById(
-	"input-texto-nueva-opercion"
+	"input-texto-nueva-operacion"
 );
 
-const inputMontoNuevaOperacon = document.getElementById(
+const inputMontoNuevaOperacion = document.getElementById(
 	"input-monto-nueva-operacion"
 );
 
 const selectTipoNuevaOperacion = document.getElementById(
-	"select-tipo-nueva-Operacion"
+	"select-tipo-nueva-operacion"
 );
 
-const selectCategoriaNuevaOperacon = document.getElementById(
+const selectCategoriaNuevaOperacion = document.getElementById(
 	"select-categoria-nueva-operacion"
 );
 
@@ -224,39 +224,63 @@ const inputFechaNuevaOperacion = document.getElementById(
 	"input-fecha-nueva-operacion"
 );
 
-const valorNuevaOperacion = [
-	{
-		descripcion: inputTextoNuevaOperacion.value,
-		monto: inputMontoNuevaOperacon.value,
-		tipo: inputTextoNuevaOperacion.value,
-	},
-];
+const formularioNuevaOperacion = document.getElementById(
+	"formulario-nueva-operacion"
+);
 
-console.log(valorNuevaOperacion);
-console.log(inputTextoNuevaOperacion.value);
+formularioNuevaOperacion.onsubmit = () => {
+	// e.preventDefault();
+	// const formulario = e.target;
+	const descripcionNuevaOperacion = inputTextoNuevaOperacion.value;
+	const montoNuevaOperacion = inputMontoNuevaOperacion.value;
+	const tipoNuevaOperacion = selectTipoNuevaOperacion.value;
+	const categoriaNuevaOperacion = selectCategoriaNuevaOperacion.value;
+	const fechaNuevaOperacion = inputFechaNuevaOperacion.value;
 
-const mostrarNuevaOperacionEnHtml = (array) => {
+	const valorNuevaOperacion = {
+		descripcion: descripcionNuevaOperacion,
+		monto: montoNuevaOperacion,
+		tipo: tipoNuevaOperacion,
+		categoria: categoriaNuevaOperacion,
+		fecha: fechaNuevaOperacion,
+	};
+
+	const operacionesVerificaLocalStorage = guardarEnLocalStorage();
+	operacionesVerificaLocalStorage.operaciones.push(valorNuevaOperacion);
+	console.log(valorNuevaOperacion);
+	localStorage.setItem(
+		"tp-ahorradas",
+		JSON.stringify(operacionesVerificaLocalStorage)
+	);
+};
+
+const mostrarOperaciones = () => {
+	let mostrarDelLocalStorage = guardarEnLocalStorage();
+
 	let acc = ``;
 
-	valorNuevaOperacion.map((elemento) => {
-		acc =
-			acc +
-			`
+	const mostrarNuevaOperacionEnHtml = mostrarDelLocalStorage.operaciones.map(
+		(elemento) => {
+			acc =
+				acc +
+				`
 	<div class="column is-3">
-  <p>HOLA</p>
+  <p>${elemento.descripcion}</p>
   </div>
   <div class="column is-3">
-     <p class="tag has-background-primary-light has-text-primary-dark"> ${valorNuevaOperacion.monto} </p>
+     <p class="tag has-background-primary-light has-text-primary-dark">${elemento.categoria}  </p>
   </div>
-  <div class="column is-2 has-text-right"> ${valorNuevaOperacion.monto} </div>
-   <div class="column is-2 has-text-right">$$$$$</div>
+  <div class="column is-2 has-text-right">${elemento.fecha}</div>
+   <div class="column is-2 has-text-right">${elemento.monto}</div>
      <div class="column is-2 has-text-right">
+
      <button class=" tag button is-ghost">Ghost</button>
        <button class=" tag button is-ghost">Ghost</button>
    </div>
-	
+
 	`;
-		divDatosOperacionJs.innerHTML = acc;
-	});
+			divDatosOperacionJs.innerHTML = acc;
+		}
+	);
 };
-mostrarNuevaOperacionEnHtml();
+mostrarOperaciones();
