@@ -1,3 +1,5 @@
+// elementos del DOM
+
 const seccionNuevaOperacion = document.getElementById(
 	"seccion-nueva-operacion"
 );
@@ -31,17 +33,7 @@ const selectFiltroCategorias = document.getElementById(
 const divMostrarCategoriasHtml = document.getElementById(
 	"div-mostrar-categorias-html"
 );
-// div datos js para modificar
-const divDatosOperacionJS = document.getElementById("div-datos-operacion-jS");
-
-// boton "agregar" en SECCION NUEVA OPERACION
-
-botonAgregarFormularioNuevaOperacion.onclick = () => {
-	divOperacionesImagenTexto.classList.add("is-hidden");
-	divDatosOperacionesTitulo.classList.remove("is-hidden");
-	seccionNuevaOperacion.classList.add("is-hidden");
-	seccionPrincipal.classList.remove("is-hidden");
-};
+const divDatosOperacionJs = document.getElementById("div-datos-operacion-js");
 
 // boton balance
 
@@ -50,8 +42,19 @@ botonBalance.onclick = () => {
 	seccionCategoria.classList.add("is-hidden");
 	seccionReporte.classList.add("is-hidden");
 	seccionNuevaOperacion.classList.add("is-hidden");
-	divDatosOperacionesTitulo.classList.add("is-hidden");
 	divOperacionesImagenTexto.classList.remove("is-hidden");
+	divDatosOperacionesTitulo.classList.add("is-hidden");
+	divDatosOperacionJs.add("is-hidden");
+};
+
+// boton "agregar" en SECCION NUEVA OPERACION
+
+botonAgregarFormularioNuevaOperacion.onclick = () => {
+	seccionNuevaOperacion.classList.add("is-hidden");
+	seccionPrincipal.classList.remove("is-hidden");
+	divOperacionesImagenTexto.classList.add("is-hidden");
+	divDatosOperacionesTitulo.classList.remove("is-hidden");
+	divDatosOperacionJs.classList.remove("is-hidden");
 };
 
 // boton categorias
@@ -75,10 +78,7 @@ botonAgregarCategorias.onclick = () => {
 			nombre: agregarNuevasCategorias,
 		};
 		verificaLocalStorage.categorias.push(nuevasCategorias);
-		localStorage.setItem(
-			"tp-ahorradas",
-			JSON.stringify(verificaLocalStorage)
-		);
+		localStorage.setItem("tp-ahorradas", JSON.stringify(verificaLocalStorage));
 	};
 	agregarCategorias();
 	mostrarCategorias();
@@ -203,3 +203,60 @@ const mostrarCategoriasSelect = () => {
 };
 
 mostrarCategoriasSelect();
+
+const inputTextoNuevaOperacion = document.getElementById(
+	"input-texto-nueva-opercion"
+);
+
+const inputMontoNuevaOperacon = document.getElementById(
+	"input-monto-nueva-operacion"
+);
+
+const selectTipoNuevaOperacion = document.getElementById(
+	"select-tipo-nueva-Operacion"
+);
+
+const selectCategoriaNuevaOperacon = document.getElementById(
+	"select-categoria-nueva-operacion"
+);
+
+const inputFechaNuevaOperacion = document.getElementById(
+	"input-fecha-nueva-operacion"
+);
+
+const valorNuevaOperacion = [
+	{
+		descripcion: inputTextoNuevaOperacion.value,
+		monto: inputMontoNuevaOperacon.value,
+		tipo: inputTextoNuevaOperacion.value,
+	},
+];
+
+console.log(valorNuevaOperacion);
+console.log(inputTextoNuevaOperacion.value);
+
+const mostrarNuevaOperacionEnHtml = (array) => {
+	let acc = ``;
+
+	valorNuevaOperacion.map((elemento) => {
+		acc =
+			acc +
+			`
+	<div class="column is-3">
+  <p>HOLA</p>
+  </div>
+  <div class="column is-3">
+     <p class="tag has-background-primary-light has-text-primary-dark"> ${valorNuevaOperacion.monto} </p>
+  </div>
+  <div class="column is-2 has-text-right"> ${valorNuevaOperacion.monto} </div>
+   <div class="column is-2 has-text-right">$$$$$</div>
+     <div class="column is-2 has-text-right">
+     <button class=" tag button is-ghost">Ghost</button>
+       <button class=" tag button is-ghost">Ghost</button>
+   </div>
+	
+	`;
+		divDatosOperacionJs.innerHTML = acc;
+	});
+};
+mostrarNuevaOperacionEnHtml();
