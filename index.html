@@ -79,18 +79,18 @@
                 <!-- article BALANCE -->
                 <article class="box">
                     <h2 class=" title is-3 is-size-3 m-2 mb-6 has-text-weight-bold">Balance</h2>
-                 <div class="columns">   
+                 <div class="columns is-mobile is-vcentered">   
                      <div class="column is-size-5">Ganancia</div>
-                     <div  class="column has-text-right has-text-success">+$0</div>
+                     <div class="column has-text-right has-text-success">+$0</div>
                  </div>
 
-                <div class="columns">
+                <div class="columns is-mobile is-vcentered">
                     <div class="column is-size-5">Gastos</div>
                     <div  class="column has-text-right has-text-danger">-$0</div>
 
                 </div>
 
-                <div class="columns">
+                <div class="columns is-mobile is-vcentered">
                     <div class="column is-size-4">Total</div>
                     <div  class="column has-text-right"> $0</div>
 
@@ -99,7 +99,7 @@
                 </article>
                 <!-- article FILTROS  -->
                 <article class="box">
-                    <div class="columns">
+                    <div class="columns is-mobile is-vcentered">
                         <div class="column">
                             <h3 class="title is-3 is-size-4 has-text-weight-bold ">Filtros</h3>
                         </div>
@@ -173,7 +173,7 @@
                 <!-- article OPERACIONES -->
                 <article class="box" >
                       <!-- titulo y boton nueva operacion  -->
-                    <div class="columns">
+                    <div class="columns is-mobile is-vcentered">
                         <div class="column">
                             <h2 class="title is-4 has-text-weight-bold">Operaciones</h2>
                         </div>
@@ -362,6 +362,34 @@
 
         </div>
 
+    </section>
+    <!-- AGREGUE MODAL EDITAR CATEGORIA  -->
+    <section class="section mt-5 is-hidden" id="seccion-editar-categoria">
+      <div class="container">
+        <div class="columns is-multiline">
+          <div class="column is-8-widescreen is-10-desktop is-offset-2-widescreen is-offset-1-desktop">
+            <div class="box">
+              <h2 class="title is-size-2 has-text-weight-bold">
+                Editar categoría
+              </h2>
+              <label class="label mt-6" for="editarCategoria">Nombre</label>
+              <div class="field is-grouped">
+                <div class="control is-expanded">
+                  <input class="input" type="text" id="">
+                </div>
+              </div>
+              <div class="buttons mt-6">
+                <button class="button is-light" id="cancelar-categoria">
+                  Cancelar
+                </button>
+                <button class="button is-success" id="editar-categoria">
+                  Editar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- section reportes -->

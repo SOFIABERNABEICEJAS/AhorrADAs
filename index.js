@@ -33,7 +33,17 @@ const selectFiltroCategorias = document.getElementById(
 const divMostrarCategoriasHtml = document.getElementById(
 	"div-mostrar-categorias-html"
 );
+
 const divDatosOperacionJs = document.getElementById("div-datos-operacion-js");
+
+// boton "agregar" en SECCION NUEVA OPERACION
+
+botonAgregarFormularioNuevaOperacion.onclick = () => {
+	divOperacionesImagenTexto.classList.add("is-hidden");
+	divDatosOperacionesTitulo.classList.remove("is-hidden");
+	seccionNuevaOperacion.classList.add("is-hidden");
+	seccionPrincipal.classList.remove("is-hidden");
+};
 
 // boton balance
 
@@ -65,6 +75,7 @@ botonCategorias.onclick = () => {
 	seccionReporte.classList.add("is-hidden");
 	seccionNuevaOperacion.classList.add("is-hidden");
 };
+
 
 //funcion agregar categorias
 
@@ -173,7 +184,7 @@ const mostrarCategorias = () => {
 		</span>
 	</div>
 	<div class="column has-text-right">
-		<button class="button tag is-ghost">Editar</button>
+		<button class="button tag is-ghost" id="boton-editar-categoria">Editar</button>
 		<button class="button tag is-ghost">Borrar</button>
 	</div>
 </div>
@@ -282,3 +293,14 @@ const mostrarOperaciones = () => {
 	);
 };
 mostrarOperaciones();
+
+//boton editar categorias abrir modal
+const botonEditarCategoria = document.getElementById("boton-editar-categoria");
+const seccionEditarCategoria = document.getElementById("seccion-editar-categoria");
+	botonEditarCategoria.onclick = () => {
+		seccionEditarCategoria.classList.remove("is-hidden");
+		seccionCategoria.classList.add("is-hidden");
+		console.log("abrir modal");
+	};
+//viqui funciona solo con el primer boton- ver de implementar un for
+	
