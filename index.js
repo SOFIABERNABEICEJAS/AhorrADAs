@@ -31,7 +31,7 @@ const selectFiltroCategorias = document.getElementById(
 const divMostrarCategoriasHtml = document.getElementById(
 	"div-mostrar-categorias-html"
 );
-
+const botonCancelarCategoria = document.getElementById("cancelar-categoria");
 
 // div datos js para modificar
 const divDatosOperacionJS = document.getElementById("div-datos-operacion-jS");
@@ -65,7 +65,6 @@ botonCategorias.onclick = () => {
 	seccionNuevaOperacion.classList.add("is-hidden");
 };
 
-
 //funcion agregar categorias
 
 botonAgregarCategorias.onclick = () => {
@@ -78,10 +77,7 @@ botonAgregarCategorias.onclick = () => {
 			nombre: agregarNuevasCategorias,
 		};
 		verificaLocalStorage.categorias.push(nuevasCategorias);
-		localStorage.setItem(
-			"tp-ahorradas",
-			JSON.stringify(verificaLocalStorage)
-		);
+		localStorage.setItem("tp-ahorradas", JSON.stringify(verificaLocalStorage));
 	};
 	agregarCategorias();
 	mostrarCategorias();
@@ -207,16 +203,15 @@ const mostrarCategoriasSelect = () => {
 
 mostrarCategoriasSelect();
 
-
 //boton editar categorias abrir modal
 const botonEditarCategoria = document.getElementById("boton-editar-categoria");
-const seccionEditarCategoria = document.getElementById("seccion-editar-categoria");
-	botonEditarCategoria.onclick = () => {
-		seccionEditarCategoria.classList.remove("is-hidden");
-		seccionCategoria.classList.add("is-hidden");
-		console.log("abrir modal");
-	};
+const seccionEditarCategoria = document.getElementById(
+	"seccion-editar-categoria"
+);
+botonEditarCategoria.onclick = () => {
+	seccionEditarCategoria.classList.remove("is-hidden");
+	seccionCategoria.classList.add("is-hidden");
+	console.log("abrir modal");
+};
 //viqui funciona solo con el primer boton- ver de implementar un for
-	
-
-
+console.log(botonEditarCategoria);
