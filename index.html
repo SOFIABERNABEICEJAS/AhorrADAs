@@ -201,11 +201,12 @@
                         </div>
                     </div>
                     <!-- columnas para rellenar con js!! -->
-                    <div class="columns" id="div-datos-operacion-jS">
-                      <div class="column is-3">
+
+                    <div class="columns is-hidden" id="div-datos-operacion-js">
+                      <!-- <div class="column is-3">
                         <p>HOLA</p>
                       </div>
-                      <div class="column is-3">
+                       <div class="column is-3">
                         <p class="tag has-background-primary-light has-text-primary-dark"> hola </p>
                       </div>
                       <div class="column is-2 has-text-right">fecha</div>
@@ -213,7 +214,7 @@
                       <div class="column is-2 has-text-right">
                         <button class=" tag button is-ghost">Ghost</button>
                         <button class=" tag button is-ghost">Ghost</button>
-                      </div>
+                      </div> -->
                     </div>
                       <!-- contenedor de imagen y texto -->
                     <div id="div-operaciones-imagen-texto">
@@ -247,19 +248,19 @@
                 <!-- formulario nueva operacion -->
                <div class="column">
 
-                <form>
+                <form id="formulario-nueva-operacion">
                     <!-- input descripcion -->
                     <div class="field">
                         <label class="label" for="Descripcion">Descripción</label>
                         <div class="control">
-                          <input class="input" type="text">
+                          <input class="input" type="text" id="input-texto-nueva-operacion">
                         </div>
                     </div>
                         <!-- input monto -->
                     <div class="field">
                         <label class="label" for="Monto">Monto</label>
                         <div class="control">
-                          <input class="input" type="number">
+                          <input class="input" type="number" id="input-monto-nueva-operacion">
                         </div>
                     </div>
                     <!-- select tipo-gastos-ganancias -->
@@ -267,7 +268,7 @@
                        <label class="label is-fullwidth" for="tipo de gastos-opciones">Tipo</label>
                        <div class="control">
                          <div class="select is-fullwidth">
-                           <select>
+                           <select id="select-tipo-nueva-operacion">
                              <option>Todos</option>
                              <option>Gastos</option>
                              <option>Ganancia</option>
@@ -280,7 +281,7 @@
                        <label class="label" for="categoría-opciones">Categoría</label>
                        <div class="control">
                          <div class="select is-fullwidth">
-                           <select>
+                           <select id="select-categoria-nueva-operacion">
                              <option>Todas</option>
                              <option>Comida</option>
                              <option>Servicios</option>
@@ -298,7 +299,7 @@
                    <div class="field">
                        <label class="label" for="fecha">Fecha</label>
                      <div class="control">
-                       <input class="input" type="date">
+                       <input class="input" type="date" id="input-fecha-nueva-operacion">
                      </div>
 
                    </div>

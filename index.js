@@ -1,3 +1,5 @@
+// elementos del DOM
+
 const seccionNuevaOperacion = document.getElementById(
 	"seccion-nueva-operacion"
 );
@@ -31,10 +33,8 @@ const selectFiltroCategorias = document.getElementById(
 const divMostrarCategoriasHtml = document.getElementById(
 	"div-mostrar-categorias-html"
 );
-const botonCancelarCategoria = document.getElementById("cancelar-categoria");
 
-// div datos js para modificar
-const divDatosOperacionJS = document.getElementById("div-datos-operacion-jS");
+const divDatosOperacionJs = document.getElementById("div-datos-operacion-js");
 
 // boton "agregar" en SECCION NUEVA OPERACION
 
@@ -52,8 +52,19 @@ botonBalance.onclick = () => {
 	seccionCategoria.classList.add("is-hidden");
 	seccionReporte.classList.add("is-hidden");
 	seccionNuevaOperacion.classList.add("is-hidden");
-	divDatosOperacionesTitulo.classList.add("is-hidden");
 	divOperacionesImagenTexto.classList.remove("is-hidden");
+	divDatosOperacionesTitulo.classList.add("is-hidden");
+	divDatosOperacionJs.add("is-hidden");
+};
+
+// boton "agregar" en SECCION NUEVA OPERACION
+
+botonAgregarFormularioNuevaOperacion.onclick = () => {
+	seccionNuevaOperacion.classList.add("is-hidden");
+	seccionPrincipal.classList.remove("is-hidden");
+	divOperacionesImagenTexto.classList.add("is-hidden");
+	divDatosOperacionesTitulo.classList.remove("is-hidden");
+	divDatosOperacionJs.classList.remove("is-hidden");
 };
 
 // boton categorias
@@ -202,6 +213,85 @@ const mostrarCategoriasSelect = () => {
 };
 
 mostrarCategoriasSelect();
+
+const inputTextoNuevaOperacion = document.getElementById(
+	"input-texto-nueva-operacion"
+);
+
+const inputMontoNuevaOperacion = document.getElementById(
+	"input-monto-nueva-operacion"
+);
+
+const selectTipoNuevaOperacion = document.getElementById(
+	"select-tipo-nueva-operacion"
+);
+
+const selectCategoriaNuevaOperacion = document.getElementById(
+	"select-categoria-nueva-operacion"
+);
+
+const inputFechaNuevaOperacion = document.getElementById(
+	"input-fecha-nueva-operacion"
+);
+
+const formularioNuevaOperacion = document.getElementById(
+	"formulario-nueva-operacion"
+);
+
+formularioNuevaOperacion.onsubmit = () => {
+	const descripcionNuevaOperacion = inputTextoNuevaOperacion.value;
+	const montoNuevaOperacion = inputMontoNuevaOperacion.value;
+	const tipoNuevaOperacion = selectTipoNuevaOperacion.value;
+	const categoriaNuevaOperacion = selectCategoriaNuevaOperacion.value;
+	const fechaNuevaOperacion = inputFechaNuevaOperacion.value;
+
+	const valorNuevaOperacion = {
+		descripcion: descripcionNuevaOperacion,
+		monto: montoNuevaOperacion,
+		tipo: tipoNuevaOperacion,
+		categoria: categoriaNuevaOperacion,
+		fecha: fechaNuevaOperacion,
+	};
+
+	const operacionesVerificaLocalStorage = guardarEnLocalStorage();
+	operacionesVerificaLocalStorage.operaciones.push(valorNuevaOperacion);
+	console.log(valorNuevaOperacion);
+	localStorage.setItem(
+		"tp-ahorradas",
+		JSON.stringify(operacionesVerificaLocalStorage)
+	);
+};
+
+const mostrarOperaciones = () => {
+	let mostrarDelLocalStorage = guardarEnLocalStorage();
+
+	let acc = ``;
+
+	const mostrarNuevaOperacionEnHtml = mostrarDelLocalStorage.operaciones.map(
+		(elemento) => {
+			acc =
+				acc +
+				`
+	<div class="column is-3">
+  <p>${elemento.descripcion}</p>
+  </div>
+  <div class="column is-3">
+     <p class="tag has-background-primary-light has-text-primary-dark">${elemento.categoria}  </p>
+  </div>
+  <div class="column is-2 has-text-right">${elemento.fecha}</div>
+   <div class="column is-2 has-text-right">${elemento.monto}</div>
+     <div class="column is-2 has-text-right">
+
+     <button class=" tag button is-ghost">Ghost</button>
+       <button class=" tag button is-ghost">Ghost</button>
+   </div>
+
+	`;
+			divDatosOperacionJs.innerHTML = acc;
+		}
+	);
+};
+mostrarOperaciones();
 
 //boton editar categorias abrir modal
 const botonEditarCategoria = document.getElementById("boton-editar-categoria");
