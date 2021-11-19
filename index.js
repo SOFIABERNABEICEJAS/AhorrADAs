@@ -33,7 +33,6 @@ const selectFiltroCategorias = document.getElementById(
 const divMostrarCategoriasHtml = document.getElementById(
 	"div-mostrar-categorias-html"
 );
-
 const divDatosOperacionJs = document.getElementById("div-datos-operacion-js");
 
 // boton "agregar" en SECCION NUEVA OPERACION
@@ -183,8 +182,8 @@ const mostrarCategorias = () => {
 		</span>
 	</div>
 	<div class="column has-text-right">
-		<button class="button tag is-ghost" id="boton-editar-categoria">Editar</button>
-		<button class="button tag is-ghost">Borrar</button>
+		<button class="button tag is-ghost" id="boton-editar-categoria-${index}">Editar</button>
+		<button class="button tag is-ghost">Eliminar</button>
 	</div>
 </div>
 		`
@@ -298,10 +297,14 @@ const botonEditarCategoria = document.getElementById("boton-editar-categoria");
 const seccionEditarCategoria = document.getElementById(
 	"seccion-editar-categoria"
 );
+
+// for (let index = 0; index < botonEditarCategoria.length; index++) {
+// 	// const element = array[index];
+// 	console.log("hola");// }
 botonEditarCategoria.onclick = () => {
 	seccionEditarCategoria.classList.remove("is-hidden");
 	seccionCategoria.classList.add("is-hidden");
 	console.log("abrir modal");
 };
+
 //viqui funciona solo con el primer boton- ver de implementar un for
-console.log(botonEditarCategoria);
