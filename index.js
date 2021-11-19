@@ -182,7 +182,7 @@ const mostrarCategorias = () => {
 		</span>
 	</div>
 	<div class="column has-text-right">
-		<button class="button tag is-ghost" id="boton-editar-categoria-${index}">Editar</button>
+		<button class="button tag is-ghost" id="boton-editar-categoria">Editar</button>
 		<button class="button tag is-ghost">Eliminar</button>
 	</div>
 </div>
@@ -254,7 +254,6 @@ formularioNuevaOperacion.onsubmit = () => {
 
 	const operacionesVerificaLocalStorage = guardarEnLocalStorage();
 	operacionesVerificaLocalStorage.operaciones.push(valorNuevaOperacion);
-	console.log(valorNuevaOperacion);
 	localStorage.setItem(
 		"tp-ahorradas",
 		JSON.stringify(operacionesVerificaLocalStorage)
@@ -275,7 +274,7 @@ const mostrarOperaciones = () => {
   <p>${elemento.descripcion}</p>
   </div>
   <div class="column is-3">
-     <p class="tag has-background-primary-light has-text-primary-dark">${elemento.categoria}  </p>
+     <p class="tag has-background-primary-light has-text-primary-dark">${elemento.categoria}</p>
   </div>
   <div class="column is-2 has-text-right">${elemento.fecha}</div>
    <div class="column is-2 has-text-right">${elemento.monto}</div>
@@ -298,9 +297,6 @@ const seccionEditarCategoria = document.getElementById(
 	"seccion-editar-categoria"
 );
 
-// for (let index = 0; index < botonEditarCategoria.length; index++) {
-// 	// const element = array[index];
-// 	console.log("hola");// }
 botonEditarCategoria.onclick = () => {
 	seccionEditarCategoria.classList.remove("is-hidden");
 	seccionCategoria.classList.add("is-hidden");
