@@ -38,8 +38,13 @@ const divMostrarCategoriasHtml = document.getElementById(
 );
 
 const divDatosOperacionJs = document.getElementById("div-datos-operacion-js");
+const inputTextoNuevaOperacion = document.getElementById(
+	"input-texto-nueva-operacion"
+);
 
-// boton "agregar" en SECCION NUEVA OPERACION
+const inputMontoNuevaOperacion = document.getElementById(
+	"input-monto-nueva-operacion"
+);
 
 botonAgregarFormularioNuevaOperacion.onclick = () => {
 	divOperacionesImagenTexto.classList.add("is-hidden");
@@ -48,6 +53,22 @@ botonAgregarFormularioNuevaOperacion.onclick = () => {
 	seccionPrincipal.classList.remove("is-hidden");
 	seccionModalParaEditarCategoria.classList.add("is-hidden");
 };
+
+const selectTipoNuevaOperacion = document.getElementById(
+	"select-tipo-nueva-operacion"
+);
+
+const selectCategoriaNuevaOperacion = document.getElementById(
+	"select-categoria-nueva-operacion"
+);
+
+const inputFechaNuevaOperacion = document.getElementById(
+	"input-fecha-nueva-operacion"
+);
+
+const formularioNuevaOperacion = document.getElementById(
+	"formulario-nueva-operacion"
+);
 
 // boton balance
 
@@ -83,7 +104,40 @@ botonCategorias.onclick = () => {
 	seccionModalParaEditarCategoria.classList.add("is-hidden");
 };
 
-//funcion agregar categorias
+// boton reporte
+
+botonReporte.onclick = () => {
+	seccionReporte.classList.remove("is-hidden");
+	seccionPrincipal.classList.add("is-hidden");
+	seccionCategoria.classList.add("is-hidden");
+	seccionNuevaOperacion.classList.add("is-hidden");
+	seccionModalParaEditarCategoria.classList.add("is-hidden");
+};
+
+//boton ocultar filtros SECCION OPERACIONES (formulario filtro)
+
+botonOcultarFiltros.onclick = () => {
+	divFormularioFiltros.classList.toggle("is-hidden");
+};
+
+// boton nueva operacion SECCION OPERACIONES
+
+botonNuevaOperacion.onclick = () => {
+	seccionNuevaOperacion.classList.remove("is-hidden");
+	seccionPrincipal.classList.add("is-hidden");
+};
+
+// boton "agregar" en SECCION NUEVA OPERACION
+
+botonAgregarFormularioNuevaOperacion.onclick = () => {
+	seccionNuevaOperacion.classList.add("is-hidden");
+	seccionPrincipal.classList.remove("is-hidden");
+	divOperacionesImagenTexto.classList.add("is-hidden");
+	divDatosOperacionesTitulo.classList.remove("is-hidden");
+	divDatosOperacionJs.classList.remove("is-hidden");
+};
+
+//FUNCION AGREGAR CATEGORIA
 
 botonAgregarCategorias.onclick = () => {
 	const agregarCategorias = () => {
@@ -100,29 +154,6 @@ botonAgregarCategorias.onclick = () => {
 	agregarCategorias();
 	mostrarCategorias();
 	mostrarCategoriasSelect();
-};
-
-// boton reporte
-
-botonReporte.onclick = () => {
-	seccionReporte.classList.remove("is-hidden");
-	seccionPrincipal.classList.add("is-hidden");
-	seccionCategoria.classList.add("is-hidden");
-	seccionNuevaOperacion.classList.add("is-hidden");
-	seccionModalParaEditarCategoria.classList.add("is-hidden");
-};
-
-//boton ocultar filtros SECCION FILTRO
-
-botonOcultarFiltros.onclick = () => {
-	divFormularioFiltros.classList.toggle("is-hidden");
-};
-
-// boton nueva operacion SECCION OPERACIONES
-
-botonNuevaOperacion.onclick = () => {
-	seccionNuevaOperacion.classList.remove("is-hidden");
-	seccionPrincipal.classList.add("is-hidden");
 };
 
 //guardar en local storage
@@ -222,29 +253,7 @@ const mostrarCategoriasSelect = () => {
 
 mostrarCategoriasSelect();
 
-const inputTextoNuevaOperacion = document.getElementById(
-	"input-texto-nueva-operacion"
-);
-
-const inputMontoNuevaOperacion = document.getElementById(
-	"input-monto-nueva-operacion"
-);
-
-const selectTipoNuevaOperacion = document.getElementById(
-	"select-tipo-nueva-operacion"
-);
-
-const selectCategoriaNuevaOperacion = document.getElementById(
-	"select-categoria-nueva-operacion"
-);
-
-const inputFechaNuevaOperacion = document.getElementById(
-	"input-fecha-nueva-operacion"
-);
-
-const formularioNuevaOperacion = document.getElementById(
-	"formulario-nueva-operacion"
-);
+// mostrar opperaciones
 
 botonAgregarOperacion.onclick = () => {
 	const descripcionNuevaOperacion = inputTextoNuevaOperacion.value;
@@ -281,7 +290,7 @@ const mostrarOperaciones = () => {
 			acc =
 				acc +
 				`
-<div>
+ <div class="columns">
 	<div class="column is-3">
   <p>${elemento.descripcion}</p>
   </div>
@@ -295,7 +304,9 @@ const mostrarOperaciones = () => {
      <button class=" tag button is-ghost">Editar</button>
        <button class=" tag button is-ghost">Eliminar</button>
    </div>
-</div>
+  </div>
+	 </div>
+
 	`;
 			divDatosOperacionJs.innerHTML = acc;
 		}
