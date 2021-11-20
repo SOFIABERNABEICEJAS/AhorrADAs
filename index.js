@@ -92,7 +92,15 @@ botonAgregarCategorias.onclick = () => {
 	agregarCategorias();
 	mostrarCategorias();
 	mostrarCategoriasSelect();
+	const botonesEditarCategorias = document.querySelectorAll(
+		"#boton-editar-categoria"
+	);
 };
+
+for (let index = 0; index < array.length; index++) {
+	const element = array[index];
+	
+}
 
 // boton reporte
 
@@ -182,8 +190,8 @@ const mostrarCategorias = () => {
 		</span>
 	</div>
 	<div class="column has-text-right">
-		<button class="button tag is-ghost" id="boton-editar-categoria">Editar</button>
-		<button class="button tag is-ghost">Eliminar</button>
+		<button class="button tag is-ghost" data-id="${elemento.id}" id="boton-editar-categoria">Editar</button>
+		<button class="button tag is-ghost" data-id="${elemento.id}">Eliminar</button>
 	</div>
 </div>
 		`
@@ -304,3 +312,7 @@ botonEditarCategoria.onclick = () => {
 };
 
 //viqui funciona solo con el primer boton- ver de implementar un for
+
+const botonesEditarCategorias = document.querySelectorAll(
+	"#boton-editar-categoria"
+);
