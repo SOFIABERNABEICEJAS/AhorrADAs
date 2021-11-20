@@ -46,6 +46,14 @@ const inputMontoNuevaOperacion = document.getElementById(
 	"input-monto-nueva-operacion"
 );
 
+botonAgregarFormularioNuevaOperacion.onclick = () => {
+	divOperacionesImagenTexto.classList.add("is-hidden");
+	divDatosOperacionesTitulo.classList.remove("is-hidden");
+	seccionNuevaOperacion.classList.add("is-hidden");
+	seccionPrincipal.classList.remove("is-hidden");
+	seccionModalParaEditarCategoria.classList.add("is-hidden");
+};
+
 const selectTipoNuevaOperacion = document.getElementById(
 	"select-tipo-nueva-operacion"
 );
@@ -71,7 +79,19 @@ botonBalance.onclick = () => {
 	seccionNuevaOperacion.classList.add("is-hidden");
 	divOperacionesImagenTexto.classList.remove("is-hidden");
 	divDatosOperacionesTitulo.classList.add("is-hidden");
-	divDatosOperacionJs.add("is-hidden");
+	divDatosOperacionJs.classList.add("is-hidden");
+	seccionModalParaEditarCategoria.classList.add("is-hidden");
+};
+
+// boton "agregar" en SECCION NUEVA OPERACION
+
+botonAgregarFormularioNuevaOperacion.onclick = () => {
+	seccionNuevaOperacion.classList.add("is-hidden");
+	seccionPrincipal.classList.remove("is-hidden");
+	divOperacionesImagenTexto.classList.add("is-hidden");
+	divDatosOperacionesTitulo.classList.remove("is-hidden");
+	divDatosOperacionJs.classList.remove("is-hidden");
+	seccionModalParaEditarCategoria.classList.add("is-hidden");
 };
 
 // boton categorias
@@ -81,6 +101,7 @@ botonCategorias.onclick = () => {
 	seccionPrincipal.classList.add("is-hidden");
 	seccionReporte.classList.add("is-hidden");
 	seccionNuevaOperacion.classList.add("is-hidden");
+	seccionModalParaEditarCategoria.classList.add("is-hidden");
 };
 
 // boton reporte
@@ -90,6 +111,7 @@ botonReporte.onclick = () => {
 	seccionPrincipal.classList.add("is-hidden");
 	seccionCategoria.classList.add("is-hidden");
 	seccionNuevaOperacion.classList.add("is-hidden");
+	seccionModalParaEditarCategoria.classList.add("is-hidden");
 };
 
 //boton ocultar filtros SECCION OPERACIONES (formulario filtro)
@@ -282,12 +304,9 @@ const mostrarOperaciones = () => {
      <button class=" tag button is-ghost">Editar</button>
        <button class=" tag button is-ghost">Eliminar</button>
    </div>
-<<<<<<< HEAD
   </div>
-=======
 	 </div>
 
->>>>>>> 12373d73b181807520d0e5bbaa30eb0f7aea6f29
 	`;
 			divDatosOperacionJs.innerHTML = acc;
 		}
@@ -295,14 +314,13 @@ const mostrarOperaciones = () => {
 };
 mostrarOperaciones();
 
-//boton editar categorias abrir modal
+//boton abrir modal ditar categorias
 const botonEditarCategoria = document.getElementById("boton-editar-categoria");
-const seccionEditarCategoria = document.getElementById(
-	"seccion-editar-categoria"
+const seccionModalParaEditarCategoria = document.getElementById(
+	"seccion-modal-editar-categoria"
 );
 botonEditarCategoria.onclick = () => {
-	seccionEditarCategoria.classList.remove("is-hidden");
+	seccionModalParaEditarCategoria.classList.remove("is-hidden");
 	seccionCategoria.classList.add("is-hidden");
-	console.log("abrir modal");
 };
 //viqui funciona solo con el primer boton- ver de implementar un for
