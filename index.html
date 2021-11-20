@@ -118,9 +118,9 @@
                                 <div class="control">
                                   <div class="select is-fullwidth">
                                     <select>
-                                      <option>Todos</option>
-                                      <option>Gastos</option>
-                                      <option>Ganancia</option>
+                                      <option value="Todos">Todos</option>
+                                      <option value="Gasto">Gastos</option>
+                                      <option value="Ganancia">Ganancia</option>
                                     </select>
                                   </div>
                                 </div>
@@ -141,7 +141,7 @@
                             <div class="field">
                                 <label class="label" for="datos-fecha">Desde</label>
                               <div class="control">
-                                <input class="input" type="date">
+                                <input class="input" type="date" id="input-fecha">
                               </div>
 
                             </div>
@@ -200,21 +200,15 @@
                           <h3 class="has-text-weight-semibold">Acciones</h3>
                         </div>
                     </div>
+                    
                     <!-- columnas para rellenar con js!! -->
 
-                    <div class="columns is-hidden" id="div-datos-operacion-js">
-                      <!-- <div class="column is-3">
-                        <p>HOLA</p>
-                      </div>
-                       <div class="column is-3">
-                        <p class="tag has-background-primary-light has-text-primary-dark"> hola </p>
-                      </div>
-                      <div class="column is-2 has-text-right">fecha</div>
-                      <div class="column is-2 has-text-right">$$$$$</div>
-                      <div class="column is-2 has-text-right">
-                        <button class=" tag button is-ghost">Ghost</button>
-                        <button class=" tag button is-ghost">Ghost</button>
-                      </div> -->
+
+                    <div class=" is-hidden" id="div-datos-operacion-js">
+                     
+                
+                      
+
                     </div>
                       <!-- contenedor de imagen y texto -->
                     <div id="div-operaciones-imagen-texto">
@@ -312,7 +306,7 @@
                           </button>
                         </p>
                         <p class="control" id="boton-agregar-formulario-nueva-operacion">
-                          <button class="button is-success" type="button">
+                          <button class="button is-success" type="button" id="boton-agrega-nueva-operacion">
                            Agregar
                           </button>
                         </p>
@@ -363,8 +357,10 @@
         </div>
 
     </section>
-    <!-- AGREGUE MODAL EDITAR CATEGORIA  -->
+
+    <!-- Seccion modal editar categorias -->
     <section class="section mt-5 is-hidden" id="seccion-editar-categoria">
+
       <div class="container">
         <div class="columns is-multiline">
           <div class="column is-8-widescreen is-10-desktop is-offset-2-widescreen is-offset-1-desktop">
