@@ -21,6 +21,9 @@ const divDatosOperacionesTitulo = document.getElementById(
 const botonAgregarFormularioNuevaOperacion = document.getElementById(
 	"boton-agregar-formulario-nueva-operacion"
 );
+const botonAgregarOperacion = document.getElementById(
+	"boton-agrega-nueva-operacion"
+);
 const inputAgregarCategorias = document.getElementById(
 	"input-agregar-categorias"
 );
@@ -75,7 +78,6 @@ botonCategorias.onclick = () => {
 	seccionReporte.classList.add("is-hidden");
 	seccionNuevaOperacion.classList.add("is-hidden");
 };
-
 
 //funcion agregar categorias
 
@@ -239,7 +241,7 @@ const formularioNuevaOperacion = document.getElementById(
 	"formulario-nueva-operacion"
 );
 
-formularioNuevaOperacion.onsubmit = () => {
+botonAgregarOperacion.onclick = () => {
 	const descripcionNuevaOperacion = inputTextoNuevaOperacion.value;
 	const montoNuevaOperacion = inputMontoNuevaOperacion.value;
 	const tipoNuevaOperacion = selectTipoNuevaOperacion.value;
@@ -261,6 +263,7 @@ formularioNuevaOperacion.onsubmit = () => {
 		"tp-ahorradas",
 		JSON.stringify(operacionesVerificaLocalStorage)
 	);
+	mostrarOperaciones();
 };
 
 const mostrarOperaciones = () => {
@@ -273,6 +276,7 @@ const mostrarOperaciones = () => {
 			acc =
 				acc +
 				`
+<div>
 	<div class="column is-3">
   <p>${elemento.descripcion}</p>
   </div>
@@ -286,7 +290,7 @@ const mostrarOperaciones = () => {
      <button class=" tag button is-ghost">Ghost</button>
        <button class=" tag button is-ghost">Ghost</button>
    </div>
-
+</div>
 	`;
 			divDatosOperacionJs.innerHTML = acc;
 		}
@@ -296,11 +300,12 @@ mostrarOperaciones();
 
 //boton editar categorias abrir modal
 const botonEditarCategoria = document.getElementById("boton-editar-categoria");
-const seccionEditarCategoria = document.getElementById("seccion-editar-categoria");
-	botonEditarCategoria.onclick = () => {
-		seccionEditarCategoria.classList.remove("is-hidden");
-		seccionCategoria.classList.add("is-hidden");
-		console.log("abrir modal");
-	};
+const seccionEditarCategoria = document.getElementById(
+	"seccion-editar-categoria"
+);
+botonEditarCategoria.onclick = () => {
+	seccionEditarCategoria.classList.remove("is-hidden");
+	seccionCategoria.classList.add("is-hidden");
+	console.log("abrir modal");
+};
 //viqui funciona solo con el primer boton- ver de implementar un for
-	
