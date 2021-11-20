@@ -268,7 +268,7 @@ const mostrarOperaciones = () => {
 			acc =
 				acc +
 				`
-<div>
+ <div class="columns">
 	<div class="column is-3">
   <p>${elemento.descripcion}</p>
   </div>
@@ -282,7 +282,12 @@ const mostrarOperaciones = () => {
      <button class=" tag button is-ghost">Editar</button>
        <button class=" tag button is-ghost">Eliminar</button>
    </div>
+<<<<<<< HEAD
   </div>
+=======
+	 </div>
+
+>>>>>>> 12373d73b181807520d0e5bbaa30eb0f7aea6f29
 	`;
 			divDatosOperacionJs.innerHTML = acc;
 		}
