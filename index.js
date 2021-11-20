@@ -324,3 +324,27 @@ botonEditarCategoria.onclick = () => {
 	seccionCategoria.classList.add("is-hidden");
 };
 //viqui funciona solo con el primer boton- ver de implementar un for
+
+
+//*** FILTRO FECHA OPERACIONES*/
+
+const filtroFecha = (operacionesArray, date) => {
+	return operacionesArray.filter((operacion)=>{
+		return date <= new Date(operacion.fecha)
+	})
+}
+
+// funcion filtros general 
+const filtrosFormulario = document.getElementById("div-formulario-filtros");
+filtrosFormulario.onchange = () =>{
+	const storageLocal = getStorage(); //leer localstorage
+	let operacionesArray = storageLocal.operaciones;
+
+	const inputFiltroFecha = document.getElementById("input-fecha");
+	if (inputFiltroFecha.value !== "") {
+		const date = new Date(inputFiltroFecha.value);
+		operacionesArray = filtroFecha(operacionesArray, date); // llama a la funcion filtro fecha
+	}
+
+	//sort
+}
