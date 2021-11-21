@@ -296,7 +296,41 @@ const mostrarOperaciones = () => {
 };
 mostrarOperaciones();
 
-console.log(mostrarDelLocalStorage);
+// formulario FILTRO
+
+const selectFiltroTipo = document.getElementById("select-filtro-tipo");
+
+const aplicarFiltros = () => {
+	const selectTipo = selectFiltroTipo.value;
+	let operacionesDato = guardarEnLocalStorage();
+
+	const filtrarPorTipo = operacionesDatos.operaciones.filter((operacion) => {
+		if (selectTipo === "todo") {
+			return operacion;
+		}
+		return operacion.tipo === selectTipo;
+	});
+
+	const filtrarPorCategoria = filtroCategoria.value;
+	const filtradoFinal = filtroTipo.filter((operacion) => {
+		if (filtrarPorCategoria === "todos") {
+			return operacion;
+		}
+		return operacion.categoria === filtrarPorCategoria;
+	});
+
+	return filtradoFinal;
+};
+
+divFormularioFiltros.onchange = () => {
+	const filtrado = aplicarFiltros();
+	mostrarEnHTML(filtrado);
+};
+
+divFormularioFiltro.onchange = () => {
+	const filtrado = aplicarFiltros();
+	mostrarEnHTML(filtrado);
+};
 
 //boton abrir modal ditar categorias
 const botonEditarCategoria = document.getElementById("boton-editar-categoria");
@@ -308,27 +342,3 @@ botonEditarCategoria.onclick = () => {
 	seccionCategoria.classList.add("is-hidden");
 };
 //viqui funciona solo con el primer boton- ver de implementar un for
-
-
-//*** FILTRO FECHA OPERACIONES*/
-
-const filtroFecha = (operacionesArray, date) => {
-	return operacionesArray.filter((operacion)=>{
-		return date <= new Date(operacion.fecha)
-	})
-}
-
-// funcion filtros general 
-const filtrosFormulario = document.getElementById("div-formulario-filtros");
-filtrosFormulario.onchange = () =>{
-	const storageLocal = getStorage(); //leer localstorage
-	let operacionesArray = storageLocal.operaciones;
-
-	const inputFiltroFecha = document.getElementById("input-fecha");
-	if (inputFiltroFecha.value !== "") {
-		const date = new Date(inputFiltroFecha.value);
-		operacionesArray = filtroFecha(operacionesArray, date); // llama a la funcion filtro fecha
-	}
-
-	//sort
-}
