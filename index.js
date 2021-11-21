@@ -45,15 +45,6 @@ const inputTextoNuevaOperacion = document.getElementById(
 const inputMontoNuevaOperacion = document.getElementById(
 	"input-monto-nueva-operacion"
 );
-
-botonAgregarFormularioNuevaOperacion.onclick = () => {
-	divOperacionesImagenTexto.classList.add("is-hidden");
-	divDatosOperacionesTitulo.classList.remove("is-hidden");
-	seccionNuevaOperacion.classList.add("is-hidden");
-	seccionPrincipal.classList.remove("is-hidden");
-	seccionModalParaEditarCategoria.classList.add("is-hidden");
-};
-
 const selectTipoNuevaOperacion = document.getElementById(
 	"select-tipo-nueva-operacion"
 );
@@ -80,17 +71,6 @@ botonBalance.onclick = () => {
 	divOperacionesImagenTexto.classList.remove("is-hidden");
 	divDatosOperacionesTitulo.classList.add("is-hidden");
 	divDatosOperacionJs.classList.add("is-hidden");
-	seccionModalParaEditarCategoria.classList.add("is-hidden");
-};
-
-// boton "agregar" en SECCION NUEVA OPERACION
-
-botonAgregarFormularioNuevaOperacion.onclick = () => {
-	seccionNuevaOperacion.classList.add("is-hidden");
-	seccionPrincipal.classList.remove("is-hidden");
-	divOperacionesImagenTexto.classList.add("is-hidden");
-	divDatosOperacionesTitulo.classList.remove("is-hidden");
-	divDatosOperacionJs.classList.remove("is-hidden");
 	seccionModalParaEditarCategoria.classList.add("is-hidden");
 };
 
@@ -253,43 +233,15 @@ const mostrarCategoriasSelect = () => {
 
 mostrarCategoriasSelect();
 
-// mostrar opperaciones
+// funcion auxliar
 
-botonAgregarOperacion.onclick = () => {
-	const descripcionNuevaOperacion = inputTextoNuevaOperacion.value;
-	const montoNuevaOperacion = inputMontoNuevaOperacion.value;
-	const tipoNuevaOperacion = selectTipoNuevaOperacion.value;
-	const categoriaNuevaOperacion = selectCategoriaNuevaOperacion.value;
-	const fechaNuevaOperacion = inputFechaNuevaOperacion.value;
-
-	const valorNuevaOperacion = {
-		descripcion: descripcionNuevaOperacion,
-		monto: montoNuevaOperacion,
-		tipo: tipoNuevaOperacion,
-		categoria: categoriaNuevaOperacion,
-		fecha: fechaNuevaOperacion,
-	};
-
-	const operacionesVerificaLocalStorage = guardarEnLocalStorage();
-	operacionesVerificaLocalStorage.operaciones.push(valorNuevaOperacion);
-	console.log(valorNuevaOperacion);
-	localStorage.setItem(
-		"tp-ahorradas",
-		JSON.stringify(operacionesVerificaLocalStorage)
-	);
-	mostrarOperaciones();
-};
-
-const mostrarOperaciones = () => {
-	let mostrarDelLocalStorage = guardarEnLocalStorage();
-
+const mostrarEnHTML = (array) => {
 	let acc = ``;
 
-	const mostrarNuevaOperacionEnHtml = mostrarDelLocalStorage.operaciones.map(
-		(elemento) => {
-			acc =
-				acc +
-				`
+	const funcionAuxiliarParaHtml = array.map((elemento) => {
+		acc =
+			acc +
+			`
  <div class="columns">
 	<div class="column is-3">
   <p>${elemento.descripcion}</p>
@@ -308,11 +260,43 @@ const mostrarOperaciones = () => {
 	 </div>
 
 	`;
-			divDatosOperacionJs.innerHTML = acc;
-		}
+		divDatosOperacionJs.innerHTML = acc;
+	});
+};
+
+// mostrar operaciones
+
+botonAgregarOperacion.onclick = () => {
+	const descripcionNuevaOperacion = inputTextoNuevaOperacion.value;
+	const montoNuevaOperacion = inputMontoNuevaOperacion.value;
+	const tipoNuevaOperacion = selectTipoNuevaOperacion.value;
+	const categoriaNuevaOperacion = selectCategoriaNuevaOperacion.value;
+	const fechaNuevaOperacion = inputFechaNuevaOperacion.value;
+
+	const valorNuevaOperacion = {
+		descripcion: descripcionNuevaOperacion,
+		monto: montoNuevaOperacion,
+		tipo: tipoNuevaOperacion,
+		categoria: categoriaNuevaOperacion,
+		fecha: fechaNuevaOperacion,
+	};
+
+	const operacionesVerificaLocalStorage = guardarEnLocalStorage();
+	operacionesVerificaLocalStorage.operaciones.push(valorNuevaOperacion);
+	localStorage.setItem(
+		"tp-ahorradas",
+		JSON.stringify(operacionesVerificaLocalStorage)
 	);
+	mostrarOperaciones();
+};
+
+const mostrarOperaciones = () => {
+	let mostrarDelLocalStorage = guardarEnLocalStorage();
+	mostrarEnHTML(mostrarDelLocalStorage.operaciones);
 };
 mostrarOperaciones();
+
+console.log(mostrarDelLocalStorage);
 
 //boton abrir modal ditar categorias
 const botonEditarCategoria = document.getElementById("boton-editar-categoria");
