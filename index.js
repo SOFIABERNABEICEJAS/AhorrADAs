@@ -154,6 +154,7 @@ botonAgregarCategorias.onclick = () => {
 	agregarCategorias();
 	mostrarCategorias();
 	mostrarCategoriasSelect();
+	agregarOnClicks();
 };
 
 //guardar en local storage
