@@ -134,6 +134,7 @@ botonAgregarCategorias.onclick = () => {
 	agregarCategorias();
 	mostrarCategorias();
 	mostrarCategoriasSelect();
+	agregarOnClicks();
 };
 
 //guardar en local storage
@@ -190,6 +191,7 @@ const setearID = () => {
 //funcion mostrar categorias
 const mostrarCategorias = () => {
 	let mostrarDelLocalStorage = guardarEnLocalStorage();
+	divMostrarCategoriasHtml.innerHTML = "";
 	const mostrarCategoriaHtml = mostrarDelLocalStorage.categorias.reduce(
 		(acc, elemento, index) => {
 			return (
@@ -203,7 +205,7 @@ const mostrarCategorias = () => {
 	</div>
 	<div class="column has-text-right">
 		<button class="button tag is-ghost" id="boton-editar-categoria">Editar</button>
-		<button class="button tag is-ghost">Borrar</button>
+		<button class="button tag is-ghost" id="boton-eliminar-categoria" data-id="${elemento.id}">Eliminar</button>
 	</div>
 </div>
 		`
@@ -342,3 +344,58 @@ botonEditarCategoria.onclick = () => {
 	seccionCategoria.classList.add("is-hidden");
 };
 //viqui funciona solo con el primer boton- ver de implementar un for
+
+
+//*** FILTRO FECHA OPERACIONES*/
+
+const filtroFecha = (operacionesArray, date) => {
+	return operacionesArray.filter((operacion) => {
+		return date <= new Date(operacion.fecha);
+	});
+};
+
+// funcion filtros general
+const filtrosFormulario = document.getElementById("div-formulario-filtros");
+filtrosFormulario.onchange = () => {
+	const storageLocal = getStorage(); //leer localstorage
+	let operacionesArray = storageLocal.operaciones;
+
+	const inputFiltroFecha = document.getElementById("input-fecha");
+	if (inputFiltroFecha.value !== "") {
+		const date = new Date(inputFiltroFecha.value);
+		operacionesArray = filtroFecha(operacionesArray, date); // llama a la funcion filtro fecha
+	}
+
+	//sort
+};
+
+const agregarOnClicks = () => {
+	const botonesEliminarCategorias = document.querySelectorAll(
+		"#boton-eliminar-categoria"
+	);
+
+	for (let i = 0; i < botonesEliminarCategorias.length; i++) {
+		// const prueba = guardarEnLocalStorage.id;
+		botonesEliminarCategorias[i].onclick = (e) => {
+			// Leo la informacion que tengo en el LocalStorage
+			let informacionEnLocalStorage = guardarEnLocalStorage();
+			// Creo un nuevo array filtrando el id de la categoria que se clickeo
+			const nuevoArray = informacionEnLocalStorage.categorias.filter(
+				(item) => item.id != e.target.dataset.id
+			);
+			// Cambio el array del local storage por el nuevo array que no tiene el elemento
+			informacionEnLocalStorage.categorias = nuevoArray;
+			// Guardo nuevamente el objeto en el LocalStorage
+			localStorage.setItem(
+				"tp-ahorradas",
+				JSON.stringify(informacionEnLocalStorage)
+			);
+			// Llamo denuevo a la funcion que lee el localStorage y crea los elementos html
+			mostrarCategorias();
+			// Llamo a la funcion que les agrega los onclicks a los elementos recien creados
+			agregarOnClicks();
+		};
+	}
+};
+agregarOnClicks();
+
