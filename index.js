@@ -134,6 +134,7 @@ botonAgregarCategorias.onclick = () => {
 	agregarCategorias();
 	mostrarCategorias();
 	mostrarCategoriasSelect();
+	agregarOnClicks();
 };
 
 //guardar en local storage
@@ -190,6 +191,7 @@ const setearID = () => {
 //funcion mostrar categorias
 const mostrarCategorias = () => {
 	let mostrarDelLocalStorage = guardarEnLocalStorage();
+	divMostrarCategoriasHtml.innerHTML = "";
 	const mostrarCategoriaHtml = mostrarDelLocalStorage.categorias.reduce(
 		(acc, elemento, index) => {
 			return (
@@ -203,7 +205,7 @@ const mostrarCategorias = () => {
 	</div>
 	<div class="column has-text-right">
 		<button class="button tag is-ghost" id="boton-editar-categoria">Editar</button>
-		<button class="button tag is-ghost">Borrar</button>
+		<button class="button tag is-ghost" id="boton-eliminar-categoria" data-id="${elemento.id}">Eliminar</button>
 	</div>
 </div>
 		`
@@ -342,3 +344,135 @@ botonEditarCategoria.onclick = () => {
 	seccionCategoria.classList.add("is-hidden");
 };
 //viqui funciona solo con el primer boton- ver de implementar un for
+<<<<<<< HEAD
+=======
+
+//*** FILTRO FECHA OPERACIONES*/
+
+const filtroFecha = (operacionesArray, date) => {
+	return operacionesArray.filter((operacion) => {
+		return date <= new Date(operacion.fecha);
+	});
+};
+
+//*** FILTRO ORDENAR */
+// 1º POR FECHA 
+
+const ordenFecha = (ope1,ope2)=>{
+	//si la primer fecha esta antes de la 2da 
+if(ope1.date > ope2.date){
+	return 1
+}
+//si la segunda esta antes que la primera
+if(ope1.date < ope2.date){
+	return -1
+}
+return 0; // si son iguales. =
+}
+
+//2º POR MONTO EVALUAR CUANDO ES NEGATIVO?
+
+const ordenMonto = (ope1, ope2) => {
+	// nos fijamos con el operador ternario si es tipo ganancia da true primero sino (:) false se le agrega el -
+	const monto1 = ope1.tipo === "ganancia" ? Number(ope1.monto) : (Number(ope2.monto)*-1)
+	const monto2 = ope2.tipo === "ganancia" ? Number(ope1.monto) : (Number(ope2.monto)*-1)
+	return monto1 - monto2 //trabajamos con numeros monto2 - monto1
+}
+
+//3º DE LA AZ-ZA
+const ordenAZ = (ope1, ope2)=>{
+	// si ope1 debe ir ordenada antes que ope2 return 1
+	if (ope1.descripcion > ope2.descripcion) {
+		return 1;
+	}
+	// si ope1 debe ir ordenada despues que ope2 return -1
+	if (ope1.descripcion < ope2.descripcion) {
+		return -1;
+	}
+	// si ambas son iguales 
+	return 0;
+}
+const operacionOrdenar = (operacionesArray, ordenElegido)=>{
+
+	//esta funcion nos ayuda verificando el value elegido por el usuario y retorna un callback segun corresponda
+	switch (ordenElegido) {
+		case "ordenFechaMenosReciente":
+			return operacionesArray.sort((ope1,ope2)=>{
+				return ordenFecha(ope1,ope2)
+			})
+	 	case "ordenFechaMasReciente":
+			 return operacionesArray.sort((ope1,ope2)=>{
+				 return ordenFecha(ope1,ope2)
+			 })
+		case "ordenMontoMayor":
+			return operacionesArray.sort((ope1,ope2)=>{
+				return ordenMonto(ope1,ope2)
+			})
+		case "ordenMontoMenor":
+			return operacionesArray.sort((ope1,ope2)=>{
+				return ordenMonto(ope1,ope2)
+			})
+		case "ordenAZ":
+			return operacionesArray.sort((ope1,ope2)=>{
+				return ordenAZ(ope1,ope2)
+			})
+		case "ordenZA":
+			return operacionesArray.sort((ope1,ope2)=>{
+				return ordenAZ(ope1,ope2)
+			})
+		default:
+			return operacionesArray;
+			break;
+	}
+}
+
+
+// funcion filtros general
+const filtrosFormulario = document.getElementById("div-formulario-filtros");
+filtrosFormulario.onchange = () => {
+	const storageLocal = guardarEnLocalStorage(); //leer localstorage
+	let operacionesArray = storageLocal.operaciones;
+	// fecha
+	const inputFiltroFecha = document.getElementById("input-fecha");
+	if (inputFiltroFecha.value !== "") {
+		const date = new Date(inputFiltroFecha.value);
+		operacionesArray = filtroFecha(operacionesArray, date); // llama a la funcion filtro fecha
+	}
+	
+	//sort
+	const ordenFiltro = document.getElementById("orden-filtro");
+	const ordenElegido = ordenFiltro.value
+	operacionesArray = operacionOrdenar(operacionesArray, ordenElegido); //nos fijamos en el switch le pasamos el array de operaciones y el orden elegido.
+
+};
+
+const agregarOnClicks = () => {
+	const botonesEliminarCategorias = document.querySelectorAll(
+		"#boton-eliminar-categoria"
+	);
+
+	for (let i = 0; i < botonesEliminarCategorias.length; i++) {
+		// const prueba = guardarEnLocalStorage.id;
+		botonesEliminarCategorias[i].onclick = (e) => {
+			// Leo la informacion que tengo en el LocalStorage
+			let informacionEnLocalStorage = guardarEnLocalStorage();
+			// Creo un nuevo array filtrando el id de la categoria que se clickeo
+			const nuevoArray = informacionEnLocalStorage.categorias.filter(
+				(item) => item.id != e.target.dataset.id
+			);
+			// Cambio el array del local storage por el nuevo array que no tiene el elemento
+			informacionEnLocalStorage.categorias = nuevoArray;
+			// Guardo nuevamente el objeto en el LocalStorage
+			localStorage.setItem(
+				"tp-ahorradas",
+				JSON.stringify(informacionEnLocalStorage)
+			);
+			// Llamo denuevo a la funcion que lee el localStorage y crea los elementos html
+			mostrarCategorias();
+			// Llamo a la funcion que les agrega los onclicks a los elementos recien creados
+			agregarOnClicks();
+		};
+	}
+};
+agregarOnClicks();
+>>>>>>> 009c4cb5f17bf7d04035871179cc68ead85cd131

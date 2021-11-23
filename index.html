@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+ <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📈</text></svg>"
+    />
 
 </head>
 
@@ -75,7 +79,7 @@
    <section class="section" id="seccion-principal">
         <div class="columns ">
             <!-- column izquierda BALANCE y FILTROS -->
-            <div class="column is-offset-1 is-3">
+            <div class="column is-offset-1 is-3 ">
                 <!-- article BALANCE -->
                 <article class="box">
                     <h2 class=" title is-3 is-size-3 m-2 mb-6 has-text-weight-bold">Balance</h2>
@@ -98,7 +102,7 @@
 
                 </article>
                 <!-- article FILTROS  -->
-                <article class="box">
+                <article class="box  is-mobile">
                     <div class="columns is-mobile is-vcentered">
                         <div class="column">
                             <h3 class="title is-3 is-size-4 has-text-weight-bold ">Filtros</h3>
@@ -152,13 +156,13 @@
                                 <label class="label" for="ordenar por-opciones">Ordenar por</label>
                                 <div class="control">
                                   <div class="select is-fullwidth">
-                                    <select>
-                                      <option>Más recientes</option>
-                                      <option>Menos recientes</option>
-                                      <option>Mayor monto</option>
-                                      <option>Menos monto</option>
-                                      <option>A/Z</option>
-                                      <option>Z/A</option>
+                                    <select id="orden-filtro">
+                                      <option value="ordenFechaMasReciente">Más recientes</option>
+                                      <option value="ordenFechaMenosReciente">Menos recientes</option>
+                                      <option value="ordenMontoMayor">Mayor monto</option>
+                                      <option value="ordenMontoMenor">Menos monto</option>
+                                      <option value="ordenAZ">A/Z</option>
+                                      <option value="ordenZA">Z/A</option>
                                     </select>
                                   </div>
                                 </div>
