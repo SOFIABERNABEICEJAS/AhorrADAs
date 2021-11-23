@@ -224,7 +224,7 @@ const mostrarCategorias = () => {
 		</span>
 	</div>
 	<div class="column has-text-right">
-		<button class="button tag is-ghost" id="boton-editar-categoria">Editar</button>
+		<button class="button tag is-ghost" id="boton-editar-categoria" data-id="${elemento.id}">Editar</button>
 		<button class="button tag is-ghost" id="boton-eliminar-categoria" data-id="${elemento.id}">Eliminar</button>
 	</div>
 </div>
@@ -354,7 +354,9 @@ const agregarOnClicks = () => {
 	const botonesEliminarCategorias = document.querySelectorAll(
 		"#boton-eliminar-categoria"
 	);
-
+	const botonesEditarCategorias = document.querySelectorAll(
+		"#boton-editar-categoria"
+	);
 	for (let i = 0; i < botonesEliminarCategorias.length; i++) {
 		// const prueba = guardarEnLocalStorage.id;
 		botonesEliminarCategorias[i].onclick = (e) => {
