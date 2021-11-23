@@ -121,10 +121,11 @@
                                 <label class="label is-fullwidth" for="tipo de gastos-opciones">Tipo</label>
                                 <div class="control">
                                   <div class="select is-fullwidth">
-                                    <select>
-                                      <option value="Todos">Todos</option>
-                                      <option value="Gasto">Gastos</option>
-                                      <option value="Ganancia">Ganancia</option>
+
+                                    <select name="tipo" id="select-filtro-tipo">
+                                      <option value="todos">Todos</option>
+                                      <option value="gastos">Gastos</option>
+                                      <option value="ganancia">Ganancia</option>
                                     </select>
                                   </div>
                                 </div>
@@ -134,7 +135,7 @@
                                 <label class="label" for="categoría-opciones">Categoría</label>
                                 <div class="control">
                                   <div class="select is-fullwidth">
-                                    <select id="select-filtro-categorias">
+                                    <select name="categorias"id="select-filtro-categorias" >
                                     </select>
                                   </div>
                                 </div>
