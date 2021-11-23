@@ -345,7 +345,11 @@ botonEditarCategoria.onclick = () => {
 };
 //viqui funciona solo con el primer boton- ver de implementar un for
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+
+>>>>>>> 03c4c8ca459e84b57f0fe3b66b77bb47dbc04606
 
 //*** FILTRO FECHA OPERACIONES*/
 
@@ -475,4 +479,8 @@ const agregarOnClicks = () => {
 	}
 };
 agregarOnClicks();
+<<<<<<< HEAD
 >>>>>>> 009c4cb5f17bf7d04035871179cc68ead85cd131
+=======
+
+>>>>>>> 03c4c8ca459e84b57f0fe3b66b77bb47dbc04606
