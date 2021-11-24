@@ -324,15 +324,15 @@ const aplicarFiltros = () => {
 	return filtradoFinal;
 };
 
-divFormularioFiltros.onchange = () => {
-	const filtrado = aplicarFiltros();
-	mostrarEnHTML(filtrado);
-};
+// divFormularioFiltros.onchange = () => {
+// 	const filtrado = aplicarFiltros();
+// 	mostrarEnHTML(filtrado);
+// };
 
-divFormularioFiltro.onchange = () => {
-	const filtrado = aplicarFiltros();
-	mostrarEnHTML(filtrado);
-};
+// divFormularioFiltro.onchange = () => {
+// 	const filtrado = aplicarFiltros();
+// 	mostrarEnHTML(filtrado);
+// };
 
 //boton abrir modal ditar categorias
 const botonEditarCategoria = document.getElementById("boton-editar-categoria");
