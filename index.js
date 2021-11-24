@@ -45,15 +45,6 @@ const inputTextoNuevaOperacion = document.getElementById(
 const inputMontoNuevaOperacion = document.getElementById(
 	"input-monto-nueva-operacion"
 );
-
-botonAgregarFormularioNuevaOperacion.onclick = () => {
-	divOperacionesImagenTexto.classList.add("is-hidden");
-	divDatosOperacionesTitulo.classList.remove("is-hidden");
-	seccionNuevaOperacion.classList.add("is-hidden");
-	seccionPrincipal.classList.remove("is-hidden");
-	seccionModalParaEditarCategoria.classList.add("is-hidden");
-};
-
 const selectTipoNuevaOperacion = document.getElementById(
 	"select-tipo-nueva-operacion"
 );
@@ -80,17 +71,6 @@ botonBalance.onclick = () => {
 	divOperacionesImagenTexto.classList.remove("is-hidden");
 	divDatosOperacionesTitulo.classList.add("is-hidden");
 	divDatosOperacionJs.classList.add("is-hidden");
-	seccionModalParaEditarCategoria.classList.add("is-hidden");
-};
-
-// boton "agregar" en SECCION NUEVA OPERACION
-
-botonAgregarFormularioNuevaOperacion.onclick = () => {
-	seccionNuevaOperacion.classList.add("is-hidden");
-	seccionPrincipal.classList.remove("is-hidden");
-	divOperacionesImagenTexto.classList.add("is-hidden");
-	divDatosOperacionesTitulo.classList.remove("is-hidden");
-	divDatosOperacionJs.classList.remove("is-hidden");
 	seccionModalParaEditarCategoria.classList.add("is-hidden");
 };
 
@@ -255,43 +235,15 @@ const mostrarCategoriasSelect = () => {
 
 mostrarCategoriasSelect();
 
-// mostrar opperaciones
+// funcion auxliar
 
-botonAgregarOperacion.onclick = () => {
-	const descripcionNuevaOperacion = inputTextoNuevaOperacion.value;
-	const montoNuevaOperacion = inputMontoNuevaOperacion.value;
-	const tipoNuevaOperacion = selectTipoNuevaOperacion.value;
-	const categoriaNuevaOperacion = selectCategoriaNuevaOperacion.value;
-	const fechaNuevaOperacion = inputFechaNuevaOperacion.value;
-
-	const valorNuevaOperacion = {
-		descripcion: descripcionNuevaOperacion,
-		monto: montoNuevaOperacion,
-		tipo: tipoNuevaOperacion,
-		categoria: categoriaNuevaOperacion,
-		fecha: fechaNuevaOperacion,
-	};
-
-	const operacionesVerificaLocalStorage = guardarEnLocalStorage();
-	operacionesVerificaLocalStorage.operaciones.push(valorNuevaOperacion);
-	console.log(valorNuevaOperacion);
-	localStorage.setItem(
-		"tp-ahorradas",
-		JSON.stringify(operacionesVerificaLocalStorage)
-	);
-	mostrarOperaciones();
-};
-
-const mostrarOperaciones = () => {
-	let mostrarDelLocalStorage = guardarEnLocalStorage();
-
+const mostrarEnHTML = (array) => {
 	let acc = ``;
 
-	const mostrarNuevaOperacionEnHtml = mostrarDelLocalStorage.operaciones.map(
-		(elemento) => {
-			acc =
-				acc +
-				`
+	const funcionAuxiliarParaHtml = array.map((elemento) => {
+		acc =
+			acc +
+			`
  <div class="columns">
 	<div class="column is-3">
   <p>${elemento.descripcion}</p>
@@ -310,11 +262,77 @@ const mostrarOperaciones = () => {
 	 </div>
 
 	`;
-			divDatosOperacionJs.innerHTML = acc;
-		}
+		divDatosOperacionJs.innerHTML = acc;
+	});
+};
+
+// mostrar operaciones
+
+botonAgregarOperacion.onclick = () => {
+	const descripcionNuevaOperacion = inputTextoNuevaOperacion.value;
+	const montoNuevaOperacion = inputMontoNuevaOperacion.value;
+	const tipoNuevaOperacion = selectTipoNuevaOperacion.value;
+	const categoriaNuevaOperacion = selectCategoriaNuevaOperacion.value;
+	const fechaNuevaOperacion = inputFechaNuevaOperacion.value;
+
+	const valorNuevaOperacion = {
+		descripcion: descripcionNuevaOperacion,
+		monto: montoNuevaOperacion,
+		tipo: tipoNuevaOperacion,
+		categoria: categoriaNuevaOperacion,
+		fecha: fechaNuevaOperacion,
+	};
+
+	const operacionesVerificaLocalStorage = guardarEnLocalStorage();
+	operacionesVerificaLocalStorage.operaciones.push(valorNuevaOperacion);
+	localStorage.setItem(
+		"tp-ahorradas",
+		JSON.stringify(operacionesVerificaLocalStorage)
 	);
+	mostrarOperaciones();
+};
+
+const mostrarOperaciones = () => {
+	let mostrarDelLocalStorage = guardarEnLocalStorage();
+	mostrarEnHTML(mostrarDelLocalStorage.operaciones);
 };
 mostrarOperaciones();
+
+// formulario FILTRO
+
+const selectFiltroTipo = document.getElementById("select-filtro-tipo");
+
+const aplicarFiltros = () => {
+	const selectTipo = selectFiltroTipo.value;
+	let operacionesDato = guardarEnLocalStorage();
+
+	const filtrarPorTipo = operacionesDatos.operaciones.filter((operacion) => {
+		if (selectTipo === "todo") {
+			return operacion;
+		}
+		return operacion.tipo === selectTipo;
+	});
+
+	const filtrarPorCategoria = filtroCategoria.value;
+	const filtradoFinal = filtroTipo.filter((operacion) => {
+		if (filtrarPorCategoria === "todos") {
+			return operacion;
+		}
+		return operacion.categoria === filtrarPorCategoria;
+	});
+
+	return filtradoFinal;
+};
+
+divFormularioFiltros.onchange = () => {
+	const filtrado = aplicarFiltros();
+	mostrarEnHTML(filtrado);
+};
+
+divFormularioFiltro.onchange = () => {
+	const filtrado = aplicarFiltros();
+	mostrarEnHTML(filtrado);
+};
 
 //boton abrir modal ditar categorias
 const botonEditarCategoria = document.getElementById("boton-editar-categoria");
@@ -327,6 +345,7 @@ botonEditarCategoria.onclick = () => {
 };
 //viqui funciona solo con el primer boton- ver de implementar un for
 
+
 //*** FILTRO FECHA OPERACIONES*/
 
 const filtroFecha = (operacionesArray, date) => {
@@ -335,19 +354,95 @@ const filtroFecha = (operacionesArray, date) => {
 	});
 };
 
+//*** FILTRO ORDENAR */
+// 1º POR FECHA 
+
+const ordenFecha = (ope1,ope2)=>{
+	//si la primer fecha esta antes de la 2da 
+if(ope1.date > ope2.date){
+	return 1
+}
+//si la segunda esta antes que la primera
+if(ope1.date < ope2.date){
+	return -1
+}
+return 0; // si son iguales. =
+}
+
+//2º POR MONTO EVALUAR CUANDO ES NEGATIVO?
+
+const ordenMonto = (ope1, ope2) => {
+	// nos fijamos con el operador ternario si es tipo ganancia da true primero sino (:) false se le agrega el -
+	const monto1 = ope1.tipo === "ganancia" ? Number(ope1.monto) : (Number(ope2.monto)*-1)
+	const monto2 = ope2.tipo === "ganancia" ? Number(ope1.monto) : (Number(ope2.monto)*-1)
+	return monto1 - monto2 //trabajamos con numeros monto2 - monto1
+}
+
+//3º DE LA AZ-ZA
+const ordenAZ = (ope1, ope2)=>{
+	// si ope1 debe ir ordenada antes que ope2 return 1
+	if (ope1.descripcion > ope2.descripcion) {
+		return 1;
+	}
+	// si ope1 debe ir ordenada despues que ope2 return -1
+	if (ope1.descripcion < ope2.descripcion) {
+		return -1;
+	}
+	// si ambas son iguales 
+	return 0;
+}
+const operacionOrdenar = (operacionesArray, ordenElegido)=>{
+
+	//esta funcion nos ayuda verificando el value elegido por el usuario y retorna un callback segun corresponda
+	switch (ordenElegido) {
+		case "ordenFechaMenosReciente":
+			return operacionesArray.sort((ope1,ope2)=>{
+				return ordenFecha(ope1,ope2)
+			})
+	 	case "ordenFechaMasReciente":
+			 return operacionesArray.sort((ope1,ope2)=>{
+				 return ordenFecha(ope1,ope2)
+			 })
+		case "ordenMontoMayor":
+			return operacionesArray.sort((ope1,ope2)=>{
+				return ordenMonto(ope1,ope2)
+			})
+		case "ordenMontoMenor":
+			return operacionesArray.sort((ope1,ope2)=>{
+				return ordenMonto(ope1,ope2)
+			})
+		case "ordenAZ":
+			return operacionesArray.sort((ope1,ope2)=>{
+				return ordenAZ(ope1,ope2)
+			})
+		case "ordenZA":
+			return operacionesArray.sort((ope1,ope2)=>{
+				return ordenAZ(ope1,ope2)
+			})
+		default:
+			return operacionesArray;
+			break;
+	}
+}
+
+
 // funcion filtros general
 const filtrosFormulario = document.getElementById("div-formulario-filtros");
 filtrosFormulario.onchange = () => {
-	const storageLocal = getStorage(); //leer localstorage
+	const storageLocal = guardarEnLocalStorage(); //leer localstorage
 	let operacionesArray = storageLocal.operaciones;
-
+	// fecha
 	const inputFiltroFecha = document.getElementById("input-fecha");
 	if (inputFiltroFecha.value !== "") {
 		const date = new Date(inputFiltroFecha.value);
 		operacionesArray = filtroFecha(operacionesArray, date); // llama a la funcion filtro fecha
 	}
-
+	
 	//sort
+	const ordenFiltro = document.getElementById("orden-filtro");
+	const ordenElegido = ordenFiltro.value
+	operacionesArray = operacionOrdenar(operacionesArray, ordenElegido); //nos fijamos en el switch le pasamos el array de operaciones y el orden elegido.
+
 };
 
 const agregarOnClicks = () => {
@@ -381,3 +476,4 @@ const agregarOnClicks = () => {
 	}
 };
 agregarOnClicks();
+
