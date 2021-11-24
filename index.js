@@ -345,7 +345,6 @@ botonEditarCategoria.onclick = () => {
 };
 //viqui funciona solo con el primer boton- ver de implementar un for
 
-
 //*** FILTRO FECHA OPERACIONES*/
 
 const filtroFecha = (operacionesArray, date) => {
@@ -355,31 +354,33 @@ const filtroFecha = (operacionesArray, date) => {
 };
 
 //*** FILTRO ORDENAR */
-// 1º POR FECHA 
+// 1º POR FECHA
 
-const ordenFecha = (ope1,ope2)=>{
-	//si la primer fecha esta antes de la 2da 
-if(ope1.date > ope2.date){
-	return 1
-}
-//si la segunda esta antes que la primera
-if(ope1.date < ope2.date){
-	return -1
-}
-return 0; // si son iguales. =
-}
+const ordenFecha = (ope1, ope2) => {
+	//si la primer fecha esta antes de la 2da
+	if (ope1.date > ope2.date) {
+		return 1;
+	}
+	//si la segunda esta antes que la primera
+	if (ope1.date < ope2.date) {
+		return -1;
+	}
+	return 0; // si son iguales. =
+};
 
 //2º POR MONTO EVALUAR CUANDO ES NEGATIVO?
 
 const ordenMonto = (ope1, ope2) => {
 	// nos fijamos con el operador ternario si es tipo ganancia da true primero sino (:) false se le agrega el -
-	const monto1 = ope1.tipo === "ganancia" ? Number(ope1.monto) : (Number(ope2.monto)*-1)
-	const monto2 = ope2.tipo === "ganancia" ? Number(ope1.monto) : (Number(ope2.monto)*-1)
-	return monto1 - monto2 //trabajamos con numeros monto2 - monto1
-}
+	const monto1 =
+		ope1.tipo === "ganancia" ? Number(ope1.monto) : Number(ope2.monto) * -1;
+	const monto2 =
+		ope2.tipo === "ganancia" ? Number(ope1.monto) : Number(ope2.monto) * -1;
+	return monto1 - monto2; //trabajamos con numeros monto2 - monto1
+};
 
 //3º DE LA AZ-ZA
-const ordenAZ = (ope1, ope2)=>{
+const ordenAZ = (ope1, ope2) => {
 	// si ope1 debe ir ordenada antes que ope2 return 1
 	if (ope1.descripcion > ope2.descripcion) {
 		return 1;
@@ -388,43 +389,41 @@ const ordenAZ = (ope1, ope2)=>{
 	if (ope1.descripcion < ope2.descripcion) {
 		return -1;
 	}
-	// si ambas son iguales 
+	// si ambas son iguales
 	return 0;
-}
-const operacionOrdenar = (operacionesArray, ordenElegido)=>{
-
+};
+const operacionOrdenar = (operacionesArray, ordenElegido) => {
 	//esta funcion nos ayuda verificando el value elegido por el usuario y retorna un callback segun corresponda
 	switch (ordenElegido) {
 		case "ordenFechaMenosReciente":
-			return operacionesArray.sort((ope1,ope2)=>{
-				return ordenFecha(ope1,ope2)
-			})
-	 	case "ordenFechaMasReciente":
-			 return operacionesArray.sort((ope1,ope2)=>{
-				 return ordenFecha(ope1,ope2)
-			 })
+			return operacionesArray.sort((ope1, ope2) => {
+				return ordenFecha(ope1, ope2);
+			});
+		case "ordenFechaMasReciente":
+			return operacionesArray.sort((ope1, ope2) => {
+				return ordenFecha(ope1, ope2);
+			});
 		case "ordenMontoMayor":
-			return operacionesArray.sort((ope1,ope2)=>{
-				return ordenMonto(ope1,ope2)
-			})
+			return operacionesArray.sort((ope1, ope2) => {
+				return ordenMonto(ope1, ope2);
+			});
 		case "ordenMontoMenor":
-			return operacionesArray.sort((ope1,ope2)=>{
-				return ordenMonto(ope1,ope2)
-			})
+			return operacionesArray.sort((ope1, ope2) => {
+				return ordenMonto(ope1, ope2);
+			});
 		case "ordenAZ":
-			return operacionesArray.sort((ope1,ope2)=>{
-				return ordenAZ(ope1,ope2)
-			})
+			return operacionesArray.sort((ope1, ope2) => {
+				return ordenAZ(ope1, ope2);
+			});
 		case "ordenZA":
-			return operacionesArray.sort((ope1,ope2)=>{
-				return ordenAZ(ope1,ope2)
-			})
+			return operacionesArray.sort((ope1, ope2) => {
+				return ordenAZ(ope1, ope2);
+			});
 		default:
 			return operacionesArray;
 			break;
 	}
-}
-
+};
 
 // funcion filtros general
 const filtrosFormulario = document.getElementById("div-formulario-filtros");
@@ -437,14 +436,14 @@ filtrosFormulario.onchange = () => {
 		const date = new Date(inputFiltroFecha.value);
 		operacionesArray = filtroFecha(operacionesArray, date); // llama a la funcion filtro fecha
 	}
-	
+
 	//sort
 	const ordenFiltro = document.getElementById("orden-filtro");
-	const ordenElegido = ordenFiltro.value
+	const ordenElegido = ordenFiltro.value;
 	operacionesArray = operacionOrdenar(operacionesArray, ordenElegido); //nos fijamos en el switch le pasamos el array de operaciones y el orden elegido.
-
 };
 
+//funcion eliminar categorias
 const agregarOnClicks = () => {
 	const botonesEliminarCategorias = document.querySelectorAll(
 		"#boton-eliminar-categoria"
@@ -476,4 +475,3 @@ const agregarOnClicks = () => {
 	}
 };
 agregarOnClicks();
-
