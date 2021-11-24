@@ -303,7 +303,7 @@ const selectFiltroTipo = document.getElementById("select-filtro-tipo");
 const aplicarFiltros = () => {
 	let operacionesDato = guardarEnLocalStorage();
 	let operacionesArray = operacionesDato.operaciones;
-	operacionesArraySeguro = [...operacionesArray];
+	const operacionesArraySeguro = [...operacionesArray];
 	const selectTipo = selectFiltroTipo.value;
 
 	const filtrarPorTipo = operacionesArraySeguro.filter((operacion) => {
