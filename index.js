@@ -145,27 +145,27 @@ const guardarEnLocalStorage = () => {
 			categorias: [
 				{
 					id: 1,
-					nombre: "Comidas",
+					nombre: "comidas",
 				},
 				{
 					id: 2,
-					nombre: "Servicios",
+					nombre: "servicios",
 				},
 				{
 					id: 3,
-					nombre: "Salidas",
+					nombre: "salidas",
 				},
 				{
 					id: 4,
-					nombre: "Educación",
+					nombre: "educación",
 				},
 				{
 					id: 5,
-					nombre: "Transporte",
+					nombre: "transporte",
 				},
 				{
 					id: 6,
-					nombre: "Trabajo",
+					nombre: "trabajo",
 				},
 			],
 			operaciones: [],
@@ -224,7 +224,7 @@ const mostrarCategoriasSelect = () => {
 			return (
 				acc +
 				`
-	<option value:"${elemento.nombre}">${elemento.nombre}</option>
+	<option value="${elemento.nombre}">${elemento.nombre}</option>
 		`
 			);
 		},
@@ -303,7 +303,7 @@ const selectFiltroTipo = document.getElementById("select-filtro-tipo");
 const aplicarFiltros = () => {
 	let operacionesDato = guardarEnLocalStorage();
 	let operacionesArray = operacionesDato.operaciones;
-	operacionesArray = [...operacionesArraySeguro];
+	operacionesArraySeguro = [...operacionesArray];
 	const selectTipo = selectFiltroTipo.value;
 
 	const filtrarPorTipo = operacionesArraySeguro.filter((operacion) => {
@@ -473,5 +473,3 @@ const agregarOnClicks = () => {
 	}
 };
 agregarOnClicks();
-
-// balance
