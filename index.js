@@ -300,39 +300,39 @@ mostrarOperaciones();
 
 // formulario FILTRO
 
-const selectFiltroTipo = document.getElementById("select-filtro-tipo");
+// const selectFiltroTipo = document.getElementById("select-filtro-tipo");
 
-const aplicarFiltros = () => {
-	const selectTipo = selectFiltroTipo.value;
-	let operacionesDato = guardarEnLocalStorage();
+// const aplicarFiltros = () => {
+// 	const selectTipo = selectFiltroTipo.value;
+// 	let operacionesDato = guardarEnLocalStorage();
 
-	const filtrarPorTipo = operacionesDatos.operaciones.filter((operacion) => {
-		if (selectTipo === "todo") {
-			return operacion;
-		}
-		return operacion.tipo === selectTipo;
-	});
+// 	const filtrarPorTipo = operacionesDatos.operaciones.filter((operacion) => {
+// 		if (selectTipo === "todo") {
+// 			return operacion;
+// 		}
+// 		return operacion.tipo === selectTipo;
+// 	});
 
-	const filtrarPorCategoria = filtroCategoria.value;
-	const filtradoFinal = filtroTipo.filter((operacion) => {
-		if (filtrarPorCategoria === "todos") {
-			return operacion;
-		}
-		return operacion.categoria === filtrarPorCategoria;
-	});
+// 	const filtrarPorCategoria = filtroCategoria.value;
+// 	const filtradoFinal = filtroTipo.filter((operacion) => {
+// 		if (filtrarPorCategoria === "todos") {
+// 			return operacion;
+// 		}
+// 		return operacion.categoria === filtrarPorCategoria;
+// 	});
 
-	return filtradoFinal;
-};
+// 	return filtradoFinal;
+// };
 
-divFormularioFiltros.onchange = () => {
-	const filtrado = aplicarFiltros();
-	mostrarEnHTML(filtrado);
-};
+// divFormularioFiltros.onchange = () => {
+// 	const filtrado = aplicarFiltros();
+// 	mostrarEnHTML(filtrado);
+// };
 
-divFormularioFiltro.onchange = () => {
-	const filtrado = aplicarFiltros();
-	mostrarEnHTML(filtrado);
-};
+// divFormularioFiltro.onchange = () => {
+// 	const filtrado = aplicarFiltros();
+// 	mostrarEnHTML(filtrado);
+// };
 
 //boton abrir modal ditar categorias
 const botonEditarCategoria = document.getElementById("boton-editar-categoria");
@@ -345,6 +345,27 @@ botonEditarCategoria.onclick = () => {
 };
 //viqui funciona solo con el primer boton- ver de implementar un for
 
+
+//FILTROS PRUEBA DIFERENTE########
+
+//GASTO O GANANCIA
+const tipoFiltro = (operacionesArray, selectTipo) =>{
+	if(selectTipo !== "todos"){
+		return operacionesArray.filter(
+			(operacion) => operacion.tipo === selectTipo
+		);
+	}
+	
+	return operacionesArray;
+};
+//FILTRO CATEGORIAS
+
+const categoriaFiltro = (operacionesArray, categoria)=>{
+	if(categoria !== "todos"){
+		return operacionesArray.filter((operacion)=> operacion.categoria === categoria)
+	}
+	return operacionesArray
+}
 
 //*** FILTRO FECHA OPERACIONES*/
 
@@ -392,7 +413,6 @@ const ordenAZ = (ope1, ope2)=>{
 	return 0;
 }
 const operacionOrdenar = (operacionesArray, ordenElegido)=>{
-
 	//esta funcion nos ayuda verificando el value elegido por el usuario y retorna un callback segun corresponda
 	switch (ordenElegido) {
 		case "ordenFechaMenosReciente":
@@ -426,11 +446,21 @@ const operacionOrdenar = (operacionesArray, ordenElegido)=>{
 }
 
 
-// funcion filtros general
+// ####### funcion filtros general para aplicarlos 
 const filtrosFormulario = document.getElementById("div-formulario-filtros");
 filtrosFormulario.onchange = () => {
 	const storageLocal = guardarEnLocalStorage(); //leer localstorage
 	let operacionesArray = storageLocal.operaciones;
+	//tipo
+	const filtroTipoSelect = document.getElementById("select-filtro-tipo");
+	const tipoGananciaGasto = filtroTipoSelect.value
+	operacionesArray = tipoFiltro(operacionesArray, tipoGananciaGasto);
+
+	//categoria 
+	const selectCategoria = document.getElementById("select-filtro-categorias");
+	const categoria = selectCategoria.value
+	operacionesArray = categoriaFiltro(operacionesArray, categoria)
+
 	// fecha
 	const inputFiltroFecha = document.getElementById("input-fecha");
 	if (inputFiltroFecha.value !== "") {
@@ -443,7 +473,10 @@ filtrosFormulario.onchange = () => {
 	const ordenElegido = ordenFiltro.value
 	operacionesArray = operacionOrdenar(operacionesArray, ordenElegido); //nos fijamos en el switch le pasamos el array de operaciones y el orden elegido.
 
+	return mostrarEnHTML(operacionesArray) /// es asi ????? 
 };
+
+//####### botones #####
 
 const agregarOnClicks = () => {
 	const botonesEliminarCategorias = document.querySelectorAll(
