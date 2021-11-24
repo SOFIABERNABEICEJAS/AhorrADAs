@@ -447,10 +447,12 @@ const operacionOrdenar = (operacionesArray, ordenElegido)=>{
 
 
 // ####### funcion filtros general para aplicarlos 
-const filtrosFormulario = document.getElementById("div-formulario-filtros");
+const filtrosFormulario = document.getElementById("formulario-filtros");
 filtrosFormulario.onchange = () => {
 	const storageLocal = guardarEnLocalStorage(); //leer localstorage
 	let operacionesArray = storageLocal.operaciones;
+
+	console.log(operacionesArray);
 	//tipo
 	const filtroTipoSelect = document.getElementById("select-filtro-tipo");
 	const tipoGananciaGasto = filtroTipoSelect.value
@@ -473,8 +475,9 @@ filtrosFormulario.onchange = () => {
 	const ordenElegido = ordenFiltro.value
 	operacionesArray = operacionOrdenar(operacionesArray, ordenElegido); //nos fijamos en el switch le pasamos el array de operaciones y el orden elegido.
 
-	return mostrarEnHTML(operacionesArray) /// es asi ????? 
+	return mostrarEnHTML(operacionesArray);
 };
+
 
 //####### botones #####
 
