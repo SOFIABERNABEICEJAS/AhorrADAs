@@ -259,7 +259,7 @@ const mostrarEnHTML = (array) => {
 
 	`);
 	}, "");
-	divDatosOperacionJs.innerHTML = mostrarEnHTML;
+	divDatosOperacionJs.innerHTML = funcionAuxiliarParaHtml;
 };
 
 // mostrar operaciones
@@ -295,22 +295,24 @@ const mostrarOperaciones = () => {
 mostrarOperaciones();
 
 // formulario FILTRO
+const selectFiltroTipo = document.getElementById("select-filtro-tipo");
 
+// const selectFiltroCategorias = document.getElementById(
+// 	"select-filtro-categorias"
+// );
 const aplicarFiltros = () => {
 	let operacionesDato = guardarEnLocalStorage();
 	let operacionesArray = operacionesDato.operaciones;
-	const selectFiltroTipo = document.getElementById("select-filtro-tipo");
-
-	const selectFiltroCategorias = document.getElementById(
-		"select-filtro-categorias"
-	);
+	operacionesArray = [...operacionesArraySeguro];
 	const selectTipo = selectFiltroTipo.value;
-	const filtrarPorTipo = operacionesArray.filter((operacion) => {
+
+	const filtrarPorTipo = operacionesArraySeguro.filter((operacion) => {
 		if (selectTipo === "todos") {
 			return operacion;
 		}
 		return operacion.tipo === selectTipo;
 	});
+	console.log(filtrarPorTipo);
 
 	const filtrarPorCategoria = selectFiltroCategorias.value;
 	const filtradoFinal = filtrarPorTipo.filter((operacion) => {
@@ -322,7 +324,7 @@ const aplicarFiltros = () => {
 
 	return filtradoFinal;
 };
-return aplicarFiltros;()
+
 selectFiltroCategorias.onchange = () => {
 	const filtrado = aplicarFiltros();
 	mostrarEnHTML(filtrado);
