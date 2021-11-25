@@ -249,7 +249,7 @@ const mostrarEnHTML = (array) => {
      <p class="tag has-background-primary-light has-text-primary-dark">${elemento.categoria}  </p>
   </div>
   <div class="column is-2 has-text-right">${elemento.fecha}</div>
-   <div class="column is-2 has-text-right">${elemento.monto}</div>
+   <div class="column is-2 has-text-right"> ${elemento.monto} </div>
      <div class="column is-2 has-text-right">
 
      <button class=" tag button is-ghost">Editar</button>
@@ -476,6 +476,11 @@ const balance = () => {
 		return acc + elemento.monto;
 	}, 0);
 
+	const totalBalance = () => {
+		return sumaGanancia - sumaGastos;
+	};
+	totalBalance();
+
 	divMostrarBalance.innerHTML = `
 	<h2 class=" title is-3 is-size-3 m-2 mb-6 has-text-weight-bold">Balance</h2>
                  <div class="columns is-mobile is-vcentered">   
@@ -491,23 +496,9 @@ const balance = () => {
 
                 <div class="columns is-mobile is-vcentered">
                     <div class="column is-size-4">Total</div>
-                    <div  class="column has-text-right"> $ 0</div>
+                    <div  class="column has-text-right"> $ ${totalBalance()}  </div>
 
                 </div> 
 	`;
 };
-
-balance(); // ejecutar dentro del click del formulario
-
-//ejecutar dentro del click del formulario
-
-// const balanceRed = balanceArray.reduce((acc, elemento, i) => {
-// 	return acc + elemento.monto;
-// }, 0);
-// hay que poner gasto ganancia para que esto funcones
-// se tiene que ejecutar cuando aprieta oclick nueva operacion
-
-// si tipo.value === "gasto" retornar balanceArray add variable de estado: false else true
-// tipo. === "ganancia"
-// 	? "has-text-success"
-// 	: "has-text-danger";
+balance();
