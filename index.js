@@ -61,7 +61,7 @@ const formularioNuevaOperacion = document.getElementById(
 	"formulario-nueva-operacion"
 );
 const selectFiltroTipo = document.getElementById("select-filtro-tipo");
-
+const divMostrarBalance = document.getElementById("div-mostrar-balance");
 // boton balance
 
 botonBalance.onclick = () => {
@@ -455,20 +455,85 @@ agregarOnClicks();
 
 // balance
 
-const balanceFiltroSuma = () => {
+const balance = () => {
+	// buscar del localStorage
 	let balanceDatos = guardarEnLocalStorage();
 	let balanceArray = balanceDatos.operaciones;
-	console.log(balanceArray);
+
 	const filtroGastos = balanceArray.filter((elemento) => {
-		return elemento.tipo === "Gastos";
+		return elemento.tipo === "gastos";
 	});
 	console.log(filtroGastos);
 	const sumaGastos = filtroGastos.reduce((acc, elemento, i) => {
 		return acc + elemento.monto;
 	}, 0);
-	// console.log(sumaGastos);
+	console.log(sumaGastos);
+	const filtroGanancia = balanceArray.filter((elemento) => {
+		return elemento.tipo === "ganancia";
+	});
+	console.log(filtroGanancia);
+	const sumaGanancia = filtroGanancia.reduce((acc, elemento, i) => {
+		return acc + elemento.monto;
+	}, 0);
+	console.log(sumaGanancia);
+
+	const filtroTodos = balanceArray.filter((elemento) => {
+		return elemento.tipo === "todos";
+	});
+
+	console.log(filtroTodos);
+	const sumaTodos = filtroTodos.reduce((acc, elemento, i) => {
+		return acc + elemento.monto;
+	}, 0);
+
+	console.log(sumaTodos);
 };
-balanceFiltroSuma();
+
+balance(); // ejecutar dentro del click del formulario
+
+// const balanceGananciaSuma = () => {
+// 	let balanceGanancia = guardarEnLocalStorage();
+// 	let balanceArrayDatos = balanceGanancia.operaciones;
+// 	// console.log(balanceArrayDatos);
+// 	const filtroGanancia = balanceArrayDatos.filter((elemento) => {
+// 		return elemento.tipo === "ganancia";
+// 	});
+// 	// console.log(filtroGanancia);
+// 	const sumaGanancia = filtroGanancia.reduce((acc, elemento, i) => {
+// 		return acc + elemento.monto;
+// 	}, 0);
+// 	// console.log(sumaGanancia);
+// };
+// balanceGananciaSuma();
+
+// const balanceAuxiliar = (array) => {
+// 	const sumaBalance = array.reduce((acc, elemento, i) => {
+// 		return acc + elemento.monto;
+// 	}, 0);
+// 	console.log(sumabalance);
+// };
+
+// const balanceTodoSuma = () => {
+// 	let balanceGananciaTodo = guardarEnLocalStorage();
+// 	let balanceArrayDatosTodo = balanceGananciaTodo.operaciones;
+// 	console.log(balanceArrayDatosTodo);
+// 	const filtroTodos = balanceArrayDatosTodo.filter((elemento) => {
+// 		return elemento.tipo === "todos";
+// 	});
+
+// 	balanceAuxiliar(filtroTodos);
+// 	console.log(balanceAuxiliar(filtroTodos));
+// console.log(filtroTodos);
+// const sumaTodos = filtroTodos.reduce((acc, elemento, i) => {
+// 	return acc + elemento.monto;
+// }, 0);
+// console.log(sumaTodos);
+// };
+// balanceTodoSuma();
+
+// balance funcion auxiliar
+
+//ejecutar dentro del click del formulario
 
 // const balanceRed = balanceArray.reduce((acc, elemento, i) => {
 // 	return acc + elemento.monto;
