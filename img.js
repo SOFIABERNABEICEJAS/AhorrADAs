@@ -7,4 +7,3 @@ var animation = bodymovin.loadAnimation({
 	autoplay: true, // Optional
 	name: "finance", // Name for future reference. Optional.
 });
-
