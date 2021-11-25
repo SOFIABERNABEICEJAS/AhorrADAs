@@ -146,27 +146,27 @@ const guardarEnLocalStorage = () => {
 			categorias: [
 				{
 					id: 1,
-					nombre: "Comidas",
+					nombre: "comidas",
 				},
 				{
 					id: 2,
-					nombre: "Servicios",
+					nombre: "servicios",
 				},
 				{
 					id: 3,
-					nombre: "Salidas",
+					nombre: "salidas",
 				},
 				{
 					id: 4,
-					nombre: "Educación",
+					nombre: "educación",
 				},
 				{
 					id: 5,
-					nombre: "Transporte",
+					nombre: "transporte",
 				},
 				{
 					id: 6,
-					nombre: "Trabajo",
+					nombre: "trabajo",
 				},
 			],
 			operaciones: [],
@@ -225,7 +225,7 @@ const mostrarCategoriasSelect = () => {
 			return (
 				acc +
 				`
-	<option value:"${elemento.nombre}">${elemento.nombre}</option>
+	<option value="${elemento.nombre}">${elemento.nombre}</option>
 		`
 			);
 		},
@@ -300,7 +300,7 @@ mostrarOperaciones();
 const aplicarFiltros = () => {
 	let operacionesDato = guardarEnLocalStorage();
 	let operacionesArray = operacionesDato.operaciones;
-	operacionesArray = [...operacionesArraySeguro];
+	const operacionesArraySeguro = [...operacionesArray];
 	const selectTipo = selectFiltroTipo.value;
 
 	const filtrarPorTipo = operacionesArraySeguro.filter((operacion) => {
@@ -463,75 +463,41 @@ const balance = () => {
 	const filtroGastos = balanceArray.filter((elemento) => {
 		return elemento.tipo === "gastos";
 	});
-	console.log(filtroGastos);
+
 	const sumaGastos = filtroGastos.reduce((acc, elemento, i) => {
 		return acc + elemento.monto;
 	}, 0);
-	console.log(sumaGastos);
+
 	const filtroGanancia = balanceArray.filter((elemento) => {
 		return elemento.tipo === "ganancia";
 	});
-	console.log(filtroGanancia);
+
 	const sumaGanancia = filtroGanancia.reduce((acc, elemento, i) => {
 		return acc + elemento.monto;
 	}, 0);
-	console.log(sumaGanancia);
 
-	const filtroTodos = balanceArray.filter((elemento) => {
-		return elemento.tipo === "todos";
-	});
+	divMostrarBalance.innerHTML = `
+	<h2 class=" title is-3 is-size-3 m-2 mb-6 has-text-weight-bold">Balance</h2>
+                 <div class="columns is-mobile is-vcentered">   
+                     <div class="column is-size-5">Ganancia</div>
+                     <div class="column has-text-right has-text-success">+$${sumaGanancia}</div>
+                 </div>
 
-	console.log(filtroTodos);
-	const sumaTodos = filtroTodos.reduce((acc, elemento, i) => {
-		return acc + elemento.monto;
-	}, 0);
+                <div class="columns is-mobile is-vcentered">
+                    <div class="column is-size-5">Gastos</div>
+                    <div  class="column has-text-right has-text-danger">-$${sumaGastos}</div>
 
-	console.log(sumaTodos);
+                </div>
+
+                <div class="columns is-mobile is-vcentered">
+                    <div class="column is-size-4">Total</div>
+                    <div  class="column has-text-right"> $ 0</div>
+
+                </div> 
+	`;
 };
 
 balance(); // ejecutar dentro del click del formulario
-
-// const balanceGananciaSuma = () => {
-// 	let balanceGanancia = guardarEnLocalStorage();
-// 	let balanceArrayDatos = balanceGanancia.operaciones;
-// 	// console.log(balanceArrayDatos);
-// 	const filtroGanancia = balanceArrayDatos.filter((elemento) => {
-// 		return elemento.tipo === "ganancia";
-// 	});
-// 	// console.log(filtroGanancia);
-// 	const sumaGanancia = filtroGanancia.reduce((acc, elemento, i) => {
-// 		return acc + elemento.monto;
-// 	}, 0);
-// 	// console.log(sumaGanancia);
-// };
-// balanceGananciaSuma();
-
-// const balanceAuxiliar = (array) => {
-// 	const sumaBalance = array.reduce((acc, elemento, i) => {
-// 		return acc + elemento.monto;
-// 	}, 0);
-// 	console.log(sumabalance);
-// };
-
-// const balanceTodoSuma = () => {
-// 	let balanceGananciaTodo = guardarEnLocalStorage();
-// 	let balanceArrayDatosTodo = balanceGananciaTodo.operaciones;
-// 	console.log(balanceArrayDatosTodo);
-// 	const filtroTodos = balanceArrayDatosTodo.filter((elemento) => {
-// 		return elemento.tipo === "todos";
-// 	});
-
-// 	balanceAuxiliar(filtroTodos);
-// 	console.log(balanceAuxiliar(filtroTodos));
-// console.log(filtroTodos);
-// const sumaTodos = filtroTodos.reduce((acc, elemento, i) => {
-// 	return acc + elemento.monto;
-// }, 0);
-// console.log(sumaTodos);
-// };
-// balanceTodoSuma();
-
-// balance funcion auxiliar
 
 //ejecutar dentro del click del formulario
 
