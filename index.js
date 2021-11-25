@@ -117,7 +117,32 @@ botonAgregarFormularioNuevaOperacion.onclick = () => {
 	divDatosOperacionesTitulo.classList.remove("is-hidden");
 	divDatosOperacionJs.classList.remove("is-hidden");
 };
+// funcion auxiliar
 
+const mostrarEnHTML = (array) => {
+	const funcionAuxiliarParaHtml = array.reduce((acc, elemento) => {
+		return (acc += `
+ <div class="columns">
+	<div class="column is-3">
+  <p>${elemento.descripcion}</p>
+  </div>
+  <div class="column is-3">
+     <p class="tag has-background-primary-light has-text-primary-dark">${elemento.categoria}  </p>
+  </div>
+  <div class="column is-2 has-text-right">${elemento.fecha}</div>
+   <div class="column is-2 has-text-right"> ${elemento.monto} </div>
+     <div class="column is-2 has-text-right">
+
+     <button class=" tag button is-ghost">Editar</button>
+       <button class=" tag button is-ghost">Eliminar</button>
+   </div>
+  </div>
+	 </div>
+
+	`);
+	}, "");
+	divDatosOperacionJs.innerHTML = funcionAuxiliarParaHtml;
+};
 //funcion agregar categoria
 
 botonAgregarCategorias.onclick = () => {
@@ -235,33 +260,6 @@ const mostrarCategoriasSelect = () => {
 };
 
 mostrarCategoriasSelect();
-
-// funcion auxiliar
-
-const mostrarEnHTML = (array) => {
-	const funcionAuxiliarParaHtml = array.reduce((acc, elemento) => {
-		return (acc += `
- <div class="columns">
-	<div class="column is-3">
-  <p>${elemento.descripcion}</p>
-  </div>
-  <div class="column is-3">
-     <p class="tag has-background-primary-light has-text-primary-dark">${elemento.categoria}  </p>
-  </div>
-  <div class="column is-2 has-text-right">${elemento.fecha}</div>
-   <div class="column is-2 has-text-right"> ${elemento.monto} </div>
-     <div class="column is-2 has-text-right">
-
-     <button class=" tag button is-ghost">Editar</button>
-       <button class=" tag button is-ghost">Eliminar</button>
-   </div>
-  </div>
-	 </div>
-
-	`);
-	}, "");
-	divDatosOperacionJs.innerHTML = funcionAuxiliarParaHtml;
-};
 
 // funcion mostrar operaciones
 
