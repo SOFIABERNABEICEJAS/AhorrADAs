@@ -60,6 +60,7 @@ const inputFechaNuevaOperacion = document.getElementById(
 const formularioNuevaOperacion = document.getElementById(
 	"formulario-nueva-operacion"
 );
+const selectFiltroTipo = document.getElementById("select-filtro-tipo");
 
 // boton balance
 
@@ -117,7 +118,7 @@ botonAgregarFormularioNuevaOperacion.onclick = () => {
 	divDatosOperacionJs.classList.remove("is-hidden");
 };
 
-//FUNCION AGREGAR CATEGORIA
+//funcion agregar categoria
 
 botonAgregarCategorias.onclick = () => {
 	const agregarCategorias = () => {
@@ -235,7 +236,7 @@ const mostrarCategoriasSelect = () => {
 
 mostrarCategoriasSelect();
 
-// funcion auxliar
+// funcion auxiliar
 
 const mostrarEnHTML = (array) => {
 	const funcionAuxiliarParaHtml = array.reduce((acc, elemento) => {
@@ -262,11 +263,11 @@ const mostrarEnHTML = (array) => {
 	divDatosOperacionJs.innerHTML = funcionAuxiliarParaHtml;
 };
 
-// mostrar operaciones
+// funcion mostrar operaciones
 
 botonAgregarOperacion.onclick = () => {
 	const descripcionNuevaOperacion = inputTextoNuevaOperacion.value;
-	const montoNuevaOperacion = inputMontoNuevaOperacion.value;
+	const montoNuevaOperacion = Number(inputMontoNuevaOperacion.value);
 	const tipoNuevaOperacion = selectTipoNuevaOperacion.value;
 	const categoriaNuevaOperacion = selectCategoriaNuevaOperacion.value;
 	const fechaNuevaOperacion = inputFechaNuevaOperacion.value;
@@ -294,12 +295,8 @@ const mostrarOperaciones = () => {
 };
 mostrarOperaciones();
 
-// formulario FILTRO
-const selectFiltroTipo = document.getElementById("select-filtro-tipo");
+// filtro TIPO-CATEGORIA
 
-// const selectFiltroCategorias = document.getElementById(
-// 	"select-filtro-categorias"
-// );
 const aplicarFiltros = () => {
 	let operacionesDato = guardarEnLocalStorage();
 	let operacionesArray = operacionesDato.operaciones;
@@ -335,18 +332,7 @@ selectFiltroTipo.onchange = () => {
 	mostrarEnHTML(filtrado);
 };
 
-//boton abrir modal ditar categorias
-const botonEditarCategoria = document.getElementById("boton-editar-categoria");
-const seccionModalParaEditarCategoria = document.getElementById(
-	"seccion-modal-editar-categoria"
-);
-botonEditarCategoria.onclick = () => {
-	seccionModalParaEditarCategoria.classList.remove("is-hidden");
-	seccionCategoria.classList.add("is-hidden");
-};
-//viqui funciona solo con el primer boton- ver de implementar un for
-
-//*** FILTRO FECHA OPERACIONES*/
+// FILTRO FECHA OPERACIONES
 
 const filtroFecha = (operacionesArray, date) => {
 	return operacionesArray.filter((operacion) => {
@@ -354,7 +340,7 @@ const filtroFecha = (operacionesArray, date) => {
 	});
 };
 
-//*** FILTRO ORDENAR */
+// FILTRO ORDENAR
 // 1º POR FECHA
 
 const ordenFecha = (ope1, ope2) => {
@@ -426,23 +412,16 @@ const operacionOrdenar = (operacionesArray, ordenElegido) => {
 	}
 };
 
-// funcion filtros general
-const filtrosFormulario = document.getElementById("div-formulario-filtros");
-filtrosFormulario.onchange = () => {
-	const storageLocal = guardarEnLocalStorage(); //leer localstorage
-	let operacionesArray = storageLocal.operaciones;
-	// fecha
-	const inputFiltroFecha = document.getElementById("input-fecha");
-	if (inputFiltroFecha.value !== "") {
-		const date = new Date(inputFiltroFecha.value);
-		operacionesArray = filtroFecha(operacionesArray, date); // llama a la funcion filtro fecha
-	}
-
-	//sort
-	const ordenFiltro = document.getElementById("orden-filtro");
-	const ordenElegido = ordenFiltro.value;
-	operacionesArray = operacionOrdenar(operacionesArray, ordenElegido); //nos fijamos en el switch le pasamos el array de operaciones y el orden elegido.
+//boton abrir modal ditar categorias
+const botonEditarCategoria = document.getElementById("boton-editar-categoria");
+const seccionModalParaEditarCategoria = document.getElementById(
+	"seccion-modal-editar-categoria"
+);
+botonEditarCategoria.onclick = () => {
+	seccionModalParaEditarCategoria.classList.remove("is-hidden");
+	seccionCategoria.classList.add("is-hidden");
 };
+//viqui funciona solo con el primer boton- ver de implementar un for
 
 const agregarOnClicks = () => {
 	const botonesEliminarCategorias = document.querySelectorAll(
@@ -473,3 +452,31 @@ const agregarOnClicks = () => {
 	}
 };
 agregarOnClicks();
+
+// balance
+
+const balanceFiltroSuma = () => {
+	let balanceDatos = guardarEnLocalStorage();
+	let balanceArray = balanceDatos.operaciones;
+	console.log(balanceArray);
+	const filtroGastos = balanceArray.filter((elemento) => {
+		return elemento.tipo === "Gastos";
+	});
+	console.log(filtroGastos);
+	const sumaGastos = filtroGastos.reduce((acc, elemento, i) => {
+		return acc + elemento.monto;
+	}, 0);
+	// console.log(sumaGastos);
+};
+balanceFiltroSuma();
+
+// const balanceRed = balanceArray.reduce((acc, elemento, i) => {
+// 	return acc + elemento.monto;
+// }, 0);
+// hay que poner gasto ganancia para que esto funcones
+// se tiene que ejecutar cuando aprieta oclick nueva operacion
+
+// si tipo.value === "gasto" retornar balanceArray add variable de estado: false else true
+// tipo. === "ganancia"
+// 	? "has-text-success"
+// 	: "has-text-danger";

@@ -259,7 +259,7 @@
                     <div class="field">
                         <label class="label" for="Monto">Monto</label>
                         <div class="control">
-                          <input class="input" type="number" id="input-monto-nueva-operacion">
+                          <input class="input" type="number" min="0" id="input-monto-nueva-operacion">
                         </div>
                     </div>
                     <!-- select tipo-gastos-ganancias -->
@@ -268,9 +268,9 @@
                        <div class="control">
                          <div class="select is-fullwidth">
                            <select id="select-tipo-nueva-operacion">
-                             <option>Todos</option>
-                             <option>Gastos</option>
-                             <option>Ganancia</option>
+                             <option value="todos">Todos</option>
+                             <option value="gastos">Gastos</option>
+                             <option value="ganancia">Ganancia</option>
                            </select>
                          </div>
                        </div>
@@ -281,13 +281,13 @@
                        <div class="control">
                          <div class="select is-fullwidth">
                            <select id="select-categoria-nueva-operacion">
-                             <option>Todas</option>
-                             <option>Comida</option>
-                             <option>Servicios</option>
-                             <option>Salidas</option>
-                             <option>Educación</option>
-                             <option>Transporte</option>
-                             <option>Trabajo</option>
+                             <option value="todas">Todas</option>
+                             <option value="comida">Comida</option>
+                             <option value="servicios">Servicios</option>
+                             <option value="salidas">Salidas</option>
+                             <option value="educacion">Educación</option>
+                             <option value="transporte">Transporte</option>
+                             <option value="trabajo">Trabajo</option>
                            </select>
                          </div>
                        </div>
