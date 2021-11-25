@@ -329,10 +329,10 @@ divFormularioFiltros.onchange = () => {
 	mostrarEnHTML(filtrado);
 };
 
-divFormularioFiltro.onchange = () => {
-	const filtrado = aplicarFiltros();
-	mostrarEnHTML(filtrado);
-};
+// divFormularioFiltro.onchange = () => {
+// 	const filtrado = aplicarFiltros();
+// 	mostrarEnHTML(filtrado);
+// };
 
 //boton abrir modal ditar categorias
 const botonEditarCategoria = document.getElementById("boton-editar-categoria");
@@ -471,6 +471,16 @@ const agregarOnClicks = () => {
 			mostrarCategorias();
 			// Llamo a la funcion que les agrega los onclicks a los elementos recien creados
 			agregarOnClicks();
+		};
+	}
+
+	for (let i = 0; i < botonesEditarCategorias.length; i++) {
+		botonesEditarCategorias[i].onclick = () => {
+			console.log("hola");
+			// let informacionEnLocalStorage = guardarEnLocalStorage();
+			seccionModalParaEditarCategoria.classList.remove("is-hidden");
+			// mostrarCategorias();
+			// agregarOnClicks();
 		};
 	}
 };
