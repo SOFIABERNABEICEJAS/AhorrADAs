@@ -145,27 +145,27 @@ const guardarEnLocalStorage = () => {
 			categorias: [
 				{
 					id: 1,
-					nombre: "Comidas",
+					nombre: "comidas",
 				},
 				{
 					id: 2,
-					nombre: "Servicios",
+					nombre: "servicios",
 				},
 				{
 					id: 3,
-					nombre: "Salidas",
+					nombre: "salidas",
 				},
 				{
 					id: 4,
-					nombre: "Educación",
+					nombre: "educación",
 				},
 				{
 					id: 5,
-					nombre: "Transporte",
+					nombre: "transporte",
 				},
 				{
 					id: 6,
-					nombre: "Trabajo",
+					nombre: "trabajo",
 				},
 			],
 			operaciones: [],
@@ -224,7 +224,7 @@ const mostrarCategoriasSelect = () => {
 			return (
 				acc +
 				`
-	<option>${elemento.nombre}</option>
+	<option value="${elemento.nombre}">${elemento.nombre}</option>
 		`
 			);
 		},
@@ -238,12 +238,8 @@ mostrarCategoriasSelect();
 // funcion auxliar
 
 const mostrarEnHTML = (array) => {
-	let acc = ``;
-
-	const funcionAuxiliarParaHtml = array.map((elemento) => {
-		acc =
-			acc +
-			`
+	const funcionAuxiliarParaHtml = array.reduce((acc, elemento) => {
+		return (acc += `
  <div class="columns">
 	<div class="column is-3">
   <p>${elemento.descripcion}</p>
@@ -261,9 +257,9 @@ const mostrarEnHTML = (array) => {
   </div>
 	 </div>
 
-	`;
-		divDatosOperacionJs.innerHTML = acc;
-	});
+	`);
+	}, "");
+	divDatosOperacionJs.innerHTML = funcionAuxiliarParaHtml;
 };
 
 // mostrar operaciones
@@ -299,22 +295,27 @@ const mostrarOperaciones = () => {
 mostrarOperaciones();
 
 // formulario FILTRO
-
 const selectFiltroTipo = document.getElementById("select-filtro-tipo");
 
+// const selectFiltroCategorias = document.getElementById(
+// 	"select-filtro-categorias"
+// );
 const aplicarFiltros = () => {
-	const selectTipo = selectFiltroTipo.value;
 	let operacionesDato = guardarEnLocalStorage();
+	let operacionesArray = operacionesDato.operaciones;
+	const operacionesArraySeguro = [...operacionesArray];
+	const selectTipo = selectFiltroTipo.value;
 
-	const filtrarPorTipo = operacionesDatos.operaciones.filter((operacion) => {
-		if (selectTipo === "todo") {
+	const filtrarPorTipo = operacionesArraySeguro.filter((operacion) => {
+		if (selectTipo === "todos") {
 			return operacion;
 		}
 		return operacion.tipo === selectTipo;
 	});
+	console.log(filtrarPorTipo);
 
-	const filtrarPorCategoria = filtroCategoria.value;
-	const filtradoFinal = filtroTipo.filter((operacion) => {
+	const filtrarPorCategoria = selectFiltroCategorias.value;
+	const filtradoFinal = filtrarPorTipo.filter((operacion) => {
 		if (filtrarPorCategoria === "todos") {
 			return operacion;
 		}
@@ -324,15 +325,15 @@ const aplicarFiltros = () => {
 	return filtradoFinal;
 };
 
-divFormularioFiltros.onchange = () => {
+selectFiltroCategorias.onchange = () => {
 	const filtrado = aplicarFiltros();
 	mostrarEnHTML(filtrado);
 };
 
-// divFormularioFiltro.onchange = () => {
-// 	const filtrado = aplicarFiltros();
-// 	mostrarEnHTML(filtrado);
-// };
+selectFiltroTipo.onchange = () => {
+	const filtrado = aplicarFiltros();
+	mostrarEnHTML(filtrado);
+};
 
 //boton abrir modal ditar categorias
 const botonEditarCategoria = document.getElementById("boton-editar-categoria");
