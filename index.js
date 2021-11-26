@@ -68,6 +68,7 @@ const divMostrarBalance = document.getElementById("div-mostrar-balance");
 const inputEditarCategorias = document.getElementById(
 	"input-editar-categorias"
 );
+const botonEditarCategoriasModal = document.getElementById("editar-categoria");
 // boton balance
 
 botonBalance.onclick = () => {
@@ -484,6 +485,27 @@ botonCancelarModalCategorias.onclick = () => {
 	seccionModalParaEditarCategoria.classList.add("is-hidden");
 	seccionCategoria.classList.remove("is-hidden");
 };
+
+//funcionalidad al boton que edita las categorias en el modal
+botonEditarCategoriasModal.onclick = () => {
+	const leoLocalStorage = guardarEnLocalStorage();
+	// Recorro el local storage buscando el elemento que tiene de id la categoria a editar
+	for (let i = 0; i < leoLocalStorage.categorias.length; i++) {
+		// Guardo el elemento actual
+		const element = leoLocalStorage.categorias[i];
+		// Si tiene el mismo id que la categoria a editar
+		if (element.id == categoriaAEditar) {
+			// Cambio el nombre por lo que esta en el input
+			element.nombre = inputEditarCategorias.value;
+			// Lo guardo en el local storage
+			localStorage.setItem("tp-ahorradas", JSON.stringify(leoLocalStorage));
+			// Recargo el modal de mostrar categorias y agrego los on clicks
+			mostrarCategorias();
+			agregarOnClicks();
+		}
+	}
+};
+
 // balance
 
 const balance = () => {
@@ -521,13 +543,13 @@ const balance = () => {
 
                 <div class="columns is-mobile is-vcentered">
                     <div class="column is-size-5">Gastos</div>
-                    <div  class="column has-text-right has-text-danger">-$${sumaGastos}</div>
+                    <div class="column has-text-right has-text-danger">-$${sumaGastos}</div>
 
                 </div>
 
                 <div class="columns is-mobile is-vcentered">
                     <div class="column is-size-4">Total</div>
-                    <div  class="column has-text-right"> $ ${totalBalance()}  </div>
+                    <div  class="column has-text-right">$${totalBalance()}</div>
 
                 </div> 
 	`;
