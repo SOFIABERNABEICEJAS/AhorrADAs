@@ -65,6 +65,9 @@ const botonCancelarModalCategorias =
 
 const selectFiltroTipo = document.getElementById("select-filtro-tipo");
 const divMostrarBalance = document.getElementById("div-mostrar-balance");
+const inputEditarCategorias = document.getElementById(
+	"input-editar-categorias"
+);
 // boton balance
 
 botonBalance.onclick = () => {
@@ -458,16 +461,19 @@ const agregarOnClicks = () => {
 	//for que edita las categorias y abre el modal
 	for (let i = 0; i < botonesEditarCategorias.length; i++) {
 		botonesEditarCategorias[i].onclick = (e) => {
+			//Escondo el modal de lista
 			seccionModalParaEditarCategoria.classList.remove("is-hidden");
+			//Agrego el modal de editar
 			seccionCategoria.classList.add("is-hidden");
+			//Guardo el id donde se clickeo
 			categoriaAEditar = e.target.dataset.id;
+			//Leo la información que tengo en el local storage
 			let infoLeidaDeLocalStorage = guardarEnLocalStorage();
+			//Creo un nuevo array filtrando que el id sea igual al que se clickeo para editar
 			const nuevoArray = infoLeidaDeLocalStorage.categorias.filter(
 				(item) => item.id == e.target.dataset.id
 			);
-			const inputEditarCategorias = document.getElementById(
-				"input-editar-categorias"
-			);
+			//Seteo el valor del input con el nombre del elemento que se clickeo
 			inputEditarCategorias.value = nuevoArray[0].nombre;
 		};
 	}
