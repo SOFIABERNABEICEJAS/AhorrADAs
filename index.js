@@ -69,8 +69,8 @@ const inputEditarCategorias = document.getElementById(
 	"input-editar-categorias"
 );
 const botonEditarCategoriasModal = document.getElementById("editar-categoria");
-// boton balance
 
+// boton balance
 botonBalance.onclick = () => {
 	seccionPrincipal.classList.remove("is-hidden");
 	seccionCategoria.classList.add("is-hidden");
@@ -416,7 +416,7 @@ const operacionOrdenar = (operacionesArray, ordenElegido) => {
 	}
 };
 
-//boton abrir modal ditar categorias
+//boton abrir modal editar categorias
 const botonEditarCategoria = document.getElementById("boton-editar-categoria");
 const seccionModalParaEditarCategoria = document.getElementById(
 	"seccion-modal-editar-categoria"
