@@ -410,6 +410,7 @@ const aplicarFiltros = () => {
 	const tipoSort = filtroSort.value;
 	operacionesArraySeguro = operacionOrdenar(operacionesArraySeguro, tipoSort);
 
+	
 };
 
 selectFiltroCategorias.onchange = () => {
