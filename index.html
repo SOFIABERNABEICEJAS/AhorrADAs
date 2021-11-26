@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,20 +12,16 @@
       rel="icon"
       href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📈</text></svg>"
     />
-
 </head>
 
 <body class="has-background-light">
     <!-- comienzo del header  -->
     <header>
-    
         <nav class="navbar is-spaced is-primary mb-5" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
-                
                 <a class="navbar-item">
                     <h1 class="title is-2 has-text-white"><i class='fas fa-wallet mr-2'></i>AhorrADAs</h1>
                 </a>
-
                 <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
                     data-target="navbarBasicExample">
                     <span aria-hidden="true"></span>
@@ -34,7 +29,6 @@
                     <span aria-hidden="true"></span>
                 </a>
             </div>
-
             <div id="navbarBasicExample" class="navbar-menu">
 
                 <div class="navbar-end">
@@ -47,16 +41,14 @@
                                     </span>
                                     <spam>Balance</spam>
                                 </span>
-
                             </a>
                             <a class="button is-primary" id="boton-categorias">
                                 <span class="icon-text" >
-                                    <span class="icon">
-                                        <i class="fas fa-tag mr-2" aria-hidden="icono balance"></i>
-                                    </span>
-                                    <spam>Categorias</spam>
+                                  <span class="icon">
+                                    <i class="fas fa-tag mr-2" aria-hidden="icono balance"></i>
+                                  </span>
+                                  <spam>Categorias</spam>
                                 </span>
-
                             </a>
                             <a class="button is-primary" id="boton-reporte">
                                 <span class="icon-text" >
@@ -72,7 +64,6 @@
             </div>
             </div>
         </nav> 
-      
     </header>
 
      <!-- section principal balance-filtro-operaciones -->
@@ -88,19 +79,14 @@
                      <div class="column is-size-5">Ganancia</div>
                      <div class="column has-text-right has-text-success">+$0</div>
                  </div>
-
                 <div class="columns is-mobile is-vcentered">
                     <div class="column is-size-5">Gastos</div>
                     <div  class="column has-text-right has-text-danger">-$0</div>
-
                 </div>
-
                 <div class="columns is-mobile is-vcentered">
                     <div class="column is-size-4">Total</div>
                     <div  class="column has-text-right"> $0</div>
-
                 </div> -->
-
                 </article>
                 
                 <!-- article FILTROS  -->
@@ -114,7 +100,7 @@
                         </div>
                     </div>
 
-                      <!-- columns formulario filtros  -->
+                 <!-- columns formulario filtros  -->
                     <div class="columns" id="div-formulario-filtros">
                         <div class="column"> 
                          <form>
@@ -123,7 +109,6 @@
                                 <label class="label is-fullwidth" for="tipo de gastos-opciones">Tipo</label>
                                 <div class="control">
                                   <div class="select is-fullwidth">
-
                                     <select name="tipo" id="select-filtro-tipo">
                                       <option value="todos">Todos</option>
                                       <option value="gastos">Gastos</option>
@@ -141,7 +126,6 @@
                                     </select>
                                   </div>
                                 </div>
-
                             </div>
 
                             <!-- imput date-tiempo-fecha -->
@@ -150,7 +134,6 @@
                               <div class="control">
                                 <input class="input" type="date" id="input-fecha">
                               </div>
-
                             </div>
                               
                             <!-- select ordenar por (mas reciente, menos reciente, mayor-menor monto, ext.) -->
@@ -169,7 +152,6 @@
                                   </div>
                                 </div>
                               </div>
-
                          </form>
                         </div>
                     </div>
@@ -188,8 +170,7 @@
                             <button class="button is-primary" id="boton-nueva-operacion">+Nueva Operación</button>
                         </div>
                     </div>
-
-                    <!-- contenedor de datos en operaciones TITULO -->
+                  <!-- contenedor de datos en operaciones TITULO -->
                     <div class="columns is-hidden" id="div-datos-operaciones-titulo">
                         <div class="column is-3">
                           <h3 class="has-text-weight-semibold">Descripción</h3>
@@ -207,15 +188,8 @@
                           <h3 class="has-text-weight-semibold">Acciones</h3>
                         </div>
                     </div>
-                    
                     <!-- columnas para rellenar con js!! -->
-
-
-                    <div class=" is-hidden" id="div-datos-operacion-js">
-                     
-                
-                      
-
+                    <div class=" is-hidden" id="div-datos-operacion-js">    
                     </div>
                       <!-- contenedor de imagen y texto -->
                     <div id="div-operaciones-imagen-texto">
@@ -243,10 +217,8 @@
                 <div class="column mb-5">
                     <h2 class="title 2 is-size-2 has-text-weight-bold">Nueva operación</h2>
                 </div>
-
                 <!-- formulario nueva operacion -->
                <div class="column">
-
                 <form id="formulario-nueva-operacion">
                     <!-- input descripcion -->
                     <div class="field">
@@ -268,7 +240,6 @@
                        <div class="control">
                          <div class="select is-fullwidth">
                            <select id="select-tipo-nueva-operacion">
-                        
                              <option value="gastos">Gastos</option>
                              <option value="ganancia">Ganancia</option>
                            </select>
@@ -291,18 +262,14 @@
                            </select>
                          </div>
                        </div>
-
                    </div>
-
                    <!-- imput date fecha -->
                    <div class="field">
                        <label class="label" for="fecha">Fecha</label>
                      <div class="control">
                        <input class="input" type="date" id="input-fecha-nueva-operacion">
                      </div>
-
                    </div>
-
                    <!-- botones de nueva operacion -->
                     <div class="buttons mt-6 is-right">
                         <p class="control">
@@ -316,14 +283,9 @@
                           </button>
                         </p>
                     </div>
- 
-
                 </form>
               </div>
-
-
             </article>
-
         </div>
     </section>
 
@@ -349,23 +311,16 @@
                     </div>
                 </div>
               </div>
-               
               <div class="columns">
                   <div class="column ml-3 mt-5 mb-3" id="div-mostrar-categorias-html">
                   </div>
-
               </div>
-
             </article>
-          
-
         </div>
-
     </section>
 
     <!-- Seccion modal editar categorias -->
     <section class="section mt-5 is-hidden" id="seccion-modal-editar-categoria">
-
       <div class="container">
         <div class="columns is-multiline">
           <div class="column is-8-widescreen is-10-desktop is-offset-2-widescreen is-offset-1-desktop">
@@ -399,37 +354,23 @@
             <article class="box">
                 <div class="column mb-6">
                      <h2 class="title 2 is-size-2 has-text-weight-bold">Reportes</h2>
-                   
                 </div>
                 <div class="columns">
                     <div class="column is-offset-3 is-6">
                         <figure class="image">
                             <img src="imagenes/operaciones-insuficientes.svg" alt="una persona mirando un gráfico">
                         </figure>
-    
                     </div>
-
                 </div>
-                
                 <div class="column mb-6">
                     <h4 class="title 4 is-size-4 has-text-centered mt-3">Operaciones insuficientes</h4>
-                    <p class="has-text-centered"> Prueba agregando más operaciones</p>
-
+                    <p class="has-text-centered">Prueba agregando más operaciones</p>
                 </div>
-
             </article>
-
         </div>
-
-        
-
     </section>
-
-
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.8.1/lottie.min.js" type="text/javascript"></script>
     <script src="index.js"></script>
-
 </body>
-
 </html>
