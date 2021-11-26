@@ -60,7 +60,8 @@ const inputFechaNuevaOperacion = document.getElementById(
 const formularioNuevaOperacion = document.getElementById(
 	"formulario-nueva-operacion"
 );
-
+const selectFiltroTipo = document.getElementById("select-filtro-tipo");
+const divMostrarBalance = document.getElementById("div-mostrar-balance");
 // boton balance
 
 botonBalance.onclick = () => {
@@ -116,8 +117,33 @@ botonAgregarFormularioNuevaOperacion.onclick = () => {
 	divDatosOperacionesTitulo.classList.remove("is-hidden");
 	divDatosOperacionJs.classList.remove("is-hidden");
 };
+// funcion auxiliar
 
-//FUNCION AGREGAR CATEGORIA
+const mostrarEnHTML = (array) => {
+	const funcionAuxiliarParaHtml = array.reduce((acc, elemento) => {
+		return (acc += `
+ <div class="columns">
+	<div class="column is-3">
+  <p>${elemento.descripcion}</p>
+  </div>
+  <div class="column is-3">
+     <p class="tag has-background-primary-light has-text-primary-dark">${elemento.categoria}  </p>
+  </div>
+  <div class="column is-2 has-text-right">${elemento.fecha}</div>
+   <div class="column is-2 has-text-right"> ${elemento.monto} </div>
+     <div class="column is-2 has-text-right">
+
+     <button class=" tag button is-ghost">Editar</button>
+       <button class=" tag button is-ghost">Eliminar</button>
+   </div>
+  </div>
+	 </div>
+
+	`);
+	}, "");
+	divDatosOperacionJs.innerHTML = funcionAuxiliarParaHtml;
+};
+//funcion agregar categoria
 
 botonAgregarCategorias.onclick = () => {
 	const agregarCategorias = () => {
@@ -235,38 +261,11 @@ const mostrarCategoriasSelect = () => {
 
 mostrarCategoriasSelect();
 
-// funcion auxliar
-
-const mostrarEnHTML = (array) => {
-	const funcionAuxiliarParaHtml = array.reduce((acc, elemento) => {
-		return (acc += `
- <div class="columns">
-	<div class="column is-3">
-  <p>${elemento.descripcion}</p>
-  </div>
-  <div class="column is-3">
-     <p class="tag has-background-primary-light has-text-primary-dark">${elemento.categoria}  </p>
-  </div>
-  <div class="column is-2 has-text-right">${elemento.fecha}</div>
-   <div class="column is-2 has-text-right">${elemento.monto}</div>
-     <div class="column is-2 has-text-right">
-
-     <button class=" tag button is-ghost">Editar</button>
-       <button class=" tag button is-ghost">Eliminar</button>
-   </div>
-  </div>
-	 </div>
-
-	`);
-	}, "");
-	divDatosOperacionJs.innerHTML = funcionAuxiliarParaHtml;
-};
-
-// mostrar operaciones
+// funcion mostrar operaciones
 
 botonAgregarOperacion.onclick = () => {
 	const descripcionNuevaOperacion = inputTextoNuevaOperacion.value;
-	const montoNuevaOperacion = inputMontoNuevaOperacion.value;
+	const montoNuevaOperacion = Number(inputMontoNuevaOperacion.value);
 	const tipoNuevaOperacion = selectTipoNuevaOperacion.value;
 	const categoriaNuevaOperacion = selectCategoriaNuevaOperacion.value;
 	const fechaNuevaOperacion = inputFechaNuevaOperacion.value;
@@ -294,12 +293,8 @@ const mostrarOperaciones = () => {
 };
 mostrarOperaciones();
 
-// formulario FILTRO
-const selectFiltroTipo = document.getElementById("select-filtro-tipo");
+// filtro TIPO-CATEGORIA
 
-// const selectFiltroCategorias = document.getElementById(
-// 	"select-filtro-categorias"
-// );
 const aplicarFiltros = () => {
 	let operacionesDato = guardarEnLocalStorage();
 	let operacionesArray = operacionesDato.operaciones;
@@ -335,18 +330,7 @@ selectFiltroTipo.onchange = () => {
 	mostrarEnHTML(filtrado);
 };
 
-//boton abrir modal ditar categorias
-const botonEditarCategoria = document.getElementById("boton-editar-categoria");
-const seccionModalParaEditarCategoria = document.getElementById(
-	"seccion-modal-editar-categoria"
-);
-botonEditarCategoria.onclick = () => {
-	seccionModalParaEditarCategoria.classList.remove("is-hidden");
-	seccionCategoria.classList.add("is-hidden");
-};
-//viqui funciona solo con el primer boton- ver de implementar un for
-
-//*** FILTRO FECHA OPERACIONES*/
+// FILTRO FECHA OPERACIONES
 
 const filtroFecha = (operacionesArray, date) => {
 	return operacionesArray.filter((operacion) => {
@@ -354,7 +338,7 @@ const filtroFecha = (operacionesArray, date) => {
 	});
 };
 
-//*** FILTRO ORDENAR */
+// FILTRO ORDENAR
 // 1º POR FECHA
 
 const ordenFecha = (ope1, ope2) => {
@@ -426,23 +410,16 @@ const operacionOrdenar = (operacionesArray, ordenElegido) => {
 	}
 };
 
-// funcion filtros general
-const filtrosFormulario = document.getElementById("div-formulario-filtros");
-filtrosFormulario.onchange = () => {
-	const storageLocal = guardarEnLocalStorage(); //leer localstorage
-	let operacionesArray = storageLocal.operaciones;
-	// fecha
-	const inputFiltroFecha = document.getElementById("input-fecha");
-	if (inputFiltroFecha.value !== "") {
-		const date = new Date(inputFiltroFecha.value);
-		operacionesArray = filtroFecha(operacionesArray, date); // llama a la funcion filtro fecha
-	}
-
-	//sort
-	const ordenFiltro = document.getElementById("orden-filtro");
-	const ordenElegido = ordenFiltro.value;
-	operacionesArray = operacionOrdenar(operacionesArray, ordenElegido); //nos fijamos en el switch le pasamos el array de operaciones y el orden elegido.
+//boton abrir modal ditar categorias
+const botonEditarCategoria = document.getElementById("boton-editar-categoria");
+const seccionModalParaEditarCategoria = document.getElementById(
+	"seccion-modal-editar-categoria"
+);
+botonEditarCategoria.onclick = () => {
+	seccionModalParaEditarCategoria.classList.remove("is-hidden");
+	seccionCategoria.classList.add("is-hidden");
 };
+//viqui funciona solo con el primer boton- ver de implementar un for
 
 const agregarOnClicks = () => {
 	const botonesEliminarCategorias = document.querySelectorAll(
@@ -473,3 +450,53 @@ const agregarOnClicks = () => {
 	}
 };
 agregarOnClicks();
+
+// balance
+
+const balance = () => {
+	// buscar del localStorage
+	let balanceDatos = guardarEnLocalStorage();
+	let balanceArray = balanceDatos.operaciones;
+
+	const filtroGastos = balanceArray.filter((elemento) => {
+		return elemento.tipo === "gastos";
+	});
+
+	const sumaGastos = filtroGastos.reduce((acc, elemento, i) => {
+		return acc + elemento.monto;
+	}, 0);
+
+	const filtroGanancia = balanceArray.filter((elemento) => {
+		return elemento.tipo === "ganancia";
+	});
+
+	const sumaGanancia = filtroGanancia.reduce((acc, elemento, i) => {
+		return acc + elemento.monto;
+	}, 0);
+
+	const totalBalance = () => {
+		return sumaGanancia - sumaGastos;
+	};
+	totalBalance();
+
+	divMostrarBalance.innerHTML = `
+	<h2 class=" title is-3 is-size-3 m-2 mb-6 has-text-weight-bold">Balance</h2>
+                 <div class="columns is-mobile is-vcentered">   
+                     <div class="column is-size-5">Ganancia</div>
+                     <div class="column has-text-right has-text-success">+$${sumaGanancia}</div>
+                 </div>
+
+                <div class="columns is-mobile is-vcentered">
+                    <div class="column is-size-5">Gastos</div>
+                    <div  class="column has-text-right has-text-danger">-$${sumaGastos}</div>
+
+                </div>
+
+                <div class="columns is-mobile is-vcentered">
+                    <div class="column is-size-4">Total</div>
+                    <div  class="column has-text-right"> $ ${totalBalance()}  </div>
+
+                </div> 
+	`;
+};
+balance();
