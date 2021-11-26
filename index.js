@@ -60,8 +60,14 @@ const inputFechaNuevaOperacion = document.getElementById(
 const formularioNuevaOperacion = document.getElementById(
 	"formulario-nueva-operacion"
 );
+const botonCancelarModalCategorias =
+	document.getElementById("cancelar-categoria");
+
 const selectFiltroTipo = document.getElementById("select-filtro-tipo");
 const divMostrarBalance = document.getElementById("div-mostrar-balance");
+const inputEditarCategorias = document.getElementById(
+	"input-editar-categorias"
+);
 // boton balance
 
 botonBalance.onclick = () => {
@@ -230,7 +236,7 @@ const mostrarCategorias = () => {
 		</span>
 	</div>
 	<div class="column has-text-right">
-		<button class="button tag is-ghost" id="boton-editar-categoria">Editar</button>
+		<button class="button tag is-ghost" id="boton-editar-categoria" data-id="${elemento.id}">Editar</button>
 		<button class="button tag is-ghost" id="boton-eliminar-categoria" data-id="${elemento.id}">Eliminar</button>
 	</div>
 </div>
@@ -421,11 +427,15 @@ botonEditarCategoria.onclick = () => {
 };
 //viqui funciona solo con el primer boton- ver de implementar un for
 
+let categoriaAEditar = "";
+//funcion eliminar categorias
 const agregarOnClicks = () => {
 	const botonesEliminarCategorias = document.querySelectorAll(
 		"#boton-eliminar-categoria"
 	);
-
+	const botonesEditarCategorias = document.querySelectorAll(
+		"#boton-editar-categoria"
+	);
 	for (let i = 0; i < botonesEliminarCategorias.length; i++) {
 		// const prueba = guardarEnLocalStorage.id;
 		botonesEliminarCategorias[i].onclick = (e) => {
@@ -448,9 +458,33 @@ const agregarOnClicks = () => {
 			agregarOnClicks();
 		};
 	}
+	//for que edita las categorias y abre el modal
+	for (let i = 0; i < botonesEditarCategorias.length; i++) {
+		botonesEditarCategorias[i].onclick = (e) => {
+			//Escondo el modal de lista
+			seccionModalParaEditarCategoria.classList.remove("is-hidden");
+			//Agrego el modal de editar
+			seccionCategoria.classList.add("is-hidden");
+			//Guardo el id donde se clickeo
+			categoriaAEditar = e.target.dataset.id;
+			//Leo la información que tengo en el local storage
+			let infoLeidaDeLocalStorage = guardarEnLocalStorage();
+			//Creo un nuevo array filtrando que el id sea igual al que se clickeo para editar
+			const nuevoArray = infoLeidaDeLocalStorage.categorias.filter(
+				(item) => item.id == e.target.dataset.id
+			);
+			//Seteo el valor del input con el nombre del elemento que se clickeo
+			inputEditarCategorias.value = nuevoArray[0].nombre;
+		};
+	}
 };
 agregarOnClicks();
 
+//cancelar la edición de las categorias
+botonCancelarModalCategorias.onclick = () => {
+	seccionModalParaEditarCategoria.classList.add("is-hidden");
+	seccionCategoria.classList.remove("is-hidden");
+};
 // balance
 
 const balance = () => {
