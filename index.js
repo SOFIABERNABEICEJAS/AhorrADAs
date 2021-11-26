@@ -136,7 +136,7 @@ const mostrarEnHTML = (array) => {
      <p class="tag has-background-primary-light has-text-primary-dark">${elemento.categoria}  </p>
   </div>
   <div class="column is-2 has-text-right">${elemento.fecha}</div>
-   <div class="column is-2 has-text-right"> ${elemento.monto} </div>
+   <div class="column is-2 has-text-right">${elemento.monto}</div>
      <div class="column is-2 has-text-right">
 
      <button class=" tag button is-ghost">Editar</button>
@@ -313,7 +313,6 @@ const aplicarFiltros = () => {
 		}
 		return operacion.tipo === selectTipo;
 	});
-	console.log(filtrarPorTipo);
 
 	const filtrarPorCategoria = selectFiltroCategorias.value;
 	const filtradoFinal = filtrarPorTipo.filter((operacion) => {
