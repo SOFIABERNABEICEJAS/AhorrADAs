@@ -60,6 +60,8 @@ const inputFechaNuevaOperacion = document.getElementById(
 const formularioNuevaOperacion = document.getElementById(
 	"formulario-nueva-operacion"
 );
+const inputFecha = document.getElementById("input-fecha");
+const filtroSort = document.getElementById("orden-filtro");
 const selectFiltroTipo = document.getElementById("select-filtro-tipo");
 const divMostrarBalance = document.getElementById("div-mostrar-balance");
 // boton balance
@@ -293,42 +295,6 @@ const mostrarOperaciones = () => {
 };
 mostrarOperaciones();
 
-// filtro TIPO-CATEGORIA
-
-const aplicarFiltros = () => {
-	let operacionesDato = guardarEnLocalStorage();
-	let operacionesArray = operacionesDato.operaciones;
-	const operacionesArraySeguro = [...operacionesArray];
-	const selectTipo = selectFiltroTipo.value;
-
-	const filtrarPorTipo = operacionesArraySeguro.filter((operacion) => {
-		if (selectTipo === "todos") {
-			return operacion;
-		}
-		return operacion.tipo === selectTipo;
-	});
-	console.log(filtrarPorTipo);
-
-	const filtrarPorCategoria = selectFiltroCategorias.value;
-	const filtradoFinal = filtrarPorTipo.filter((operacion) => {
-		if (filtrarPorCategoria === "todos") {
-			return operacion;
-		}
-		return operacion.categoria === filtrarPorCategoria;
-	});
-
-	return filtradoFinal;
-};
-
-selectFiltroCategorias.onchange = () => {
-	const filtrado = aplicarFiltros();
-	mostrarEnHTML(filtrado);
-};
-
-selectFiltroTipo.onchange = () => {
-	const filtrado = aplicarFiltros();
-	mostrarEnHTML(filtrado);
-};
 
 // FILTRO FECHA OPERACIONES
 
@@ -409,6 +375,60 @@ const operacionOrdenar = (operacionesArray, ordenElegido) => {
 			break;
 	}
 };
+const aplicarFiltros = () => {
+	let operacionesDato = guardarEnLocalStorage();
+	let operacionesArray = operacionesDato.operaciones;
+	const operacionesArraySeguro = [...operacionesArray];
+	const selectTipo = selectFiltroTipo.value;
+
+	const filtrarPorTipo = operacionesArraySeguro.filter((operacion) => {
+		if (selectTipo === "todos") {
+			return operacion;
+		}
+		return operacion.tipo === selectTipo;
+	});
+	console.log(filtrarPorTipo);
+
+	const filtrarPorCategoria = selectFiltroCategorias.value;
+	const filtradoFinal = filtrarPorTipo.filter((operacion) => {
+		if (filtrarPorCategoria === "todos") {
+			return operacion;
+		}
+		return operacion.categoria === filtrarPorCategoria;
+	});
+	return filtradoFinal;
+	
+	//##### filtrar por fecha 
+	
+	const valorFecha = inputFecha.value
+	if (valorFecha !== "") {
+		const fecha = new Date(valorFecha);
+		operacionesArraySeguro = filtroFecha(operacionesArraySeguro, fecha);
+	}
+	
+//###### ordenar
+	const tipoSort = filtroSort.value;
+	operacionesArraySeguro = operacionOrdenar(operacionesArraySeguro, tipoSort);
+
+};
+
+selectFiltroCategorias.onchange = () => {
+	const filtrado = aplicarFiltros();
+	mostrarEnHTML(filtrado);
+};
+
+selectFiltroTipo.onchange = () => {
+	const filtrado = aplicarFiltros();
+	mostrarEnHTML(filtrado);
+};
+inputFecha.onchange = () => {
+ const filtrado = aplicarFiltros();
+	mostrarEnHTML(filtrado);
+}
+filtroSort.onchange = () =>{
+	const filtrado = aplicarFiltros();
+	mostrarEnHTML(filtrado);
+}
 
 //boton abrir modal ditar categorias
 const botonEditarCategoria = document.getElementById("boton-editar-categoria");
