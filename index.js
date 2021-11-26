@@ -60,6 +60,8 @@ const inputFechaNuevaOperacion = document.getElementById(
 const formularioNuevaOperacion = document.getElementById(
 	"formulario-nueva-operacion"
 );
+const botonCancelarModalCategorias =
+	document.getElementById("cancelar-categoria");
 
 // boton balance
 
@@ -444,6 +446,7 @@ filtrosFormulario.onchange = () => {
 	operacionesArray = operacionOrdenar(operacionesArray, ordenElegido); //nos fijamos en el switch le pasamos el array de operaciones y el orden elegido.
 };
 
+let categoriaAEditar = "";
 //funcion eliminar categorias
 const agregarOnClicks = () => {
 	const botonesEliminarCategorias = document.querySelectorAll(
@@ -474,15 +477,27 @@ const agregarOnClicks = () => {
 			agregarOnClicks();
 		};
 	}
-
+	//for que edita las categorias y abre el modal
 	for (let i = 0; i < botonesEditarCategorias.length; i++) {
-		botonesEditarCategorias[i].onclick = () => {
-			console.log("hola");
-			// let informacionEnLocalStorage = guardarEnLocalStorage();
+		botonesEditarCategorias[i].onclick = (e) => {
 			seccionModalParaEditarCategoria.classList.remove("is-hidden");
-			// mostrarCategorias();
-			// agregarOnClicks();
+			seccionCategoria.classList.add("is-hidden");
+			categoriaAEditar = e.target.dataset.id;
+			let infoLeidaDeLocalStorage = guardarEnLocalStorage();
+			const nuevoArray = infoLeidaDeLocalStorage.categorias.filter(
+				(item) => item.id == e.target.dataset.id
+			);
+			const inputEditarCategorias = document.getElementById(
+				"input-editar-categorias"
+			);
+			inputEditarCategorias.value = nuevoArray[0].nombre;
 		};
 	}
 };
 agregarOnClicks();
+
+//cancelar la edición de las categorias
+botonCancelarModalCategorias.onclick = () => {
+	seccionModalParaEditarCategoria.classList.add("is-hidden");
+	seccionCategoria.classList.remove("is-hidden");
+};
