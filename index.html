@@ -82,24 +82,6 @@
             <div class="column is-offset-1 is-3 ">
                 <!-- article BALANCE -->
                  <article class="box" id="div-mostrar-balance">
-                <!-- <article class="box" id="div-mostrar-balance">
-                    <h2 class=" title is-3 is-size-3 m-2 mb-6 has-text-weight-bold">Balance</h2>
-                 <div class="columns is-mobile is-vcentered">   
-                     <div class="column is-size-5">Ganancia</div>
-                     <div class="column has-text-right has-text-success">+$0</div>
-                 </div>
-
-                <div class="columns is-mobile is-vcentered">
-                    <div class="column is-size-5">Gastos</div>
-                    <div  class="column has-text-right has-text-danger">-$0</div>
-
-                </div>
-
-                <div class="columns is-mobile is-vcentered">
-                    <div class="column is-size-4">Total</div>
-                    <div  class="column has-text-right"> $0</div>
-
-                </div> -->
 
                 </article>
                 
@@ -362,7 +344,9 @@
         </div>
 
     </section>
+ 
 
+ 
     <!-- Seccion modal editar categorias -->
     <section class="section mt-5 is-hidden" id="seccion-modal-editar-categoria">
 
@@ -394,13 +378,12 @@
     </section>
 
     <!-- section reportes -->
-    <section class="section is-hidden" id="seccion-reporte">
+    <section class="section is-hidden"  id="seccion-reporte">
         <div class="column is-offset-2 is-8">
             <article class="box">
                 <div class="column mb-6">
                      <h2 class="title 2 is-size-2 has-text-weight-bold">Reportes</h2>
-                   
-                </div>
+               </div>
                 <div class="columns">
                     <div class="column is-offset-3 is-6">
                         <figure class="image">
@@ -420,10 +403,125 @@
             </article>
 
         </div>
-
         
+      <div class="column is-offset-2 is-8 ">
+         <article class="box">
+           <div class="column mb-5">
+             <h2 class="title 2 is-size-2 has-text-weight-bold">Reportes</h2>
+          </div>
+
+          <div>
+            <div class="column ml-2 mb-4">
+             <h4 class="is-size-4 has-text-weight-semibold">Resumen</h4>
+           </div>
+                 <div class="columns is-mobile is-vcentered ml-3 mr-3">   
+                     <div class="column is-6 has-text-weight-semibold">Categoría con mayor ganancia</div>
+                     <div class="column is-3 has-text-right"><span class=" tag is-primary is-light">comida</span></div>
+                    <div class="column is-3 has-text-right has-text-weight-semibold has-text-success">$0</div>
+                 </div>
+
+                <div class="columns is-mobile is-vcentered ml-3 mr-3">
+                    <div class="column is-6 has-text-weight-semibold">Categoría con mayor gasto</div>
+                    <div class="column is-3 has-text-right"><span class=" tag is-primary is-light">comida</span></div>
+                    <div class="column is-3 has-text-right has-text-weight-semibold has-text-danger">$-0</div>
+
+                </div>
+                <div class="columns is-mobile is-vcentered ml-3 mr-3">
+                    <div class="column is-6 has-text-weight-semibold">Categoría con mayor balance</div>
+                    <div class="column is-3 has-text-right"><span class=" tag is-primary is-light">comida</span></div>
+                    <div class="column is-3 has-text-right has-text-weight-semibold">$0</div>
+
+                </div>
+                <div class="columns is-mobile is-vcentered ml-3 mr-3">
+                    <div class="column is-6 has-text-weight-semibold">Mes con mayor ganancia</div>
+                    <div class="column is-3 has-text-right">11/11/2021</div>
+                    <div class="column is-3 has-text-right has-text-weight-semibold has-text-success">$0</div>
+
+                </div>
+
+                <div class="columns is-mobile is-vcentered ml-3 mr-3 mb-6">
+                    <div class="column is-6 has-text-weight-semibold">Mes con mayor gasto</div>
+                    <div class="column is-3 has-text-right">11/11/2021</div>
+                    <div class="column is-3 has-text-right has-text-weight-semibold has-text-danger">$-0</div>
+                </div> 
+                </div>
+
+            <div>
+
+            
+              <div class="column ml-2 mb-4 mt-6">
+                  <h4 class="is-size-4 has-text-weight-semibold">Totales por categorías</h4>
+              </div>
+                 <div class="columns is-vcentered ml-3 mr-3">   
+                     <div class="column is-3 has-text-weight-semibold ">Categoría</div>
+                    <div class="column is-3 has-text-weight-semibold has-text-right">Ganancia</div>
+                    <div class="column is-3 has-text-weight-semibold has-text-right">Gastos</div>
+                    <div class="column is-3 has-text-weight-semibold has-text-right">Balance</div>
+
+                 </div>
+
+                <div class="columns is-vcentered ml-3 mr-3">
+                    <div class="column is-3 has-text-weight-semibold">Comida</div>
+                    <div class="column is-3 has-text-right has-text-weight-semibold has-text-success">$+0</div>
+                    <div class="column is-3 has-text-right has-text-weight-semibold has-text-danger">$-0</div>
+                    <div class="column is-3 has-text-right has-text-weight-semibold">$0</div>
+
+                </div>
+                <div class="columns is-vcentered ml-3 mr-3">
+                    <div class="column is-3 has-text-weight-semibold">Educacion</div>
+                    <div class="column is-3 has-text-right has-text-weight-semibold has-text-success">$+0</div>
+                    <div class="column is-3 has-text-right has-text-weight-semibold has-text-danger">$-0</div>
+                    <div class="column is-3 has-text-right has-text-weight-semibold">$0</div>
+
+
+                </div>
+                <div class="columns is-vcentered ml-3 mr-3">
+                    <div class="column is-3 has-text-weight-semibold">Salidas</div>
+                    <div class="column is-3 has-text-right has-text-weight-semibold has-text-success">$+0</div>
+                    <div class="column is-3 has-text-right has-text-weight-semibold has-text-danger">$-0</div>
+                    <div class="column is-3 has-text-right has-text-weight-semibold">$0</div>
+
+                </div>
+
+                <div class="columns is-vcentered ml-3 mr-3">
+                    <div class="column is-3 has-text-weight-semibold">Servcio</div>
+                    <div class="column is-3 has-text-right has-text-weight-semibold has-text-success">$+0</div>
+                    <div class="column is-3 has-text-right has-text-weight-semibold has-text-danger">$-0</div>
+                    <div class="column is-3 has-text-right has-text-weight-semibold">$0</div>
+
+                </div> 
+
+            
+             
+               <div class="column ml-2 mb-3 mt-6">
+                  <h4 class="is-size-4 has-text-weight-semibold">Totales por mes</h4>
+                </div>
+                <div class="columns is-vcentered ml-3 mr-3">   
+                    <div class="column is-3 has-text-weight-semibold ">Mes</div>
+                    <div class="column is-3 has-text-weight-semibold has-text-right">Ganancia</div>
+                    <div class="column is-3 has-text-weight-semibold has-text-right">Gastos</div>
+                    <div class="column is-3 has-text-weight-semibold has-text-right">Balance</div>
+
+                 </div>
+                 <div class="columns is-vcentered ml-3 mr-3 mb-6">
+                    <div class="column is-3 has-text-weight-semibold">11/11</div>
+                    <div class="column is-3 has-text-right has-text-weight-semibold has-text-success">$+0</div>
+                    <div class="column is-3 has-text-right has-text-weight-semibold has-text-danger">$-0</div>
+                    <div class="column is-3 has-text-right has-text-weight-semibold">$0</div>
+
+                </div> 
+             </div>
+            
+
+          </div>
+
+         </article>
+
+       </div>
+    
 
     </section>
+    
 
 
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
