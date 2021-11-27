@@ -134,14 +134,14 @@ const mostrarEnHTML = (array) => {
   <p>${elemento.descripcion}</p>
   </div>
   <div class="column is-3">
-     <p class="tag has-background-primary-light has-text-primary-dark">${elemento.categoria}  </p>
+     <p class="tag has-background-primary-light has-text-primary-dark">${elemento.categoria}</p>
   </div>
   <div class="column is-2 has-text-right">${elemento.fecha}</div>
    <div class="column is-2 has-text-right">${elemento.monto}</div>
      <div class="column is-2 has-text-right">
 
-     <button class=" tag button is-ghost">Editar</button>
-       <button class=" tag button is-ghost">Eliminar</button>
+     <button class=" tag button is-ghost" data-id="${elemento.id}>Editar</button>
+       <button class=" tag button is-ghost" data-id="${elemento.id}>Eliminar</button>
    </div>
   </div>
 	 </div>
@@ -220,7 +220,14 @@ const setearID = () => {
 		return obtenerItemUltimo.id + 1;
 	}
 };
-
+//agregar id  a operaciones 
+const idOperaciones = () =>{
+const localStorag = guardarEnLocalStorage();
+	if(localStorag.operaciones.length > 0){
+		const obtenerItemUltimo = localStorag.operaciones[localStorag.operaciones.length -1];
+		return obtenerItemUltimo.id +1
+	}
+};
 //funcion mostrar categorias
 const mostrarCategorias = () => {
 	let mostrarDelLocalStorage = guardarEnLocalStorage();
@@ -278,6 +285,7 @@ botonAgregarOperacion.onclick = () => {
 	const fechaNuevaOperacion = inputFechaNuevaOperacion.value;
 
 	const valorNuevaOperacion = {
+		id: idOperaciones(),
 		descripcion: descripcionNuevaOperacion,
 		monto: montoNuevaOperacion,
 		tipo: tipoNuevaOperacion,
@@ -480,10 +488,10 @@ const agregarOnClicks = () => {
 agregarOnClicks();
 
 //cancelar la edición de las categorias
-botonCancelarModalCategorias.onclick = () => {
-	seccionModalParaEditarCategoria.classList.add("is-hidden");
-	seccionCategoria.classList.remove("is-hidden");
-};
+// botonCancelarModalCategorias.onclick = () => {
+// 	seccionModalParaEditarCategoria.classList.add("is-hidden");
+// 	seccionCategoria.classList.remove("is-hidden");
+// };
 
 //funcionalidad al boton que edita las categorias en el modal
 botonEditarCategoriasModal.onclick = () => {
