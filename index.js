@@ -300,14 +300,6 @@ const mostrarOperaciones = () => {
 	mostrarEnHTML(mostrarDelLocalStorage.operaciones);
 };
 
-// const color = (array) => {
-// 	if (array.tipo === "ganancia") {
-// 		return `<p class="has-text-success"$+${array.monto}</p>`;
-// 	} else {
-// 		`<p class="has-text-danger"$-${array.monto}</p>`;
-// 	}
-// };
-
 // filtro TIPO-CATEGORIA
 
 const aplicarFiltros = () => {
