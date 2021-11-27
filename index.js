@@ -60,10 +60,23 @@ const inputFechaNuevaOperacion = document.getElementById(
 const formularioNuevaOperacion = document.getElementById(
 	"formulario-nueva-operacion"
 );
+<<<<<<< HEAD
 const selectFiltroTipo = document.getElementById("select-filtro-tipo");
 const divMostrarBalance = document.getElementById("div-mostrar-balance");
 // boton balance
+=======
+const botonCancelarModalCategorias =
+	document.getElementById("cancelar-categoria");
 
+const selectFiltroTipo = document.getElementById("select-filtro-tipo");
+const divMostrarBalance = document.getElementById("div-mostrar-balance");
+const inputEditarCategorias = document.getElementById(
+	"input-editar-categorias"
+);
+const botonEditarCategoriasModal = document.getElementById("editar-categoria");
+>>>>>>> cf611d27aa836efb1bc678a154ef225126274479
+
+// boton balance
 botonBalance.onclick = () => {
 	seccionPrincipal.classList.remove("is-hidden");
 	seccionCategoria.classList.add("is-hidden");
@@ -117,7 +130,23 @@ botonAgregarFormularioNuevaOperacion.onclick = () => {
 	divDatosOperacionesTitulo.classList.remove("is-hidden");
 	divDatosOperacionJs.classList.remove("is-hidden");
 };
+// funcion auxiliar
 
+const mostrarEnHTML = (array) => {
+	const funcionAuxiliarParaHtml = array.reduce((acc, elemento) => {
+		return (acc += `
+ <div class="columns">
+	<div class="column is-3">
+  <p>${elemento.descripcion}</p>
+  </div>
+  <div class="column is-3">
+     <p class="tag has-background-primary-light has-text-primary-dark">${elemento.categoria}  </p>
+  </div>
+  <div class="column is-2 has-text-right">${elemento.fecha}</div>
+   <div class="column is-2 has-text-right">${elemento.monto}</div>
+     <div class="column is-2 has-text-right">
+
+<<<<<<< HEAD
 // funcion auxiliar
 
 const mostrarEnHTML = (array) => {
@@ -134,6 +163,8 @@ const mostrarEnHTML = (array) => {
    <div class="column is-2 has-text-right" >  ${elemento.monto} </div>
      <div class="column is-2 has-text-right">
 
+=======
+>>>>>>> cf611d27aa836efb1bc678a154ef225126274479
      <button class=" tag button is-ghost">Editar</button>
        <button class=" tag button is-ghost">Eliminar</button>
    </div>
@@ -144,7 +175,10 @@ const mostrarEnHTML = (array) => {
 	}, "");
 	divDatosOperacionJs.innerHTML = funcionAuxiliarParaHtml;
 };
+<<<<<<< HEAD
 
+=======
+>>>>>>> cf611d27aa836efb1bc678a154ef225126274479
 //funcion agregar categoria
 
 botonAgregarCategorias.onclick = () => {
@@ -232,7 +266,7 @@ const mostrarCategorias = () => {
 		</span>
 	</div>
 	<div class="column has-text-right">
-		<button class="button tag is-ghost" id="boton-editar-categoria">Editar</button>
+		<button class="button tag is-ghost" id="boton-editar-categoria" data-id="${elemento.id}">Editar</button>
 		<button class="button tag is-ghost" id="boton-eliminar-categoria" data-id="${elemento.id}">Eliminar</button>
 	</div>
 </div>
@@ -309,7 +343,6 @@ const aplicarFiltros = () => {
 		}
 		return operacion.tipo === selectTipo;
 	});
-	console.log(filtrarPorTipo);
 
 	const filtrarPorCategoria = selectFiltroCategorias.value;
 	const filtradoFinal = filtrarPorTipo.filter((operacion) => {
@@ -412,7 +445,11 @@ const operacionOrdenar = (operacionesArray, ordenElegido) => {
 	}
 };
 
+<<<<<<< HEAD
 //boton abrir modal ditar categorias
+=======
+//boton abrir modal editar categorias
+>>>>>>> cf611d27aa836efb1bc678a154ef225126274479
 const botonEditarCategoria = document.getElementById("boton-editar-categoria");
 const seccionModalParaEditarCategoria = document.getElementById(
 	"seccion-modal-editar-categoria"
@@ -423,11 +460,15 @@ botonEditarCategoria.onclick = () => {
 };
 //viqui funciona solo con el primer boton- ver de implementar un for
 
+let categoriaAEditar = "";
+//funcion eliminar categorias
 const agregarOnClicks = () => {
 	const botonesEliminarCategorias = document.querySelectorAll(
 		"#boton-eliminar-categoria"
 	);
-
+	const botonesEditarCategorias = document.querySelectorAll(
+		"#boton-editar-categoria"
+	);
 	for (let i = 0; i < botonesEliminarCategorias.length; i++) {
 		// const prueba = guardarEnLocalStorage.id;
 		botonesEliminarCategorias[i].onclick = (e) => {
@@ -450,9 +491,57 @@ const agregarOnClicks = () => {
 			agregarOnClicks();
 		};
 	}
+	//for que edita las categorias y abre el modal
+	for (let i = 0; i < botonesEditarCategorias.length; i++) {
+		botonesEditarCategorias[i].onclick = (e) => {
+			//Escondo el modal de lista
+			seccionModalParaEditarCategoria.classList.remove("is-hidden");
+			//Agrego el modal de editar
+			seccionCategoria.classList.add("is-hidden");
+			//Guardo el id donde se clickeo
+			categoriaAEditar = e.target.dataset.id;
+			//Leo la información que tengo en el local storage
+			let infoLeidaDeLocalStorage = guardarEnLocalStorage();
+			//Creo un nuevo array filtrando que el id sea igual al que se clickeo para editar
+			const nuevoArray = infoLeidaDeLocalStorage.categorias.filter(
+				(item) => item.id == e.target.dataset.id
+			);
+			//Seteo el valor del input con el nombre del elemento que se clickeo
+			inputEditarCategorias.value = nuevoArray[0].nombre;
+		};
+	}
 };
 agregarOnClicks();
 
+<<<<<<< HEAD
+=======
+//cancelar la edición de las categorias
+botonCancelarModalCategorias.onclick = () => {
+	seccionModalParaEditarCategoria.classList.add("is-hidden");
+	seccionCategoria.classList.remove("is-hidden");
+};
+
+//funcionalidad al boton que edita las categorias en el modal
+botonEditarCategoriasModal.onclick = () => {
+	const leoLocalStorage = guardarEnLocalStorage();
+	// Recorro el local storage buscando el elemento que tiene de id la categoria a editar
+	for (let i = 0; i < leoLocalStorage.categorias.length; i++) {
+		// Guardo el elemento actual
+		const element = leoLocalStorage.categorias[i];
+		// Si tiene el mismo id que la categoria a editar
+		if (element.id == categoriaAEditar) {
+			// Cambio el nombre por lo que esta en el input
+			element.nombre = inputEditarCategorias.value;
+			// Lo guardo en el local storage
+			localStorage.setItem("tp-ahorradas", JSON.stringify(leoLocalStorage));
+			// Recargo el modal de mostrar categorias y agrego los on clicks
+			mostrarCategorias();
+			agregarOnClicks();
+		}
+	}
+};
+
+>>>>>>> cf611d27aa836efb1bc678a154ef225126274479
 // balance
 
 const balance = () => {
@@ -490,13 +579,21 @@ const balance = () => {
 
                 <div class="columns is-mobile is-vcentered">
                     <div class="column is-size-5">Gastos</div>
+<<<<<<< HEAD
                     <div  class="column has-text-right has-text-danger">-$${sumaGastos}</div>
+=======
+                    <div class="column has-text-right has-text-danger">-$${sumaGastos}</div>
+>>>>>>> cf611d27aa836efb1bc678a154ef225126274479
 
                 </div>
 
                 <div class="columns is-mobile is-vcentered">
                     <div class="column is-size-4">Total</div>
+<<<<<<< HEAD
                     <div  class="column has-text-right"> $ ${totalBalance()}  </div>
+=======
+                    <div  class="column has-text-right">$${totalBalance()}</div>
+>>>>>>> cf611d27aa836efb1bc678a154ef225126274479
 
                 </div> 
 	`;
