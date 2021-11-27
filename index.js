@@ -512,6 +512,15 @@ botonEditarCategoriasModal.onclick = () => {
 		}
 	}
 };
+// boton eliminar operaciones 
+
+
+
+
+
+
+//boton editar operaciones 
+
 
 // balance
 
