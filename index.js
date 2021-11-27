@@ -322,6 +322,16 @@ const aplicarFiltros = () => {
 		}
 		return operacion.categoria === filtrarPorCategoria;
 	});
+		//##### filtrar por fecha 
+	
+	const valorFecha = inputFecha.value
+	if (valorFecha !== "") {
+		const fecha = new Date(valorFecha);
+		operacionesArraySeguro = filtroFecha(filtradoFinal, fecha);
+	}
+//###### ordenar
+	const tipoSort = filtroSort.value;
+	operacionesArraySeguro = operacionOrdenar(filtradoFinal, tipoSort);
 
 	return filtradoFinal;
 };
@@ -335,6 +345,14 @@ selectFiltroTipo.onchange = () => {
 	const filtrado = aplicarFiltros();
 	mostrarEnHTML(filtrado);
 };
+inputFecha.onchange = () => {
+ const filtrado = aplicarFiltros();
+	mostrarEnHTML(filtrado);
+}
+filtroSort.onchange = () =>{
+	const filtrado = aplicarFiltros();
+	mostrarEnHTML(filtrado);
+}
 
 // FILTRO FECHA OPERACIONES
 
