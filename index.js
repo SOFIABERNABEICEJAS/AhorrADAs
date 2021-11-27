@@ -488,10 +488,10 @@ const agregarOnClicks = () => {
 agregarOnClicks();
 
 //cancelar la edición de las categorias
-// botonCancelarModalCategorias.onclick = () => {
-// 	seccionModalParaEditarCategoria.classList.add("is-hidden");
-// 	seccionCategoria.classList.remove("is-hidden");
-// };
+botonCancelarModalCategorias.onclick = () => {
+	seccionModalParaEditarCategoria.classList.add("is-hidden");
+	seccionCategoria.classList.remove("is-hidden");
+};
 
 //funcionalidad al boton que edita las categorias en el modal
 botonEditarCategoriasModal.onclick = () => {
