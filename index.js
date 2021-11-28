@@ -150,6 +150,13 @@ const mostrarEnHTML = (array) => {
 	}, "");
 	divDatosOperacionJs.innerHTML = funcionAuxiliarParaHtml;
 };
+
+// funcion auxiliar suma
+
+const funcionSumar = (num1, num2) => {
+	return num1 - num2;
+};
+
 //funcion agregar categoria
 
 botonAgregarCategorias.onclick = () => {
@@ -268,9 +275,10 @@ const mostrarCategoriasSelect = () => {
 		`
 			);
 		},
-		""
+		'<option value="todas">Todas</option>'
 	);
 	selectFiltroCategorias.innerHTML = mostrarCategoriaEnSelect;
+	selectCategoriaNuevaOperacion.innerHTML = mostrarCategoriaEnSelect;
 };
 
 mostrarCategoriasSelect();
@@ -545,10 +553,9 @@ const balance = () => {
 		return acc + elemento.monto;
 	}, 0);
 
-	const totalBalance = () => {
-		return sumaGanancia - sumaGastos;
-	};
-	totalBalance();
+	// funcion auxiliar balance total
+
+	let totalBalance = funcionSumar(sumaGanancia, sumaGastos);
 
 	divMostrarBalance.innerHTML = `
 	<h2 class=" title is-3 is-size-3 m-2 mb-6 has-text-weight-bold">Balance</h2>
@@ -565,7 +572,7 @@ const balance = () => {
 
                 <div class="columns is-mobile is-vcentered">
                     <div class="column is-size-4">Total</div>
-                    <div  class="column has-text-right">$${totalBalance()}</div>
+                    <div  class="column has-text-right has-text-weight-semibold"> $${totalBalance}</div>
 
                 </div> 
 	`;
