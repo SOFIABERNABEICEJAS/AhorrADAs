@@ -183,8 +183,8 @@ const mostrarEnHTML = (array) => {
 	divDatosOperacionJs.innerHTML = "";
 	const funcionAuxiliarParaHtml = array.reduce((acc, elemento) => {
 		return (acc += `
-	<div class="columns">
-		<div class="column is-3">
+	<div class="columns is-multiline is-mobile is-vcentered">
+		<div class="column is-3 is-3-tablet is-6-mobile"">
   		<p id="${elemento.id}">${elemento.descripcion}</p>
   	</div>
   	<div class="column is-3">
@@ -321,15 +321,7 @@ const mostrarCategoriasSelect = () => {
 
 mostrarCategoriasSelect();
 
-//agregar id  a operaciones
-	const idOperaciones = () => {
-		const localStorageAux = leerLocalStorage();
-		if (localStorageAux.operaciones.length > 0) {
-			const itemUltimo =
-				localStorageAux.operaciones[localStorageAux.operaciones.length - 1];
-			return itemUltimo.id + 1;
-		}
-	};
+
 
 // funcion mostrar operaciones
 botonAgregarOperacion.onclick = () => {
@@ -340,7 +332,7 @@ botonAgregarOperacion.onclick = () => {
 	const fechaNuevaOperacion = inputFechaNuevaOperacion.value;
 	
 	const valorNuevaOperacion = {
-		id: idOperaciones(),
+		id: operacionesID(),
 		descripcion: descripcionNuevaOperacion,
 		monto: montoNuevaOperacion,
 		tipo: tipoNuevaOperacion,
@@ -356,6 +348,16 @@ botonAgregarOperacion.onclick = () => {
 	console.log(valorNuevaOperacion);
 	mostrarOperaciones();
 };
+
+//agregar id  a operaciones
+	const operacionesID = () => {
+		const localStorageAux = leerLocalStorage();
+		if (localStorageAux.operaciones.length > 0) {
+			const itemUltimo =
+				localStorageAux.operaciones[localStorageAux.operaciones.length - 1];
+			return itemUltimo.id + 1;
+		}
+	};
 
 
 // FILTRO ORDENAR
