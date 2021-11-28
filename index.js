@@ -74,9 +74,10 @@ const inputEditarCategorias = document.getElementById(
 	"input-editar-categorias"
 );
 const botonEditarCategoriasModal = document.getElementById("editar-categoria");
-const selectEditarOperacionesModalCategoria =
-	document.getElementById("editar-categorias-operaciones");
-	// elementos del formulario editar operacion
+const selectEditarOperacionesModalCategoria = document.getElementById(
+	"editar-categorias-operaciones"
+);
+// elementos del formulario editar operacion
 const inputEditarDescripcion = document.getElementById("editar-descripcion");
 const inputEditarMonto = document.getElementById("editar-monto");
 const selectEditarTipo = document.getElementById("editar-tipo");
@@ -84,7 +85,7 @@ const selectEditarCategorias = document.getElementById(
 	"editar-categorias-operaciones"
 );
 const inputEditarFecha = document.getElementById("editar-fecha");
-const botonCancelarModalOperaciones = document.getElementById(
+const botonCancelarModalDeEditarOperaciones = document.getElementById(
 	"boton-cancelar-edicion"
 );
 // boton balance
@@ -182,28 +183,42 @@ const mostrarEnHTML = (array) => {
 	divDatosOperacionJs.innerHTML = "";
 	const funcionAuxiliarParaHtml = array.reduce((acc, elemento) => {
 		return (acc += `
- <div class="columns">
-	<div class="column is-3">
-  <p id="${elemento.id}">${elemento.descripcion}</p>
-  </div>
-  <div class="column is-3">
-     <p class="tag has-background-primary-light has-text-primary-dark">${elemento.categoria}</p>
-  </div>
-  <div class="column is-2 has-text-right">${elemento.fecha}</div> 
-   <div class="column is-2 has-text-right">${
-			elemento.tipo === "ganancia"
-				? `<p class="has-text-success">$+${elemento.monto}</p>`
-				: `<p class="has-text-danger">$-${elemento.monto}</p>`
-		}</div>
-     <div class="column is-2 has-text-right">
-
-     <button class=" tag button is-ghost" id="boton-editar-operacion" data-id="${elemento.id}>Editar</button>
-       <button class=" tag button is-ghost" id="boton-eliminar-operacion" data-id="${elemento.id}>Eliminar</button>
-   </div>
-  </div>
-	 </div>
-
-	`);
+	<div class="columns">
+		<div class="column is-3">
+  		<p id="${elemento.id}">${elemento.descripcion}</p>
+  	</div>
+  	<div class="column is-3">
+     	<p class="tag has-background-primary-light has-text-primary-dark"id="${
+			elemento.id
+		}">${elemento.categoria}</p>
+		</div>
+  	<div class="column is-2 has-text-right" id="${elemento.id}">${elemento.fecha}
+		</div> 
+   	<div class="column is-2 has-text-right">
+			${
+				elemento.tipo === "ganancia"
+					? `<p class="has-text-success" id="` +
+					  elemento.id +
+					  `">$+` +
+					  elemento.monto +
+					  `</p>`
+					: `<p class="has-text-danger" id="` +
+					  elemento.id +
+					  `">$-` +
+					  elemento.monto +
+					  `</p>`
+			}
+		</div>
+    <div class="column is-2 has-text-right">
+			<button class=" tag button is-ghost" id="boton-editar-operacion" data-id="${
+				elemento.id
+			}>Editar</button>
+			<button class=" tag button is-ghost" id="boton-eliminar-operacion" data-id="${
+				elemento.id
+			}>Eliminar</button>
+  	</div>
+	</div>
+	 `);
 	}, "");
 	divDatosOperacionJs.innerHTML = funcionAuxiliarParaHtml;
 };
@@ -226,7 +241,10 @@ botonAgregarCategorias.onclick = () => {
 			nombre: agregarNuevasCategorias,
 		};
 		verificaLocalStorage.categorias.push(nuevasCategorias);
-		localStorage.setItem("tp-ahorradas", JSON.stringify(verificaLocalStorage));
+		localStorage.setItem(
+			"tp-ahorradas",
+			JSON.stringify(verificaLocalStorage)
+		);
 	};
 	agregarCategorias();
 	mostrarCategorias();
@@ -253,12 +271,13 @@ const setearID = () => {
 		return obtenerItemUltimo.id + 1;
 	}
 };
-//agregar id  a operaciones 
-const idOperaciones = () =>{
-const localStorag = guardarEnLocalStorage();
-	if(localStorag.operaciones.length > 0){
-		const obtenerItemUltimo = localStorag.operaciones[localStorag.operaciones.length -1];
-		return obtenerItemUltimo.id +1
+//agregar id  a operaciones
+const idOperaciones = () => {
+	const localStorage = leerLocalStorage();
+	if (localStorage.operaciones.length > 0) {
+		const obtenerItemUltimo =
+			localStorage.operaciones[localStorage.operaciones.length - 1];
+		return obtenerItemUltimo.id + 1;
 	}
 };
 //funcion mostrar categorias
@@ -557,15 +576,16 @@ botonEditarCategoriasModal.onclick = () => {
 			// Cambio el nombre por lo que esta en el input
 			element.nombre = inputEditarCategorias.value;
 			// Lo guardo en el local storage
-			localStorage.setItem("tp-ahorradas", JSON.stringify(leoLocalStorage));
+			localStorage.setItem(
+				"tp-ahorradas",
+				JSON.stringify(leoLocalStorage)
+			);
 			// Recargo el modal de mostrar categorias y agrego los on clicks
 			mostrarCategorias();
 			agregarOnClicks();
 		}
 	}
 };
-
-
 
 //###### boton abrir modal editar operaciones ###########
 const botonEditarOperacion = document.getElementById("boton-editar-operacion");
@@ -577,14 +597,14 @@ botonEditarOperacion.onclick = () => {
 	divDatosOperacionJs.classList.add("is-hidden");
 };
 // botones eliminar operaciones y editar operacioes
-
+let operacionAEditar = "";
 const agregarOnClicksBotonesOperaciones = () => {
 	const botonesEliminarOperaciones = document.querySelectorAll(
 		"#boton-eliminar-operacion"
 	);
-	 const botonesEditarOperaciones = document.querySelectorAll(
+	const botonesEditarOperaciones = document.querySelectorAll(
 		"#boton-editar-operacion"
-	 );
+	);
 	for (let i = 0; i < botonesEliminarOperaciones.length; i++) {
 		// const prueba = guardarEnLocalStorage.id;
 		botonesEliminarOperaciones[i].onclick = (e) => {
@@ -620,9 +640,10 @@ const agregarOnClicksBotonesOperaciones = () => {
 			//Leo la información que tengo en el local storage
 			let infoLeidaDeLocalStorage = leerLocalStorage();
 			//Creo un nuevo array filtrando que el id sea igual al que se clickeo para editar
-			const nuevoArrayOperaciones = infoLeidaDeLocalStorage.operaciones.filter(
-				(item) => item.id == e.target.dataset.id
-			);
+			const nuevoArrayOperaciones =
+				infoLeidaDeLocalStorage.operaciones.filter(
+					(item) => item.id == e.target.dataset.id
+				);
 			//Seteo el valor de los input con los datos del elemento que se clickeo
 			inputEditarDescripcion.value = nuevoArrayOperaciones[i].descripcion;
 			inputEditarMonto.value = nuevoArrayOperaciones[i].monto;
@@ -634,8 +655,8 @@ const agregarOnClicksBotonesOperaciones = () => {
 };
 agregarOnClicksBotonesOperaciones();
 
-//cancelar la edición de las operaciones
-botonCancelarModalOperaciones.onclick = () => {
+//cancelar la edición de las operaciones del formulario editar
+botonCancelarModalDeEditarOperaciones.onclick = () => {
 	seccionModalParaEditarOperacion.classList.add("is-hidden");
 	divDatosOperacionJs.classList.remove("is-hidden");
 };
@@ -668,8 +689,6 @@ botonEditarOperacion.onclick = () => {
 		}
 	}
 };
-
-
 
 // balance
 const balance = () => {
