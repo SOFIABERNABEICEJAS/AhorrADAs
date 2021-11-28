@@ -60,11 +60,11 @@ const inputFechaNuevaOperacion = document.getElementById(
 const formularioNuevaOperacion = document.getElementById(
 	"formulario-nueva-operacion"
 );
+const selectFiltroTipo = document.getElementById("select-filtro-tipo");
+const divMostrarBalance = document.getElementById("div-mostrar-balance");
 const botonCancelarModalCategorias =
 	document.getElementById("cancelar-categoria");
 
-const selectFiltroTipo = document.getElementById("select-filtro-tipo");
-const divMostrarBalance = document.getElementById("div-mostrar-balance");
 const inputEditarCategorias = document.getElementById(
 	"input-editar-categorias"
 );
@@ -83,7 +83,6 @@ botonBalance.onclick = () => {
 };
 
 // boton categorias
-
 botonCategorias.onclick = () => {
 	seccionCategoria.classList.remove("is-hidden");
 	seccionPrincipal.classList.add("is-hidden");
@@ -93,7 +92,6 @@ botonCategorias.onclick = () => {
 };
 
 // boton reporte
-
 botonReporte.onclick = () => {
 	seccionReporte.classList.remove("is-hidden");
 	seccionPrincipal.classList.add("is-hidden");
@@ -109,14 +107,12 @@ botonOcultarFiltros.onclick = () => {
 };
 
 // boton nueva operacion SECCION OPERACIONES
-
 botonNuevaOperacion.onclick = () => {
 	seccionNuevaOperacion.classList.remove("is-hidden");
 	seccionPrincipal.classList.add("is-hidden");
 };
 
 // boton "agregar" en SECCION NUEVA OPERACION
-
 botonAgregarFormularioNuevaOperacion.onclick = () => {
 	seccionNuevaOperacion.classList.add("is-hidden");
 	seccionPrincipal.classList.remove("is-hidden");
@@ -124,8 +120,8 @@ botonAgregarFormularioNuevaOperacion.onclick = () => {
 	divDatosOperacionesTitulo.classList.remove("is-hidden");
 	divDatosOperacionJs.classList.remove("is-hidden");
 };
-// funcion auxiliar
 
+// funcion auxiliar
 const mostrarEnHTML = (array) => {
 	const funcionAuxiliarParaHtml = array.reduce((acc, elemento) => {
 		return (acc += `
@@ -134,12 +130,17 @@ const mostrarEnHTML = (array) => {
   <p>${elemento.descripcion}</p>
   </div>
   <div class="column is-3">
-     <p class="tag has-background-primary-light has-text-primary-dark">${elemento.categoria}  </p>
+     <p class="tag has-background-primary-light has-text-primary-dark">${
+				elemento.categoria
+			}  </p>
   </div>
-  <div class="column is-2 has-text-right">${elemento.fecha}</div>
-   <div class="column is-2 has-text-right">${elemento.monto}</div>
+  <div class="column is-2 has-text-right">${elemento.fecha}</div> 
+   <div class="column is-2 has-text-right">${
+			elemento.tipo === "ganancia"
+				? `<p class="has-text-success">$+${elemento.monto}</p>`
+				: `<p class="has-text-danger">$-${elemento.monto}</p>`
+		}</div>
      <div class="column is-2 has-text-right">
-
      <button class=" tag button is-ghost">Editar</button>
        <button class=" tag button is-ghost">Eliminar</button>
    </div>
@@ -151,12 +152,15 @@ const mostrarEnHTML = (array) => {
 	divDatosOperacionJs.innerHTML = funcionAuxiliarParaHtml;
 };
 
+<<<<<<< HEAD
+=======
 // funcion auxiliar suma
 
 const funcionSumar = (num1, num2) => {
 	return num1 - num2;
 };
 
+>>>>>>> 6e3b7b76457e9f8ba93faaa47b775123053f4283
 //funcion agregar categoria
 
 botonAgregarCategorias.onclick = () => {
@@ -277,7 +281,6 @@ const mostrarCategoriasSelect = () => {
 mostrarCategoriasSelect();
 
 // funcion mostrar operaciones
-
 botonAgregarOperacion.onclick = () => {
 	const descripcionNuevaOperacion = inputTextoNuevaOperacion.value;
 	const montoNuevaOperacion = Number(inputMontoNuevaOperacion.value);
@@ -306,7 +309,6 @@ const mostrarOperaciones = () => {
 	let mostrarDelLocalStorage = guardarEnLocalStorage();
 	mostrarEnHTML(mostrarDelLocalStorage.operaciones);
 };
-mostrarOperaciones();
 
 // filtro TIPO-CATEGORIA
 
@@ -424,6 +426,7 @@ const operacionOrdenar = (operacionesArray, ordenElegido) => {
 	}
 };
 
+//boton abrir modal ditar categorias
 //boton abrir modal editar categorias
 const botonEditarCategoria = document.getElementById("boton-editar-categoria");
 const seccionModalParaEditarCategoria = document.getElementById(
@@ -433,6 +436,7 @@ botonEditarCategoria.onclick = () => {
 	seccionModalParaEditarCategoria.classList.remove("is-hidden");
 	seccionCategoria.classList.add("is-hidden");
 };
+//viqui funciona solo con el primer boton- ver de implementar un for
 
 let categoriaAEditar = "";
 //funcion eliminar categorias
@@ -514,7 +518,6 @@ botonEditarCategoriasModal.onclick = () => {
 };
 
 // balance
-
 const balance = () => {
 	// buscar del localStorage
 	let balanceDatos = guardarEnLocalStorage();
@@ -549,8 +552,7 @@ const balance = () => {
 
                 <div class="columns is-mobile is-vcentered">
                     <div class="column is-size-5">Gastos</div>
-                    <div class="column has-text-right has-text-danger">-$${sumaGastos}</div>
-
+                    <div  class="column has-text-right has-text-danger">-$${sumaGastos}</div>
                 </div>
 
                 <div class="columns is-mobile is-vcentered">
