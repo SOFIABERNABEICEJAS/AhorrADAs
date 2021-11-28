@@ -71,6 +71,17 @@ const inputEditarCategorias = document.getElementById(
 const botonEditarCategoriasModal = document.getElementById("editar-categoria");
 const selectEditarOperacionesModalCategoria =
 	document.getElementById("editar-categorias-operaciones");
+	// elementos del formulario editar operacion
+const inputEditarDescripcion = document.getElementById("editar-descripcion");
+const inputEditarMonto = document.getElementById("editar-monto");
+const selectEditarTipo = document.getElementById("editar-tipo");
+const selectEditarCategorias = document.getElementById(
+	"editar-categorias-operaciones"
+);
+const inputEditarFecha = document.getElementById("editar-fecha");
+const botonCancelarModalOperaciones = document.getElementById(
+	"boton-cancelar-edicion"
+);
 // boton balance
 botonBalance.onclick = () => {
 	seccionPrincipal.classList.remove("is-hidden");
@@ -141,7 +152,7 @@ const mostrarEnHTML = (array) => {
    <div class="column is-2 has-text-right">${elemento.monto}</div>
      <div class="column is-2 has-text-right">
 
-     <button class=" tag button is-ghost" data-id="${elemento.id}>Editar</button>
+     <button class=" tag button is-ghost" id="boton-editar-operacion" data-id="${elemento.id}>Editar</button>
        <button class=" tag button is-ghost" id="boton-eliminar-operacion" data-id="${elemento.id}>Eliminar</button>
    </div>
   </div>
@@ -522,33 +533,111 @@ botonEditarCategoriasModal.onclick = () => {
 		}
 	}
 };
-// boton eliminar operaciones 
-const botonesEliminarOperaciones = document.querySelectorAll(
-	"#boton-eliminar-operacion"
+
+
+
+//###### boton abrir modal editar operaciones ###########
+const botonEditarOperacion = document.getElementById("boton-editar-operacion");
+const seccionModalParaEditarOperacion = document.getElementById(
+	"modal-editar-operacion"
 );
+botonEditarOperacion.onclick = () => {
+	seccionModalParaEditarOperacion.classList.remove("is-hidden");
+	divDatosOperacionJs.classList.add("is-hidden");
+};
+// botones eliminar operaciones y editar operacioes
 
-// const eliminarOperacion = (e) => {
-// 	const idAEliminar = e.target.dataset.operaciones; //id del elemento a eliminar
-// 	const datoLocalStorage = guardarEnLocalStorage(); // Leo el local storage y me lo guardo en esta variable
+const agregarOnClicksBotonesOperaciones = () => {
+	const botonesEliminarOperaciones = document.querySelectorAll(
+		"#boton-eliminar-operacion"
+	);
+	 const botonesEditarOperaciones = document.querySelectorAll(
+		"#boton-editar-operacion"
+	 );
+	for (let i = 0; i < botonesEliminarOperaciones.length; i++) {
+		// const prueba = guardarEnLocalStorage.id;
+		botonesEliminarOperaciones[i].onclick = (e) => {
+			// Leo la informacion que tengo en el LocalStorage
+			let informacionEnLocalStorage = guardarEnLocalStorage();
+			// Creo un nuevo array filtrando el id de la operacion que se clickeo
+			const nuevoArrayOperaciones =
+				informacionEnLocalStorage.operaciones.filter(
+					(item) => item.id != e.target.dataset.id
+				);
+			// Cambio el array del local storage por el nuevo array que no tiene el elemento
+			informacionEnLocalStorage.operaciones = nuevoArrayOperaciones;
+			// Guardo nuevamente el objeto en el LocalStorage
+			localStorage.setItem(
+				"tp-ahorradas",
+				JSON.stringify(informacionEnLocalStorage)
+			);
+			// Llamo denuevo a la funcion que lee el localStorage y crea los elementos html
+			mostrarEnHTML();
+			// Llamo a la funcion que les agrega los onclicks a los elementos recien creados
+			agregarOnClicksBotonesOperaciones();
+		};
+	}
+	//for que edita operaciones y abre el modal
+	for (let i = 0; i < botonesEditarOperaciones.length; i++) {
+		botonesEditarOperaciones[i].onclick = (e) => {
+			//Escondo el modal de lista
+			seccionModalParaEditarOperacion.classList.remove("is-hidden");
+			//Agrego el modal de editar
+			divDatosOperacionJs.classList.add("is-hidden");
+			//Guardo el id donde se clickeo
+			operacionAEditar = e.target.dataset.id;
+			//Leo la información que tengo en el local storage
+			let infoLeidaDeLocalStorage = guardarEnLocalStorage();
+			//Creo un nuevo array filtrando que el id sea igual al que se clickeo para editar
+			const nuevoArrayOperaciones = infoLeidaDeLocalStorage.operaciones.filter(
+				(item) => item.id == e.target.dataset.id
+			);
+			//Seteo el valor de los input con los datos del elemento que se clickeo
+			inputEditarDescripcion.value = nuevoArrayOperaciones[i].descripcion;
+			inputEditarMonto.value = nuevoArrayOperaciones[i].monto;
+			selectEditarTipo.value = nuevoArrayOperaciones[i].tipo;
+			selectEditarCategorias.value = nuevoArrayOperaciones[i].categoria;
+			inputEditarFecha.value = nuevoArrayOperaciones[i].fecha;
+		};
+	}
+};
+agregarOnClicksBotonesOperaciones();
 
-// 	// Recorro el local storage buscando el elemento que tengo que eliminar
-// 	for (let i = 0; i < datoLocalStorage.operaciones.length; i++) {
-// 		if (datoLocalStorage.operaciones[i].id == idAEliminar) {
-// 			datoLocalStorage.operaciones.splice(i, 1); // posicion y cuantos elementos elimina
-// 			break;
-// 		}
-// 	}
+//cancelar la edición de las operaciones
+botonCancelarModalOperaciones.onclick = () => {
+	seccionModalParaEditarOperacion.classList.add("is-hidden");
+	divDatosOperacionJs.classList.remove("is-hidden");
+};
 
-// 	localStorage.setItem("tp-ahorradas", JSON.stringify(datoLocalStorage));
-// 	//aplicarFiltros();
-// };
+//funcionalidad al boton que edita las operaciones en el formulario de editar operacion
+botonEditarOperacion.onclick = () => {
+	const leoLocalStorage = guardarEnLocalStorage();
+	// Recorro el local storage buscando el elemento que tiene de id la categoria a editar
+	for (let i = 0; i < leoLocalStorage.operaciones.length; i++) {
+		// Guardo el elemento actual
+		const elemento = leoLocalStorage.operaciones[i];
+		// Si tiene el mismo id que la categoria a editar
+		if (elemento.id == operacionAEditar) {
+			// Cambio el nombre por lo que esta en el input
 
+			///????????
+			elemento.descripcion = inputEditarDescripcion.value;
+			elemento.monto = inputEditarMonto.value;
+			elemento.tipo = selectEditarTipo.value;
+			elemento.categoria = selectEditarCategorias.value;
+			elemento.fecha = inputEditarFecha.value;
+			// Lo guardo en el local storage
+			localStorage.setItem(
+				"tp-ahorradas",
+				JSON.stringify(leoLocalStorage)
+			);
+			// Recargo el modal de mostrar categorias y agrego los on clicks
+			mostrarEnHTML();
+			agregarOnClicksBotonesOperaciones();
+		}
+	}
+};
 
-
-
-
-
-//boton editar operaciones 
 
 
 // balance
