@@ -271,15 +271,7 @@ const setearID = () => {
 		return obtenerItemUltimo.id + 1;
 	}
 };
-//agregar id  a operaciones
-const idOperaciones = () => {
-	const localStorage = leerLocalStorage();
-	if (localStorage.operaciones.length > 0) {
-		const obtenerItemUltimo =
-			localStorage.operaciones[localStorage.operaciones.length - 1];
-		return obtenerItemUltimo.id + 1;
-	}
-};
+
 //funcion mostrar categorias
 const mostrarCategorias = () => {
 	let mostrarDelLocalStorage = leerLocalStorage();
@@ -329,6 +321,16 @@ const mostrarCategoriasSelect = () => {
 
 mostrarCategoriasSelect();
 
+//agregar id  a operaciones
+	const idOperaciones = () => {
+		const localStorageAux = leerLocalStorage();
+		if (localStorageAux.operaciones.length > 0) {
+			const itemUltimo =
+				localStorageAux.operaciones[localStorageAux.operaciones.length - 1];
+			return itemUltimo.id + 1;
+		}
+	};
+
 // funcion mostrar operaciones
 botonAgregarOperacion.onclick = () => {
 	const descripcionNuevaOperacion = inputTextoNuevaOperacion.value;
@@ -336,7 +338,7 @@ botonAgregarOperacion.onclick = () => {
 	const tipoNuevaOperacion = selectTipoNuevaOperacion.value;
 	const categoriaNuevaOperacion = selectCategoriaNuevaOperacion.value;
 	const fechaNuevaOperacion = inputFechaNuevaOperacion.value;
-
+	
 	const valorNuevaOperacion = {
 		id: idOperaciones(),
 		descripcion: descripcionNuevaOperacion,
@@ -345,15 +347,16 @@ botonAgregarOperacion.onclick = () => {
 		categoria: categoriaNuevaOperacion,
 		fecha: fechaNuevaOperacion,
 	};
-
 	const operacionesVerificaLocalStorage = leerLocalStorage();
 	operacionesVerificaLocalStorage.operaciones.push(valorNuevaOperacion);
 	localStorage.setItem(
 		"tp-ahorradas",
 		JSON.stringify(operacionesVerificaLocalStorage)
 	);
+	console.log(valorNuevaOperacion);
 	mostrarOperaciones();
 };
+
 
 // FILTRO ORDENAR
 // 1º POR FECHA
@@ -594,7 +597,7 @@ const seccionModalParaEditarOperacion = document.getElementById(
 );
 botonEditarOperacion.onclick = () => {
 	seccionModalParaEditarOperacion.classList.remove("is-hidden");
-	divDatosOperacionJs.classList.add("is-hidden");
+	seccionPrincipal.classList.add("is-hidden");
 };
 // botones eliminar operaciones y editar operacioes
 let operacionAEditar = "";
@@ -623,11 +626,12 @@ const agregarOnClicksBotonesOperaciones = () => {
 				JSON.stringify(informacionEnLocalStorage)
 			);
 			// Llamo denuevo a la funcion que lee el localStorage y crea los elementos html
-			mostrarEnHTML();
+		 mostrarOperaciones();
 			// Llamo a la funcion que les agrega los onclicks a los elementos recien creados
 			agregarOnClicksBotonesOperaciones();
 		};
 	}
+
 	//for que edita operaciones y abre el modal
 	for (let i = 0; i < botonesEditarOperaciones.length; i++) {
 		botonesEditarOperaciones[i].onclick = (e) => {
@@ -672,7 +676,6 @@ botonEditarOperacion.onclick = () => {
 		if (elemento.id == operacionAEditar) {
 			// Cambio el nombre por lo que esta en el input
 
-			///????????
 			elemento.descripcion = inputEditarDescripcion.value;
 			elemento.monto = inputEditarMonto.value;
 			elemento.tipo = selectEditarTipo.value;
@@ -683,8 +686,8 @@ botonEditarOperacion.onclick = () => {
 				"tp-ahorradas",
 				JSON.stringify(leoLocalStorage)
 			);
-			// Recargo el modal de mostrar categorias y agrego los on clicks
-			mostrarEnHTML();
+			// Recargo el modal de mostrar operaciones y agrego los on clicks
+				mostrarOperaciones();
 			agregarOnClicksBotonesOperaciones();
 		}
 	}
