@@ -309,62 +309,6 @@ const mostrarOperaciones = () => {
 };
 mostrarOperaciones();
 
-// filtro TIPO-CATEGORIA
-
-const aplicarFiltros = () => {
-	//lee del LS
-	const operacionesDato = guardarEnLocalStorage();
-	//se trae operaciones
-	const operacionesArray = operacionesDato.operaciones;
-	//hace copia de operaciones del LS
-	const operacionesArraySeguro = [...operacionesArray];
-	console.log(operacionesArraySeguro);
-	//leo el valor del select traido del DOM 
-	const selectTipo = selectFiltroTipo.value;
-	const filtrarPorTipo = operacionesArraySeguro.filter((operacion) => {
-		if (selectTipo === "todos") {
-			return operacion;
-		}
-		return operacion.tipo === selectTipo;
-	});
-
-	const filtrarPorCategoria = selectFiltroCategorias.value;
-	const filtradoFinal = filtrarPorTipo.filter((operacion) => {
-		if (filtrarPorCategoria === "todos") {
-			return operacion;
-		}
-		return operacion.categoria === filtrarPorCategoria;
-	});
-		//##### filtrar por fecha 
-	
-// 	const valorFecha = inputFecha.value
-// 	if (valorFecha !== "") {
-// 		const fecha = new Date(valorFecha);
-// 	  operacionesArraySeguro = filtroFecha(filtradoFinal, fecha);
-// 	}
-// //###### ordenar
-// 	const tipoSort = filtroSort.value;
-// 	operacionesArraySeguro = operacionOrdenar(filtradoFinal, tipoSort);
-		return filtradoFinal;
-};
-
-selectFiltroCategorias.onchange = () => {
-	const filtrado = aplicarFiltros();
-	mostrarEnHTML(filtrado);
-};
-
-selectFiltroTipo.onchange = () => {
-	const filtrado = aplicarFiltros();
-	mostrarEnHTML(filtrado);
-};
-inputFecha.onchange = () => {
- const filtrado = aplicarFiltros();
-	mostrarEnHTML(filtrado);
-}
-filtroSort.onchange = () =>{
-	const filtrado = aplicarFiltros();
-	mostrarEnHTML(filtrado);
-}
 
 // FILTRO FECHA OPERACIONES
 
@@ -445,6 +389,62 @@ const operacionOrdenar = (operacionesArray, ordenElegido) => {
 			break;
 	}
 };
+// filtro TIPO-CATEGORIA
+
+const aplicarFiltros = () => {
+	//lee del LS
+	const operacionesDato = guardarEnLocalStorage();
+	//se trae operaciones
+	const operacionesArray = operacionesDato.operaciones;
+	//hace copia de operaciones del LS
+	const operacionesArraySeguro = [...operacionesArray];
+	console.log(operacionesArraySeguro);
+	//leo el valor del select traido del DOM 
+	const selectTipo = selectFiltroTipo.value;
+	const filtrarPorTipo = operacionesArraySeguro.filter((operacion) => {
+		if (selectTipo === "todos") {
+			return operacion;
+		}
+		return operacion.tipo === selectTipo;
+	});
+
+	const filtrarPorCategoria = selectFiltroCategorias.value;
+	const filtradoFinal = filtrarPorTipo.filter((operacion) => {
+		if (filtrarPorCategoria === "todos") {
+			return operacion;
+		}
+		return operacion.categoria === filtrarPorCategoria;
+	});
+		//##### filtrar por fecha 
+	
+	const valorFecha = inputFecha.value
+	if (valorFecha !== "") {
+		const fecha = new Date(valorFecha);
+	  operacionesArraySeguro = filtroFecha(filtradoFinal, fecha);
+	}
+//###### ordenar
+	const tipoSort = filtroSort.value;
+	operacionesArraySeguro = operacionOrdenar(filtradoFinal, tipoSort);
+		return filtradoFinal;
+};
+
+selectFiltroCategorias.onchange = () => {
+	const filtrado = aplicarFiltros();
+	mostrarEnHTML(filtrado);
+};
+
+selectFiltroTipo.onchange = () => {
+	const filtrado = aplicarFiltros();
+	mostrarEnHTML(filtrado);
+};
+inputFecha.onchange = () => {
+ const filtrado = aplicarFiltros();
+	mostrarEnHTML(filtrado);
+}
+filtroSort.onchange = () =>{
+	const filtrado = aplicarFiltros();
+	mostrarEnHTML(filtrado);
+}
 
 //boton abrir modal editar categorias
 const botonEditarCategoria = document.getElementById("boton-editar-categoria");
