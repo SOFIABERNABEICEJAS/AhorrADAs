@@ -210,12 +210,8 @@ const mostrarEnHTML = (array) => {
 			}
 		</div>
     <div class="column is-2 has-text-right">
-			<button class=" tag button is-ghost" id="boton-editar-operacion" data-id="${
-				elemento.id
-			}>Editar</button>
-			<button class=" tag button is-ghost" id="boton-eliminar-operacion" data-id="${
-				elemento.id
-			}>Eliminar</button>
+			<button class=" tag button is-ghost" id="boton-editar-operacion">Editar</button>
+			<button class=" tag button is-ghost" id="boton-eliminar-operacion">Eliminar</button>
   	</div>
 	</div>
 	 `);
