@@ -69,7 +69,8 @@ const inputEditarCategorias = document.getElementById(
 	"input-editar-categorias"
 );
 const botonEditarCategoriasModal = document.getElementById("editar-categoria");
-
+const selectEditarOperacionesModalCategoria =
+	document.getElementById("editar-categorias-operaciones");
 // boton balance
 botonBalance.onclick = () => {
 	seccionPrincipal.classList.remove("is-hidden");
@@ -131,7 +132,7 @@ const mostrarEnHTML = (array) => {
 		return (acc += `
  <div class="columns">
 	<div class="column is-3">
-  <p>${elemento.descripcion}</p>
+  <p id="${elemento.id}">${elemento.descripcion}</p>
   </div>
   <div class="column is-3">
      <p class="tag has-background-primary-light has-text-primary-dark">${elemento.categoria}</p>
@@ -141,7 +142,7 @@ const mostrarEnHTML = (array) => {
      <div class="column is-2 has-text-right">
 
      <button class=" tag button is-ghost" data-id="${elemento.id}>Editar</button>
-       <button class=" tag button is-ghost" data-id="${elemento.id}>Eliminar</button>
+       <button class=" tag button is-ghost" id="boton-eliminar-operacion" data-id="${elemento.id}>Eliminar</button>
    </div>
   </div>
 	 </div>
@@ -279,6 +280,7 @@ const mostrarCategoriasSelect = () => {
 	);
 	selectFiltroCategorias.innerHTML = mostrarCategoriaEnSelect;
 	selectCategoriaNuevaOperacion.innerHTML = mostrarCategoriaEnSelect;
+	selectEditarOperacionesModalCategoria.innerHTML = mostrarCategoriaEnSelect;
 };
 
 mostrarCategoriasSelect();
@@ -521,6 +523,25 @@ botonEditarCategoriasModal.onclick = () => {
 	}
 };
 // boton eliminar operaciones 
+const botonesEliminarOperaciones = document.querySelectorAll(
+	"#boton-eliminar-operacion"
+);
+
+// const eliminarOperacion = (e) => {
+// 	const idAEliminar = e.target.dataset.operaciones; //id del elemento a eliminar
+// 	const datoLocalStorage = guardarEnLocalStorage(); // Leo el local storage y me lo guardo en esta variable
+
+// 	// Recorro el local storage buscando el elemento que tengo que eliminar
+// 	for (let i = 0; i < datoLocalStorage.operaciones.length; i++) {
+// 		if (datoLocalStorage.operaciones[i].id == idAEliminar) {
+// 			datoLocalStorage.operaciones.splice(i, 1); // posicion y cuantos elementos elimina
+// 			break;
+// 		}
+// 	}
+
+// 	localStorage.setItem("tp-ahorradas", JSON.stringify(datoLocalStorage));
+// 	//aplicarFiltros();
+// };
 
 
 
