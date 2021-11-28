@@ -272,9 +272,10 @@ const mostrarCategoriasSelect = () => {
 		`
 			);
 		},
-		""
+		'<option value="todas">Todas</option>'
 	);
 	selectFiltroCategorias.innerHTML = mostrarCategoriaEnSelect;
+	selectCategoriaNuevaOperacion.innerHTML = mostrarCategoriaEnSelect;
 };
 
 mostrarCategoriasSelect();
