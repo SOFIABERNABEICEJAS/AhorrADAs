@@ -128,6 +128,7 @@ botonAgregarFormularioNuevaOperacion.onclick = () => {
 // funcion auxiliar
 
 const mostrarEnHTML = (array) => {
+	divDatosOperacionJs.innerHTML = "";
 	const funcionAuxiliarParaHtml = array.reduce((acc, elemento) => {
 		return (acc += `
  <div class="columns">
