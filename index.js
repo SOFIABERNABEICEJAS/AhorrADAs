@@ -251,6 +251,7 @@ botonAgregarCategorias.onclick = () => {
 const mostrarOperaciones = () => {
 	let mostrarDelLocalStorage = leerLocalStorage();
 	mostrarEnHTML(mostrarDelLocalStorage.operaciones);
+	agregarOnClicksBotonesOperaciones();
 };
 mostrarOperaciones();
 
