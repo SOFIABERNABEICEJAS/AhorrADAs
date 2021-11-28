@@ -60,11 +60,16 @@ const inputFechaNuevaOperacion = document.getElementById(
 const formularioNuevaOperacion = document.getElementById(
 	"formulario-nueva-operacion"
 );
-const botonCancelarModalCategorias =
-	document.getElementById("cancelar-categoria");
-
 const selectFiltroTipo = document.getElementById("select-filtro-tipo");
 const divMostrarBalance = document.getElementById("div-mostrar-balance");
+const botonCancelarModalCategorias =
+	document.getElementById("cancelar-categoria");
+const botonCancelarModalOperaciones = document.getElementById(
+	"cancelar-operaciones"
+);
+const inputFecha = document.getElementById("input-fecha");
+const filtroSort = document.getElementById("orden-filtro");
+
 const inputEditarCategorias = document.getElementById(
 	"input-editar-categorias"
 );
@@ -95,7 +100,6 @@ botonBalance.onclick = () => {
 };
 
 // boton categorias
-
 botonCategorias.onclick = () => {
 	seccionCategoria.classList.remove("is-hidden");
 	seccionPrincipal.classList.add("is-hidden");
@@ -105,7 +109,6 @@ botonCategorias.onclick = () => {
 };
 
 // boton reporte
-
 botonReporte.onclick = () => {
 	seccionReporte.classList.remove("is-hidden");
 	seccionPrincipal.classList.add("is-hidden");
@@ -121,14 +124,12 @@ botonOcultarFiltros.onclick = () => {
 };
 
 // boton nueva operacion SECCION OPERACIONES
-
 botonNuevaOperacion.onclick = () => {
 	seccionNuevaOperacion.classList.remove("is-hidden");
 	seccionPrincipal.classList.add("is-hidden");
 };
 
 // boton "agregar" en SECCION NUEVA OPERACION
-
 botonAgregarFormularioNuevaOperacion.onclick = () => {
 	seccionNuevaOperacion.classList.add("is-hidden");
 	seccionPrincipal.classList.remove("is-hidden");
@@ -136,61 +137,9 @@ botonAgregarFormularioNuevaOperacion.onclick = () => {
 	divDatosOperacionesTitulo.classList.remove("is-hidden");
 	divDatosOperacionJs.classList.remove("is-hidden");
 };
-// funcion auxiliar
 
-const mostrarEnHTML = (array) => {
-	const funcionAuxiliarParaHtml = array.reduce((acc, elemento) => {
-		return (acc += `
- <div class="columns">
-	<div class="column is-3">
-  <p id="${elemento.id}">${elemento.descripcion}</p>
-  </div>
-  <div class="column is-3">
-     <p class="tag has-background-primary-light has-text-primary-dark">${elemento.categoria}</p>
-  </div>
-  <div class="column is-2 has-text-right">${elemento.fecha}</div>
-   <div class="column is-2 has-text-right">${elemento.monto}</div>
-     <div class="column is-2 has-text-right">
-
-     <button class=" tag button is-ghost" id="boton-editar-operacion" data-id="${elemento.id}>Editar</button>
-       <button class=" tag button is-ghost" id="boton-eliminar-operacion" data-id="${elemento.id}>Eliminar</button>
-   </div>
-  </div>
-	 </div>
-
-	`);
-	}, "");
-	divDatosOperacionJs.innerHTML = funcionAuxiliarParaHtml;
-};
-
-// funcion auxiliar suma
-
-const funcionSumar = (num1, num2) => {
-	return num1 - num2;
-};
-
-//funcion agregar categoria
-
-botonAgregarCategorias.onclick = () => {
-	const agregarCategorias = () => {
-		let agregarNuevasCategorias = inputAgregarCategorias.value;
-
-		const verificaLocalStorage = guardarEnLocalStorage();
-		const nuevasCategorias = {
-			id: setearID(),
-			nombre: agregarNuevasCategorias,
-		};
-		verificaLocalStorage.categorias.push(nuevasCategorias);
-		localStorage.setItem("tp-ahorradas", JSON.stringify(verificaLocalStorage));
-	};
-	agregarCategorias();
-	mostrarCategorias();
-	mostrarCategoriasSelect();
-	agregarOnClicks();
-};
-
-//guardar en local storage
-const guardarEnLocalStorage = () => {
+//Leer del local storage
+const leerLocalStorage = () => {
 	let infoTraidaDeStorage = JSON.parse(localStorage.getItem("tp-ahorradas"));
 	if (!infoTraidaDeStorage) {
 		infoTraidaDeStorage = {
@@ -226,9 +175,74 @@ const guardarEnLocalStorage = () => {
 	return infoTraidaDeStorage;
 };
 
+// funcion auxiliar
+
+// funcion auxiliar
+const mostrarEnHTML = (array) => {
+	divDatosOperacionJs.innerHTML = "";
+	const funcionAuxiliarParaHtml = array.reduce((acc, elemento) => {
+		return (acc += `
+ <div class="columns">
+	<div class="column is-3">
+  <p id="${elemento.id}">${elemento.descripcion}</p>
+  </div>
+  <div class="column is-3">
+     <p class="tag has-background-primary-light has-text-primary-dark">${elemento.categoria}</p>
+  </div>
+  <div class="column is-2 has-text-right">${elemento.fecha}</div> 
+   <div class="column is-2 has-text-right">${
+			elemento.tipo === "ganancia"
+				? `<p class="has-text-success">$+${elemento.monto}</p>`
+				: `<p class="has-text-danger">$-${elemento.monto}</p>`
+		}</div>
+     <div class="column is-2 has-text-right">
+
+     <button class=" tag button is-ghost" id="boton-editar-operacion" data-id="${elemento.id}>Editar</button>
+       <button class=" tag button is-ghost" id="boton-eliminar-operacion" data-id="${elemento.id}>Eliminar</button>
+   </div>
+  </div>
+	 </div>
+
+	`);
+	}, "");
+	divDatosOperacionJs.innerHTML = funcionAuxiliarParaHtml;
+};
+
+// funcion auxiliar suma
+
+const funcionSumar = (num1, num2) => {
+	return num1 - num2;
+};
+
+//funcion agregar categoria
+
+botonAgregarCategorias.onclick = () => {
+	const agregarCategorias = () => {
+		let agregarNuevasCategorias = inputAgregarCategorias.value;
+
+		const verificaLocalStorage = leerLocalStorage();
+		const nuevasCategorias = {
+			id: setearID(),
+			nombre: agregarNuevasCategorias,
+		};
+		verificaLocalStorage.categorias.push(nuevasCategorias);
+		localStorage.setItem("tp-ahorradas", JSON.stringify(verificaLocalStorage));
+	};
+	agregarCategorias();
+	mostrarCategorias();
+	mostrarCategoriasSelect();
+	agregarOnClicks();
+};
+
+const mostrarOperaciones = () => {
+	let mostrarDelLocalStorage = leerLocalStorage();
+	mostrarEnHTML(mostrarDelLocalStorage.operaciones);
+};
+mostrarOperaciones();
+
 // agregar id a categorias-
 const setearID = () => {
-	const storageLocal = guardarEnLocalStorage();
+	const storageLocal = leerLocalStorage();
 
 	if (storageLocal.categorias.length > 0) {
 		// se fija cual es el ultimo
@@ -249,7 +263,7 @@ const localStorag = guardarEnLocalStorage();
 };
 //funcion mostrar categorias
 const mostrarCategorias = () => {
-	let mostrarDelLocalStorage = guardarEnLocalStorage();
+	let mostrarDelLocalStorage = leerLocalStorage();
 	divMostrarCategoriasHtml.innerHTML = "";
 	const mostrarCategoriaHtml = mostrarDelLocalStorage.categorias.reduce(
 		(acc, elemento, index) => {
@@ -277,7 +291,7 @@ const mostrarCategorias = () => {
 mostrarCategorias();
 
 const mostrarCategoriasSelect = () => {
-	let mostrarDelLocalStorage = guardarEnLocalStorage();
+	let mostrarDelLocalStorage = leerLocalStorage();
 	const mostrarCategoriaEnSelect = mostrarDelLocalStorage.categorias.reduce(
 		(acc, elemento) => {
 			return (
@@ -297,7 +311,6 @@ const mostrarCategoriasSelect = () => {
 mostrarCategoriasSelect();
 
 // funcion mostrar operaciones
-
 botonAgregarOperacion.onclick = () => {
 	const descripcionNuevaOperacion = inputTextoNuevaOperacion.value;
 	const montoNuevaOperacion = Number(inputMontoNuevaOperacion.value);
@@ -314,63 +327,13 @@ botonAgregarOperacion.onclick = () => {
 		fecha: fechaNuevaOperacion,
 	};
 
-	const operacionesVerificaLocalStorage = guardarEnLocalStorage();
+	const operacionesVerificaLocalStorage = leerLocalStorage();
 	operacionesVerificaLocalStorage.operaciones.push(valorNuevaOperacion);
 	localStorage.setItem(
 		"tp-ahorradas",
 		JSON.stringify(operacionesVerificaLocalStorage)
 	);
 	mostrarOperaciones();
-};
-
-const mostrarOperaciones = () => {
-	let mostrarDelLocalStorage = guardarEnLocalStorage();
-	mostrarEnHTML(mostrarDelLocalStorage.operaciones);
-};
-mostrarOperaciones();
-
-// filtro TIPO-CATEGORIA
-
-const aplicarFiltros = () => {
-	let operacionesDato = guardarEnLocalStorage();
-	let operacionesArray = operacionesDato.operaciones;
-	const operacionesArraySeguro = [...operacionesArray];
-	const selectTipo = selectFiltroTipo.value;
-
-	const filtrarPorTipo = operacionesArraySeguro.filter((operacion) => {
-		if (selectTipo === "todos") {
-			return operacion;
-		}
-		return operacion.tipo === selectTipo;
-	});
-
-	const filtrarPorCategoria = selectFiltroCategorias.value;
-	const filtradoFinal = filtrarPorTipo.filter((operacion) => {
-		if (filtrarPorCategoria === "todos") {
-			return operacion;
-		}
-		return operacion.categoria === filtrarPorCategoria;
-	});
-
-	return filtradoFinal;
-};
-
-selectFiltroCategorias.onchange = () => {
-	const filtrado = aplicarFiltros();
-	mostrarEnHTML(filtrado);
-};
-
-selectFiltroTipo.onchange = () => {
-	const filtrado = aplicarFiltros();
-	mostrarEnHTML(filtrado);
-};
-
-// FILTRO FECHA OPERACIONES
-
-const filtroFecha = (operacionesArray, date) => {
-	return operacionesArray.filter((operacion) => {
-		return date <= new Date(operacion.fecha);
-	});
 };
 
 // FILTRO ORDENAR
@@ -445,6 +408,67 @@ const operacionOrdenar = (operacionesArray, ordenElegido) => {
 	}
 };
 
+const aplicarFiltros = () => {
+	const leoStorage = leerLocalStorage();
+	const operacionesArray = leoStorage.operaciones;
+
+	const selectTipo = selectFiltroTipo.value;
+	const selectCategoria = selectFiltroCategorias.value;
+	const valorFecha = inputFecha.value;
+	const tipoSort = filtroSort.value;
+
+	// Guardo en resultado el array original para que si no aplico ningun filtro se muestre todo
+	let resultado = operacionesArray;
+
+	// Filtrar por tipo si tengo un tipo seleccionado diferente a todos
+	if (selectTipo != "todos") {
+		resultado = resultado.filter((elemento) => {
+			if (selectTipo == elemento.tipo) {
+				return elemento;
+			}
+		});
+	}
+
+	// Filtrar por categoria si tengo una categoria seleccionado diferente a todas
+	if (selectCategoria != "todas") {
+		resultado = resultado.filter((elemento) => {
+			if (selectCategoria == elemento.categoria) {
+				return elemento;
+			}
+		});
+	}
+
+	// Filtrar por fecha si el valor de fecha no está vacio
+	if (valorFecha !== "") {
+		const fecha = new Date(valorFecha);
+		resultado = resultado.filter((elemento) => {
+			return fecha <= new Date(elemento.fecha);
+		});
+	}
+
+	resultado = operacionOrdenar(resultado, tipoSort);
+
+	return resultado;
+};
+
+selectFiltroCategorias.onchange = () => {
+	const filtrado = aplicarFiltros();
+	mostrarEnHTML(filtrado);
+};
+
+selectFiltroTipo.onchange = () => {
+	const filtrado = aplicarFiltros();
+	mostrarEnHTML(filtrado);
+};
+inputFecha.onchange = () => {
+	const filtrado = aplicarFiltros();
+	mostrarEnHTML(filtrado);
+};
+filtroSort.onchange = () => {
+	const filtrado = aplicarFiltros();
+	mostrarEnHTML(filtrado);
+};
+
 //boton abrir modal editar categorias
 const botonEditarCategoria = document.getElementById("boton-editar-categoria");
 const seccionModalParaEditarCategoria = document.getElementById(
@@ -454,6 +478,7 @@ botonEditarCategoria.onclick = () => {
 	seccionModalParaEditarCategoria.classList.remove("is-hidden");
 	seccionCategoria.classList.add("is-hidden");
 };
+//viqui funciona solo con el primer boton- ver de implementar un for
 
 let categoriaAEditar = "";
 //funcion eliminar categorias
@@ -465,10 +490,10 @@ const agregarOnClicks = () => {
 		"#boton-editar-categoria"
 	);
 	for (let i = 0; i < botonesEliminarCategorias.length; i++) {
-		// const prueba = guardarEnLocalStorage.id;
+		// const prueba = leerLocalStorage.id;
 		botonesEliminarCategorias[i].onclick = (e) => {
 			// Leo la informacion que tengo en el LocalStorage
-			let informacionEnLocalStorage = guardarEnLocalStorage();
+			let informacionEnLocalStorage = leerLocalStorage();
 			// Creo un nuevo array filtrando el id de la categoria que se clickeo
 			const nuevoArray = informacionEnLocalStorage.categorias.filter(
 				(item) => item.id != e.target.dataset.id
@@ -496,7 +521,7 @@ const agregarOnClicks = () => {
 			//Guardo el id donde se clickeo
 			categoriaAEditar = e.target.dataset.id;
 			//Leo la información que tengo en el local storage
-			let infoLeidaDeLocalStorage = guardarEnLocalStorage();
+			let infoLeidaDeLocalStorage = leerLocalStorage();
 			//Creo un nuevo array filtrando que el id sea igual al que se clickeo para editar
 			const nuevoArray = infoLeidaDeLocalStorage.categorias.filter(
 				(item) => item.id == e.target.dataset.id
@@ -513,10 +538,16 @@ botonCancelarModalCategorias.onclick = () => {
 	seccionModalParaEditarCategoria.classList.add("is-hidden");
 	seccionCategoria.classList.remove("is-hidden");
 };
+//cancelar la edición de las operaciones
+botonCancelarModalOperaciones.onclick = (e) => {
+	e.preventDefault();
+	seccionNuevaOperacion.classList.add("is-hidden");
+	seccionPrincipal.classList.remove("is-hidden");
+};
 
 //funcionalidad al boton que edita las categorias en el modal
 botonEditarCategoriasModal.onclick = () => {
-	const leoLocalStorage = guardarEnLocalStorage();
+	const leoLocalStorage = leerLocalStorage();
 	// Recorro el local storage buscando el elemento que tiene de id la categoria a editar
 	for (let i = 0; i < leoLocalStorage.categorias.length; i++) {
 		// Guardo el elemento actual
@@ -558,7 +589,7 @@ const agregarOnClicksBotonesOperaciones = () => {
 		// const prueba = guardarEnLocalStorage.id;
 		botonesEliminarOperaciones[i].onclick = (e) => {
 			// Leo la informacion que tengo en el LocalStorage
-			let informacionEnLocalStorage = guardarEnLocalStorage();
+			let informacionEnLocalStorage = leerLocalStorage();
 			// Creo un nuevo array filtrando el id de la operacion que se clickeo
 			const nuevoArrayOperaciones =
 				informacionEnLocalStorage.operaciones.filter(
@@ -587,7 +618,7 @@ const agregarOnClicksBotonesOperaciones = () => {
 			//Guardo el id donde se clickeo
 			operacionAEditar = e.target.dataset.id;
 			//Leo la información que tengo en el local storage
-			let infoLeidaDeLocalStorage = guardarEnLocalStorage();
+			let infoLeidaDeLocalStorage = leerLocalStorage();
 			//Creo un nuevo array filtrando que el id sea igual al que se clickeo para editar
 			const nuevoArrayOperaciones = infoLeidaDeLocalStorage.operaciones.filter(
 				(item) => item.id == e.target.dataset.id
@@ -611,7 +642,7 @@ botonCancelarModalOperaciones.onclick = () => {
 
 //funcionalidad al boton que edita las operaciones en el formulario de editar operacion
 botonEditarOperacion.onclick = () => {
-	const leoLocalStorage = guardarEnLocalStorage();
+	const leoLocalStorage = leerLocalStorage();
 	// Recorro el local storage buscando el elemento que tiene de id la categoria a editar
 	for (let i = 0; i < leoLocalStorage.operaciones.length; i++) {
 		// Guardo el elemento actual
@@ -641,10 +672,9 @@ botonEditarOperacion.onclick = () => {
 
 
 // balance
-
 const balance = () => {
 	// buscar del localStorage
-	let balanceDatos = guardarEnLocalStorage();
+	let balanceDatos = leerLocalStorage();
 	let balanceArray = balanceDatos.operaciones;
 
 	const filtroGastos = balanceArray.filter((elemento) => {
@@ -676,8 +706,7 @@ const balance = () => {
 
                 <div class="columns is-mobile is-vcentered">
                     <div class="column is-size-5">Gastos</div>
-                    <div class="column has-text-right has-text-danger">-$${sumaGastos}</div>
-
+                    <div  class="column has-text-right has-text-danger">-$${sumaGastos}</div>
                 </div>
 
                 <div class="columns is-mobile is-vcentered">
