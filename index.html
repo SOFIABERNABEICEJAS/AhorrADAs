@@ -274,7 +274,75 @@
             </article>
         </div>
     </section>
-
+    <!-- # modal formulario editar operaciones-->
+    <section class="section mt-5 vista is-hidden" id="modal-editar-operacion">
+      <div class="container">
+        <div class="columns is-multiline">
+          <div class="column is-8-widescreen is-10-desktop is-offset-2-widescreen is-offset-1-desktop">
+            <div class="box">
+              <h2 class="title is-size-2 has-text-weight-bold">
+                Editar operación
+              </h2>
+              <div class="field mt-6">
+                <label class="label" for="">Descripción</label>
+                <div class="control">
+                  <div class="is-fullwidth">
+                    <input class="input" type="text" name="" id="editar-descripcion">
+                  </div>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label" for="editar-monto">Monto</label>
+                <div class="control">
+                  <div class="control">
+                    <div class="is-fullwidth">
+                      <input class="input" type="number" name="" id="editar-monto">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label" for="">Tipo</label>
+                <div class="control">
+                  <div class="select is-fullwidth">
+                    <select id="editar-tipo">
+                      <option value="GASTO">Gasto</option>
+                      <option value="GANANCIA">Ganancia</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label" for="">Categoría</label>
+                <div class="control">
+                  <div class="select is-fullwidth">
+                    <!-- categorias dinamicas de js -->
+                    <select class="categorias-select" id="editar-categorias-operaciones">
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label" for="">Fecha</label>
+                <div class="control">
+                  <div class="is-fullwidth">
+                    <input class="input" type="date" name="" id="editar-fecha">
+                  </div>
+                </div>
+              </div>
+              <div class="buttons mt-6">
+                <button class="button is-light" id="boton-cancelar-edicion">
+                  Cancelar
+                </button>
+                <button class="button is-success" id="boton-editar-operacion">
+                  Editar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
       <!-- section categorias -->
     <section class="section is-hidden" id="seccion-categoria">
       <div class="column is-offset-2 is-8 ">
