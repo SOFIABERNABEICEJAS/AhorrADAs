@@ -1,0 +1,12 @@
+@media screen and (max-width : 1000px){
+  .responsive-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+  }
+  .responsive{
+    background-color: white !important;
+    color: black !important;
+  }
+}
