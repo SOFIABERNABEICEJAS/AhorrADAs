@@ -497,7 +497,6 @@ botonEditarCategoria.onclick = () => {
 	seccionModalParaEditarCategoria.classList.remove("is-hidden");
 	seccionCategoria.classList.add("is-hidden");
 };
-//viqui funciona solo con el primer boton- ver de implementar un for
 
 let categoriaAEditar = "";
 //funcion eliminar categorias
