@@ -14,6 +14,6 @@ Tecnologías utilizadas:
 
 Integrantes:
 
-🎆 Yanina Bucco,
-🎆 Victoria Diaz,
-🎆 Sofía Bernabei.
+- 🎆 Yanina Bucco,
+- 🎆 Victoria Diaz,
+- 🎆 Sofía Bernabei.
