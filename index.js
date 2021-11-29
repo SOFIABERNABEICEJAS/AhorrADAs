@@ -103,7 +103,7 @@ botonBalance.onclick = () => {
 	seccionNuevaOperacion.classList.add("is-hidden");
 	divOperacionesImagenTexto.classList.remove("is-hidden");
 	divDatosOperacionesTitulo.classList.add("is-hidden");
-	divDatosOperacionJs.classList.add("is-hidden");
+	// divDatosOperacionJs.classList.add("is-hidden");
 	seccionModalParaEditarCategoria.classList.add("is-hidden");
 	modalEditarOperaciones.classList.add("is-hidden");
 };
@@ -705,10 +705,10 @@ const balance = () => {
 
 	divMostrarBalance.innerHTML = `
 	<h2 class=" title is-3 is-size-3 m-2 mb-6 has-text-weight-bold">Balance</h2>
-                 <div class="columns is-mobile is-vcentered">   
-                     <div class="column is-size-5">Ganancia</div>
-                     <div class="column has-text-right has-text-success">+$${sumaGanancia}</div>
-                 </div>
+            <div class="columns is-mobile is-vcentered">   
+              <div class="column is-size-5">Ganancia</div>
+                <div class="column has-text-right has-text-success">+$${sumaGanancia}</div>
+              </div>
 
                 <div class="columns is-mobile is-vcentered">
                     <div class="column is-size-5">Gastos</div>
@@ -718,7 +718,6 @@ const balance = () => {
                 <div class="columns is-mobile is-vcentered">
                     <div class="column is-size-4">Total</div>
                     <div  class="column has-text-right has-text-weight-semibold"> $${totalBalance}</div>
-
                 </div> 
 	`;
 };
