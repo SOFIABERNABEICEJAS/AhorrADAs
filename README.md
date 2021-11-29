@@ -10,10 +10,10 @@ Tecnologías utilizadas:
 - 💰 Framework BULMA,
 - 💰 JavaScript
 
-### 🌍 [link al proyecto] (https://sofiabernabeicejas.github.io/AhorrADAs/)
+### 🌍 [link al proyecto](https://sofiabernabeicejas.github.io/AhorrADAs/)
 
 Integrantes:
 
-- 🎆 Yanina Bucco,
-- 🎆 Victoria Diaz,
-- 🎆 Sofía Bernabei.
+🎆 Yanina Bucco,
+🎆 Victoria Diaz,
+🎆 Sofía Bernabei.
