@@ -92,9 +92,11 @@ const divTotalesPorCategoria = document.getElementById("totales-por-categoria");
 const modalEditarOperaciones = document.getElementById(
 	"modal-editar-operacion"
 );
-botonEditarOperacionesModal = document.getElementById(
+const botonEditarOperacionesModal = document.getElementById(
 	"aceptar-editar-operacion"
 );
+const navBarBurguer = document.getElementById("nav-bar-burguer");
+const navBarMenu = document.getElementById("navbarBasicExample");
 // boton balance
 botonBalance.onclick = () => {
 	seccionPrincipal.classList.remove("is-hidden");
@@ -148,7 +150,15 @@ botonAgregarFormularioNuevaOperacion.onclick = () => {
 	divDatosOperacionesTitulo.classList.remove("is-hidden");
 	divDatosOperacionJs.classList.remove("is-hidden");
 };
-
+//menu hamburguesa
+navBarBurguer.onclick = () => {
+	navBarBurguer.classList.toggle("is-active");
+	navBarMenu.classList.toggle("is-active");
+};
+navBarMenu.onclick = () => {
+	navBarBurguer.classList.toggle("is-active");
+	navBarMenu.classList.toggle("is-active");
+};
 //Leer del local storage
 const leerLocalStorage = () => {
 	let infoTraidaDeStorage = JSON.parse(localStorage.getItem("tp-ahorradas"));
@@ -723,7 +733,6 @@ const balance = () => {
 	`;
 };
 balance();
-
 
 //If para que no se recargue la pagina con la imagen
 
