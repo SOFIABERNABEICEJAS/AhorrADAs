@@ -77,7 +77,6 @@ const botonEditarCategoriasModal = document.getElementById("editar-categoria");
 const selectEditarOperacionesModalCategoria = document.getElementById(
 	"editar-categorias-operaciones"
 );
-// elementos del formulario editar operacion
 const inputEditarDescripcion = document.getElementById("editar-descripcion");
 const inputEditarMonto = document.getElementById("editar-monto");
 const selectEditarTipo = document.getElementById("editar-tipo");
@@ -126,6 +125,7 @@ botonReporte.onclick = () => {
 	seccionCategoria.classList.add("is-hidden");
 	seccionNuevaOperacion.classList.add("is-hidden");
 	seccionModalParaEditarCategoria.classList.add("is-hidden");
+	recargarInformacion();
 	totalesPorCategoria();
 };
 
@@ -366,16 +366,6 @@ botonAgregarOperacion.onclick = () => {
 	mostrarOperaciones();
 	agregarOnClicks();
 };
-
-// //agregar id  a operaciones
-// const operacionesID = () => {
-// 	const localStorageAux = leerLocalStorage();
-// 	if (localStorageAux.operaciones.length > 0) {
-// 		const itemUltimo =
-// 			localStorageAux.operaciones[localStorageAux.operaciones.length - 1];
-// 		return itemUltimo.id + 1;
-// 	}
-// };
 
 // FILTRO ORDENAR
 // 1º POR FECHA
@@ -741,80 +731,97 @@ balance();
 
 //If para que no se recargue la pagina con la imagen
 
-const infolocalStorage = leerLocalStorage();
+let infolocalStorage = leerLocalStorage();
 // Si hay operaciones, oculto la imagen
 if (infolocalStorage.operaciones != "") {
 	divOperacionesImagenTexto.classList.add("is-hidden");
 }
 // Reportes
-// const categorias = infolocalStorage.categorias.map((categoria) => {
-// 	return categoria.nombre;
-// });
-// const operaciones = infolocalStorage.operaciones;
+let categorias = infolocalStorage.categorias.map((categoria) => {
+	return categoria.nombre;
+});
+let operaciones = infolocalStorage.operaciones;
 
-// const mostrarTotalesCategorias = (elemento) => {
-// 	const categoriaActual = `
-// 				<div class="columns is-vcentered ml-3 mr-3">
-//           <div class="column is-3 has-text-weight-semibold">${elemento[0]}</div>
-//           <div class="column is-3 has-text-right has-text-weight-semibold has-text-success">$+${elemento[1][0]}</div>
-//           <div class="column is-3 has-text-right has-text-weight-semibold has-text-danger">$${elemento[1][1]}</div>
-//           <div class="column is-3 has-text-right has-text-weight-semibold">$${elemento[1][2]}</div>
-//         </div>`;
-// 	divTotalesPorCategoria.innerHTML += categoriaActual;
-// };
+const recargarInformacion = () => {
+	infolocalStorage = leerLocalStorage();
+	// Si hay operaciones, oculto la imagen
+	if (infolocalStorage.operaciones != "") {
+		divOperacionesImagenTexto.classList.add("is-hidden");
+	}
+	// Reportes
+	categorias = infolocalStorage.categorias.map((categoria) => {
+		return categoria.nombre;
+	});
+	operaciones = infolocalStorage.operaciones;
+};
 
-// const separarPorCategoria = () => {
-// 	let arrayOperacionPorCategoria = [];
-// 	// Creo un array vacio por cada categoria que tengo guardada
-// 	categorias.map((categoria) => {
-// 		arrayOperacionPorCategoria.push([]);
-// 	});
+const mostrarTotalesCategorias = (elemento) => {
+	const categoriaActual = `
+				<div class="columns is-vcentered ml-3 mr-3">
+          <div class="column is-3 has-text-weight-semibold">${elemento[0]}</div>
+          <div class="column is-3 has-text-right has-text-weight-semibold has-text-success">$+${elemento[1][0]}</div>
+          <div class="column is-3 has-text-right has-text-weight-semibold has-text-danger">$${elemento[1][1]}</div>
+          <div class="column is-3 has-text-right has-text-weight-semibold">$${elemento[1][2]}</div>
+        </div>`;
+	divTotalesPorCategoria.innerHTML += categoriaActual;
+};
 
-// 	// Recorro operaciones pusheando al array de cada categoria la operacion correspondiente
-// 	operaciones.map((operacion) => {
-// 		const indiceCategoria = categorias.indexOf(operacion.categoria);
-// 		arrayOperacionPorCategoria[indiceCategoria].push(operacion);
-// 	});
+const separarPorCategoria = () => {
+	let arrayOperacionPorCategoria = [];
+	// Creo un array vacio por cada categoria que tengo guardada
+	categorias.map((categoria) => {
+		arrayOperacionPorCategoria.push([]);
+	});
 
-// 	return arrayOperacionPorCategoria;
-// };
+	// Recorro operaciones pusheando al array de cada categoria la operacion correspondiente
+	operaciones.map((operacion) => {
+		const indiceCategoria = categorias.indexOf(operacion.categoria);
+		arrayOperacionPorCategoria[indiceCategoria].push(operacion);
+	});
 
-// const calcularCategoria = (categoria) => {
-// 	const ganancias = categoria.filter((operacion) => {
-// 		return operacion.tipo === "ganancia";
-// 	});
-// 	const gastos = categoria.filter((operacion) => {
-// 		return operacion.tipo === "gastos";
-// 	});
-// 	const sumaGanancias = ganancias.reduce((acc, curr) => {
-// 		return acc + curr.monto;
-// 	}, 0);
-// 	const sumaGastos = gastos.reduce((acc, curr) => {
-// 		return acc + curr.monto;
-// 	}, 0);
-// 	const balance = sumaGanancias - sumaGastos;
-// 	// Devuelvo un array con los datos que necesito
-// 	return [sumaGanancias, sumaGastos, balance];
-// };
+	return arrayOperacionPorCategoria;
+};
 
-// const totalesPorCategoria = () => {
-// 	// Si el div de los totales no esta vacio, lo vacio antes de mostrar los elementos
-// 	if (divTotalesPorCategoria.innerHTML != "") {
-// 		divTotalesPorCategoria.innerHTML = "";
-// 	}
-// 	// Llamo a la funcion que separa por categorias
-// 	categoriasSeparadas = separarPorCategoria();
-// 	// Para cada categoria
-// 	for (let index = 0; index < categoriasSeparadas.length; index++) {
-// 		const element = categoriasSeparadas[index];
-// 		// Calculo los valores que necesito de cada categoria
-// 		calculoCategoria = calcularCategoria(element);
-// 		// Le mando a la funcion que los muestra en html el nombre y los valores de la categoria
-// 		mostrarTotalesCategorias([
-// 			// Nombre de la categoria
-// 			categoriasSeparadas[index][0].categoria,
-// 			// El total de las ganancias, los gastos y el balance
-// 			calculoCategoria,
-// 		]);
-// 	}
-// };
+const calcularCategoria = (categoria) => {
+	const ganancias = categoria.filter((operacion) => {
+		return operacion.tipo === "ganancia";
+	});
+	const gastos = categoria.filter((operacion) => {
+		return operacion.tipo === "gastos";
+	});
+	const sumaGanancias = ganancias.reduce((acc, curr) => {
+		return acc + curr.monto;
+	}, 0);
+	const sumaGastos = gastos.reduce((acc, curr) => {
+		return acc + curr.monto;
+	}, 0);
+	const balance = sumaGanancias - sumaGastos;
+	// Devuelvo un array con los datos que necesito
+	return [sumaGanancias, sumaGastos, balance];
+};
+
+const totalesPorCategoria = () => {
+	// Si el div de los totales no esta vacio, lo vacio antes de mostrar los elementos
+	if (divTotalesPorCategoria.innerHTML != "") {
+		divTotalesPorCategoria.innerHTML = "";
+	}
+	// Llamo a la funcion que separa por categorias
+	categoriasSeparadas = separarPorCategoria();
+	// Para cada categoria
+	for (let index = 0; index < categoriasSeparadas.length; index++) {
+		const element = categoriasSeparadas[index];
+		// Calculo los valores que necesito de cada categoria
+		if (typeof element !== "undefined" && element.length > 0) {
+			// Chequeo que el array este definido y tenga al menos un elemento
+			calculoCategoria = calcularCategoria(element);
+			// Le mando a la funcion que los muestra en html el nombre y los valores de la categoria
+			mostrarTotalesCategorias([
+				// Nombre de la categoria
+				categoriasSeparadas[index][0].categoria,
+				// El total de las ganancias, los gastos y el balance
+				calculoCategoria,
+			]);
+		}
+	}
+	recargarInformacion();
+};
