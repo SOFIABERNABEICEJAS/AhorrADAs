@@ -622,13 +622,18 @@ botonCancelarModalCategorias.onclick = () => {
 	seccionModalParaEditarCategoria.classList.add("is-hidden");
 	seccionCategoria.classList.remove("is-hidden");
 };
-//cancelar la edición de las operaciones
+//cancelar modal de las operaciones
 botonCancelarModalOperaciones.onclick = (e) => {
 	e.preventDefault();
 	seccionNuevaOperacion.classList.add("is-hidden");
 	seccionPrincipal.classList.remove("is-hidden");
 };
-
+// cancelar edicion de operaciones ya cargadas
+botonCancelarModalDeEditarOperaciones.onclick = (e) => {
+	e.preventDefault();
+	modalEditarOperaciones.classList.add("is-hidden");
+	seccionPrincipal.classList.remove("is-hidden");
+};
 //funcionalidad al boton que edita las categorias en el modal
 botonEditarCategoriasModal.onclick = () => {
 	const leoLocalStorage = leerLocalStorage();
