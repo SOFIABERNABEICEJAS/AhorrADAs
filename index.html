@@ -109,6 +109,7 @@
                                 <div class="control">
                                   <div class="select is-fullwidth">
                                     <select name="categorias"id="select-filtro-categorias" >
+                                      <option value="todas">Todas</option>
                                     </select>
                                   </div>
                                 </div>
@@ -210,14 +211,14 @@
                     <div class="field">
                         <label class="label" for="Descripcion">Descripción</label>
                         <div class="control">
-                          <input class="input" type="text" id="input-texto-nueva-operacion">
+                          <input class="input" type="text" id="input-texto-nueva-operacion" required>
                         </div>
                     </div>
                         <!-- input monto -->
                     <div class="field">
                         <label class="label" for="Monto">Monto</label>
                         <div class="control">
-                          <input class="input" type="number" min="0" id="input-monto-nueva-operacion">
+                          <input class="input" type="number" min="0" id="input-monto-nueva-operacion" required>
                         </div>
                     </div>
                     <!-- select tipo-gastos-ganancias -->
@@ -238,13 +239,7 @@
                        <div class="control">
                          <div class="select is-fullwidth">
                            <select id="select-categoria-nueva-operacion">
-                             <!-- <option value="todas">Todas</option>
-                             <option value="comidas">Comidas</option>
-                             <option value="servicios">Servicios</option>
-                             <option value="salidas">Salidas</option>
-                             <option value="educacion">Educación</option>
-                             <option value="transporte">Transporte</option>
-                             <option value="trabajo">Trabajo</option> -->
+                        
                            </select>
                          </div>
                        </div>
@@ -253,7 +248,7 @@
                    <div class="field">
                        <label class="label" for="fecha">Fecha</label>
                      <div class="control">
-                       <input class="input" type="date" id="input-fecha-nueva-operacion">
+                       <input class="input" type="date" id="input-fecha-nueva-operacion" required>
                      </div>
                    </div>
                    <!-- botones de nueva operacion -->
@@ -276,7 +271,7 @@
     </section>
     <!-- # modal formulario editar operaciones-->
     <section class="section mt-5 vista is-hidden" id="modal-editar-operacion">
-      <div class="container">
+      <form class="container">
         <div class="columns is-multiline">
           <div class="column is-8-widescreen is-10-desktop is-offset-2-widescreen is-offset-1-desktop">
             <div class="box">
@@ -287,7 +282,7 @@
                 <label class="label" for="">Descripción</label>
                 <div class="control">
                   <div class="is-fullwidth">
-                    <input class="input" type="text" name="" id="editar-descripcion">
+                    <input class="input" type="text" name="" id="editar-descripcion" required>
                   </div>
                 </div>
               </div>
@@ -296,7 +291,7 @@
                 <div class="control">
                   <div class="control">
                     <div class="is-fullwidth">
-                      <input class="input" type="number" name="" id="editar-monto">
+                      <input class="input" type="number" name="" id="editar-monto" required>
                     </div>
                   </div>
                 </div>
@@ -326,7 +321,7 @@
                 <label class="label" for="">Fecha</label>
                 <div class="control">
                   <div class="is-fullwidth">
-                    <input class="input" type="date" name="" id="editar-fecha">
+                    <input class="input" type="date" name="" id="editar-fecha" required>
                   </div>
                 </div>
               </div>
@@ -341,7 +336,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </section>
       <!-- section categorias -->
     <section class="section is-hidden" id="seccion-categoria">
