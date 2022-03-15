@@ -3,17 +3,17 @@
 ## AhorrADAs 💰💸
 
 Ahorradas permite tener un registro de nuestros gastos y ganancias para un mejor control en nuestra economía.
-Es el tercer trabajorealizado en el curdo de ADA.
+Es el tercer trabajo realizado en el curso de ADA.
 
 ---
 
-### Podras:
+### Podrás:
 
-- Registrar tus gastos, ganancias en una nueva operacion.
-- Permite distinguir entre monto, tipo, categoria y fecha en nueva operacion.
+- Registrar tus gastos, ganancias en una nueva operación.
+- Permite distinguir entre monto, tipo, categoría y fecha en nueva operación.
 - Agregar, editar, eliminar operacones.
 - Balance lleva el registro de tus ganancias y gastos. Permite ver el total de tus finanzas en un balance positivo o negativo.
-- Agregar, editar, eliminar categorias. Permite agrupar tus gastos y ganancias en categorias para una mayor organzacion.
+- Agregar, editar, eliminar categorias. Permite agrupar tus gastos y ganancias en categorías para una mayor organzacion.
 - Reporte lleva un resumen de tus gastos y ganancia.
 - Se puede filtrar por TIPO: ganancia o gasto; CATEGORIA: servicios, comida, alquiler o las que hayas agregado; FECHA; ORDENADO POR mayor o menor monto, mas recientes, A-Z.
 
