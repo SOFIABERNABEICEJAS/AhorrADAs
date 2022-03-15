@@ -5,7 +5,7 @@
 Ahorradas permite tener un registro de nuestros gastos y ganancias para un mejor control en nuestra economía.
 Es el tercer trabajorealizado en el curdo de ADA.
 
-### Link al proyecto [AhorrADAs](https://sofiabernabeicejas.github.io/AhorrADAs/) 🌍 ✔
+---
 
 ### Podras:
 
@@ -17,11 +17,15 @@ Es el tercer trabajorealizado en el curdo de ADA.
 - Reporte lleva un resumen de tus gastos y ganancia.
 - Se puede filtrar por TIPO: ganancia o gasto; CATEGORIA: servicios, comida, alquiler o las que hayas agregado; FECHA; ORDENADO POR mayor o menor monto, mas recientes, A-Z.
 
+---
+
 #### Tecnologías utilizadas:
 
 - 💰 HTML,
 - 💰 Framework BULMA,
 - 💰 JavaScript.
+
+---
 
 ### Temas abarcados:
 
@@ -31,7 +35,13 @@ Es el tercer trabajorealizado en el curdo de ADA.
 - Local storage
 - Formato Json
 
-Integrantes:
+---
+
+#### Link al proyecto [AhorrADAs](https://sofiabernabeicejas.github.io/AhorrADAs/) 🌍 ✔
+
+---
+
+### Integrantes:
 
 - 🎆 Yanina Bucco,
 - 🎆 Victoria Diaz,
